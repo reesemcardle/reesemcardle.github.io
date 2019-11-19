@@ -7,15 +7,8 @@
                 "https://github.com/reesemcardle/reesemcardle.github.io/blob/master/gifs/gif6.gif?raw=true",
                 "https://github.com/reesemcardle/reesemcardle.github.io/blob/master/gifs/gif7.gif?raw=true",
                 "https://github.com/reesemcardle/reesemcardle.github.io/blob/master/gifs/gif8.gif?raw=true",
-                "https://github.com/reesemcardle/reesemcardle.github.io/blob/master/gifs/gif9.gif?raw=true",
-                "https://github.com/reesemcardle/reesemcardle.github.io/blob/master/gifs/gif10.gif?raw=true",
-                "https://github.com/reesemcardle/reesemcardle.github.io/blob/master/gifs/gif11.gif?raw=true",
-                "https://github.com/reesemcardle/reesemcardle.github.io/blob/master/gifs/gif12.gif?raw=true",
-                "https://github.com/reesemcardle/reesemcardle.github.io/blob/master/gifs/gif13.gif?raw=true",
-                "https://github.com/reesemcardle/reesemcardle.github.io/blob/master/gifs/gif14.gif?raw=true",
-                "https://github.com/reesemcardle/reesemcardle.github.io/blob/master/gifs/gif15.gif?raw=true"]
+                "https://github.com/reesemcardle/reesemcardle.github.io/blob/master/gifs/gif9.gif?raw=true",]
 
-                var rand = Math.floor(Math.random() * 15)
+                var rand = Math.floor(Math.random() * 9)
 var element = document.getElementById("myGif");
 element.src = gifList[rand]
-console.log("yooo")
