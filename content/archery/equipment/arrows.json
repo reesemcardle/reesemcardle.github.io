@@ -1,0 +1,10 @@
+[
+  {
+    "id": "easton-660",
+    "brand": "Easton",
+    "model": "660",
+    "outerDiameterMm": 5.46,
+    "outerRadiusMm": 2.73,
+    "notes": "Used for line-cutter scoring by expanding the plotted shot center by the physical shaft radius."
+  }
+]

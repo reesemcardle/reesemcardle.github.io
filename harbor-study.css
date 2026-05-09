@@ -1,0 +1,206 @@
+:root {
+  color-scheme: light;
+  --paper: #f8f3e9;
+  --land: #fbf6ed;
+  --ink: #171713;
+  --muted: rgba(23, 23, 19, 0.58);
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+  --font: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0.44), transparent 36rem),
+    linear-gradient(90deg, rgba(242, 235, 221, 0.58), transparent 18%, transparent 82%, rgba(242, 235, 221, 0.56)),
+    var(--paper);
+  font-family: var(--font);
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+.study-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.study-stage {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 3vw;
+  perspective: 1050px;
+  perspective-origin: 50% 13%;
+}
+
+.harbor-study-map {
+  display: block;
+  width: min(130vw, 112rem);
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 1.8rem 1.8rem rgba(48, 45, 36, 0.11));
+  transform: rotateX(var(--study-tilt, 55deg)) scale(1.08);
+  transform-origin: 50% 87%;
+  transform-style: preserve-3d;
+}
+
+.study-water-field {
+  fill: transparent;
+}
+
+.study-layer path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.study-land path {
+  fill: rgba(251, 247, 239, 0.32);
+  stroke: rgba(47, 54, 49, 0.055);
+  stroke-width: 0.34;
+}
+
+.study-land path.is-land {
+  display: none;
+}
+
+.study-land path.is-landmass {
+  filter: drop-shadow(0 0.3rem 0.7rem rgba(67, 83, 82, 0.06));
+}
+
+.study-coast path {
+  fill: none;
+  opacity: 0.74;
+  stroke: rgba(38, 49, 47, 0.5);
+  stroke-width: 0.78;
+}
+
+.study-piers path {
+  fill: none;
+  opacity: 0.46;
+  stroke: rgba(42, 54, 52, 0.44);
+  stroke-width: 0.54;
+}
+
+.study-sail-ghosts path,
+.study-sail-replay-base,
+.study-sail-path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.study-sail-ghosts path {
+  opacity: 0.2;
+  stroke: rgba(43, 76, 82, 0.72);
+  stroke-width: 1.45;
+}
+
+.study-sail-ghosts path.is-selected {
+  opacity: 0.32;
+  stroke-width: 1.8;
+}
+
+.study-sail-replay-base {
+  opacity: 0.18;
+  stroke: rgba(31, 64, 70, 0.78);
+  stroke-width: 2.2;
+}
+
+.study-sail-path {
+  opacity: 0.92;
+  stroke: rgba(21, 52, 59, 0.92);
+  stroke-width: 2.35;
+  filter: drop-shadow(0 0.12rem 0.26rem rgba(21, 52, 59, 0.18));
+}
+
+.study-sail-point {
+  fill: rgba(21, 52, 59, 0.94);
+  stroke: rgba(248, 243, 233, 0.92);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.study-panel {
+  position: fixed;
+  right: 1.1rem;
+  bottom: 1.1rem;
+  z-index: 10;
+  display: grid;
+  gap: 0.65rem;
+  width: 18rem;
+  padding: 0.8rem;
+  border: 1px solid rgba(23, 23, 19, 0.16);
+  border-radius: 0.45rem;
+  background: rgba(248, 243, 233, 0.78);
+  box-shadow: 0 0.8rem 1.8rem rgba(48, 45, 36, 0.12);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+}
+
+.study-panel div {
+  display: grid;
+  grid-template-columns: 4.2rem 1fr 2.5rem;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.study-panel div:has(.speed-steps) {
+  grid-template-columns: 4.2rem 1fr;
+}
+
+.study-panel span {
+  text-transform: uppercase;
+}
+
+.study-panel select,
+.study-panel input {
+  width: 100%;
+  color: var(--ink);
+}
+
+.study-panel strong {
+  color: var(--ink);
+  font-weight: 400;
+  text-align: right;
+}
+
+.speed-steps {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.28rem;
+}
+
+.speed-steps button {
+  min-width: 2.2rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  cursor: pointer;
+}
+
+.speed-steps button.is-active {
+  border-color: rgba(23, 23, 19, 0.25);
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.38);
+}

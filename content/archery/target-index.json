@@ -1,0 +1,9 @@
+[
+  {
+    "id": "fita-40-single-10-ring",
+    "name": "FITA 40cm Single Spot",
+    "file": "targets/fita-40-single-10-ring.json",
+    "outerScoringDiameterCm": 40,
+    "ringCount": 10
+  }
+]

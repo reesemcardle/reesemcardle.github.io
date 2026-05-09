@@ -1,0 +1,43 @@
+{
+  "schema": "archery-session-v0.1",
+  "sessionId": "sample-fita40-2026-05-06",
+  "name": "Sample FITA 40 Session 3",
+  "startedAt": "2026-05-06T19:05:00-04:00",
+  "targetId": "fita-40-single-10-ring",
+  "distance": {
+    "value": 18,
+    "unit": "m"
+  },
+  "equipment": {
+    "arrowId": "easton-660"
+  },
+  "ends": [
+    {
+      "endNumber": 1,
+      "shots": [
+        { "shotId": "s001", "shotNumber": 1, "faceId": "single", "x": 0.060, "y": -0.020 },
+        { "shotId": "s002", "shotNumber": 2, "faceId": "single", "x": -0.100, "y": 0.040 },
+        { "shotId": "s003", "shotNumber": 3, "faceId": "single", "x": 0.160, "y": 0.050 },
+        { "shotId": "s004", "shotNumber": 4, "faceId": "single", "x": -0.210, "y": -0.170 }
+      ]
+    },
+    {
+      "endNumber": 2,
+      "shots": [
+        { "shotId": "s005", "shotNumber": 5, "faceId": "single", "x": -0.020, "y": 0.170 },
+        { "shotId": "s006", "shotNumber": 6, "faceId": "single", "x": 0.120, "y": -0.110 },
+        { "shotId": "s007", "shotNumber": 7, "faceId": "single", "x": 0.340, "y": 0.120 },
+        { "shotId": "s008", "shotNumber": 8, "faceId": "single", "x": -0.300, "y": 0.210 }
+      ]
+    },
+    {
+      "endNumber": 3,
+      "shots": [
+        { "shotId": "s009", "shotNumber": 9, "faceId": "single", "x": 0.380, "y": -0.260 },
+        { "shotId": "s010", "shotNumber": 10, "faceId": "single", "x": -0.140, "y": -0.080 },
+        { "shotId": "s011", "shotNumber": 11, "faceId": "single", "x": -0.450, "y": 0.280 },
+        { "shotId": "s012", "shotNumber": 12, "faceId": "single", "x": 0.510, "y": -0.430 }
+      ]
+    }
+  ]
+}

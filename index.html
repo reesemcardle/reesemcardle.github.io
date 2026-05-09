@@ -1,37 +1,284 @@
 <!DOCTYPE html>
-<html>
-    <head>
-                <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149146057-1"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-          gtag('config', 'UA-149146057-1');
-        </script>
-                 <!-- /Global site tag (gtag.js) - Google Analytics -->
-        <title>its reese</title>
-    </head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149146057-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-149146057-1');
+    </script>
+    <!-- /Global site tag (gtag.js) - Google Analytics -->
 
-
-    <body>
-        <h1>Hello, I'm Reese</h1>
+    <title>Reese McArdle</title>
+    <meta name="description" content="Reese McArdle. Building and thinking about digital interfaces for cities.">
+    <link rel="stylesheet" href="styles.css?v=20260509-sailing-engine">
+  </head>
+  <body>
+    <main class="site-shell" aria-label="Personal field instrument">
+      <aside class="intro" aria-label="Identity">
         <div>
-            <img id="myGif">
+          <h1>Reese McArdle</h1>
+          <p class="location">Brooklyn, NY</p>
         </div>
 
+        <p class="positioning">
+          Building and thinking<br>
+          about digital interfaces<br>
+          for cities.
+        </p>
 
-        <div>
-        <br>
-        <script>
-            emailE='gmail.com'
-            emailE=('reesemcardle' + '@' + emailE)
-            document.write('<A href="mailto:' + emailE + '">' + emailE + '</a>')
-        </script>
-        <a href="https://twitter.com/reesemcardlepgh">Twitter</a>
-        <a href="https://www.linkedin.com/in/reesemcardle/">LinkedIn</a>
-        <div>
-    </body>
-    <script type="text/javascript" src="index.js"></script>
+        <a class="contact-link" href="#" data-email-user="reesemcardle" data-email-domain="gmail.com">
+          Get in touch
+        </a>
+      </aside>
+
+      <section class="instrument" aria-label="Activity visualization">
+        <nav class="mode-toggle" aria-label="Activity modes">
+          <button class="mode-button is-active" type="button" aria-pressed="true" data-mode="cycling">
+            Cycling
+          </button>
+          <button class="mode-button" type="button" aria-pressed="false" data-mode="sailing">
+            Sailing
+          </button>
+          <button class="mode-button" type="button" aria-pressed="false" data-mode="archery">
+            Archery
+          </button>
+        </nav>
+
+        <figure class="visual-wrap">
+          <svg id="cyclingVisual" class="park-map" viewBox="0 0 1600 1000" role="img" aria-labelledby="map-title map-desc">
+            <title id="map-title">Prospect Park cycling traces</title>
+            <desc id="map-desc">A restrained illustrated map of Prospect Park with a projected ride trace from GPX data.</desc>
+
+            <defs>
+              <filter id="paper-noise">
+                <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"></feTurbulence>
+                <feColorMatrix type="saturate" values="0"></feColorMatrix>
+                <feComponentTransfer>
+                  <feFuncA type="table" tableValues="0 0.045"></feFuncA>
+                </feComponentTransfer>
+              </filter>
+
+              <filter id="soft-pencil">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0.35"></feGaussianBlur>
+              </filter>
+            </defs>
+
+            <rect class="paper" width="1600" height="1000"></rect>
+            <rect class="paper-grain" width="1600" height="1000" filter="url(#paper-noise)"></rect>
+
+            <g id="mapLand" class="map-layer map-land" aria-hidden="true"></g>
+            <g id="mapWater" class="map-layer map-water" aria-hidden="true"></g>
+            <g id="mapStreets" class="map-layer map-streets" aria-hidden="true"></g>
+            <g id="mapPaths" class="map-layer map-paths" aria-hidden="true"></g>
+
+            <g class="ride-layer" aria-label="Ride traces">
+              <g id="rideGhosts"></g>
+              <path id="rideReplayBase" class="ride-replay-base" hidden></path>
+              <path id="ridePath" class="ride-path" hidden></path>
+              <circle id="ridePoint" class="ride-point" r="11" cx="0" cy="0"></circle>
+            </g>
+          </svg>
+
+          <svg id="sailingVisual" class="park-map harbor-map" viewBox="0 0 1600 1000" role="img" aria-labelledby="harbor-map-title harbor-map-desc" hidden>
+            <title id="harbor-map-title">New York Harbor sailing map</title>
+            <desc id="harbor-map-desc">A tilted map of New York Harbor from the Verrazzano Bridge to Manhattanville and Roosevelt Island.</desc>
+
+            <rect class="paper" width="1600" height="1000"></rect>
+            <rect class="paper-grain" width="1600" height="1000" filter="url(#paper-noise)"></rect>
+
+            <g id="harborLand" class="map-layer map-land harbor-land" aria-hidden="true"></g>
+            <g id="harborCoast" class="map-layer harbor-coast" aria-hidden="true"></g>
+            <g id="harborPaths" class="map-layer map-paths harbor-paths" aria-hidden="true"></g>
+            <g class="sail-layer" aria-label="Sailing traces">
+              <g id="sailGhosts"></g>
+              <path id="sailReplayBase" class="sail-replay-base" hidden></path>
+              <path id="sailPath" class="sail-path" hidden></path>
+              <circle id="sailPoint" class="sail-point" r="7" cx="0" cy="0" hidden></circle>
+            </g>
+          </svg>
+
+          <svg id="archeryVisual" class="park-map archery-target" viewBox="0 0 1600 1000" role="img" aria-labelledby="archery-target-title archery-target-desc" hidden>
+            <title id="archery-target-title">FITA 40 centimeter archery target</title>
+            <desc id="archery-target-desc">A single spot FITA 40 target face with ten scoring rings and an X-ring at center.</desc>
+
+            <defs>
+              <filter id="archery-paper-noise">
+                <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="3" stitchTiles="stitch"></feTurbulence>
+                <feColorMatrix type="saturate" values="0"></feColorMatrix>
+                <feComponentTransfer>
+                  <feFuncA type="table" tableValues="0 0.038"></feFuncA>
+                </feComponentTransfer>
+              </filter>
+              <radialGradient id="archery-face-shade" cx="46%" cy="38%" r="64%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.34"></stop>
+                <stop offset="58%" stop-color="#ffffff" stop-opacity="0"></stop>
+                <stop offset="100%" stop-color="#1c1b18" stop-opacity="0.06"></stop>
+              </radialGradient>
+            </defs>
+
+            <rect class="paper archery-paper" width="1600" height="1000"></rect>
+            <rect class="paper-grain" width="1600" height="1000" filter="url(#archery-paper-noise)"></rect>
+
+            <g class="archery-face" transform="translate(800 500)" aria-label="Scoring face">
+              <circle class="target-band target-band-1" r="360"></circle>
+              <circle class="target-band target-band-2" r="324"></circle>
+              <circle class="target-band target-band-3" r="288"></circle>
+              <circle class="target-band target-band-4" r="252"></circle>
+              <circle class="target-band target-band-5" r="216"></circle>
+              <circle class="target-band target-band-6" r="180"></circle>
+              <circle class="target-band target-band-7" r="144"></circle>
+              <circle class="target-band target-band-8" r="108"></circle>
+              <circle class="target-band target-band-9" r="72"></circle>
+              <circle class="target-band target-band-10" r="36"></circle>
+              <circle class="target-face-shade" r="360"></circle>
+
+              <g class="target-ring-lines" aria-hidden="true">
+                <circle r="360"></circle>
+                <circle r="324"></circle>
+                <circle r="288"></circle>
+                <circle r="252"></circle>
+                <circle r="216"></circle>
+                <circle r="180"></circle>
+                <circle r="144"></circle>
+                <circle r="108"></circle>
+                <circle r="72"></circle>
+                <circle r="36"></circle>
+                <circle class="target-x-ring" r="18"></circle>
+              </g>
+
+              <g class="target-center-mark" aria-hidden="true">
+                <line x1="-10" y1="0" x2="10" y2="0"></line>
+                <line x1="0" y1="-10" x2="0" y2="10"></line>
+                <circle r="3.5"></circle>
+              </g>
+
+              <g id="archeryShots" class="archery-shots" aria-label="Recorded arrow locations"></g>
+            </g>
+          </svg>
+
+          <div id="modePlaceholder" class="mode-placeholder" hidden aria-live="polite">
+            <p id="placeholderTitle"></p>
+            <p id="placeholderText"></p>
+          </div>
+
+          <div id="rideLiveMetrics" class="ride-live-metrics" hidden aria-live="polite">
+            <div>
+              <span>Miles elapsed</span>
+              <strong id="liveMiles">0.00</strong>
+            </div>
+            <div>
+              <span>Current speed</span>
+              <strong id="liveSpeed">-- mph</strong>
+            </div>
+          </div>
+
+          <figcaption>
+            <span>PROSPECT PARK, BROOKLYN</span>
+            <span>recent rides fade to show</span>
+            <span>patterns over time</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <aside class="metadata" aria-label="Ride metadata">
+        <section class="global-meta" aria-label="Ambient metadata">
+          <div class="meta-primary">
+            <span id="metaStatusLabel">Now</span>
+            <strong id="metaDate">Loading</strong>
+          </div>
+
+          <nav class="trace-controls" aria-label="Trace navigation">
+            <button type="button" data-action="previous" aria-label="Previous trace">←</button>
+            <button type="button" data-action="all" aria-label="Show all traces">•</button>
+            <button type="button" data-action="next" aria-label="Next trace">→</button>
+          </nav>
+
+          <div class="ambient-meta">
+            <div>
+              <span id="metaWindLabel">Current wind</span>
+              <strong id="metaWind">Wind loading</strong>
+            </div>
+            <div>
+              <span id="metaTideLabel">Current tide</span>
+              <strong id="metaTide">Tide loading</strong>
+            </div>
+            <div>
+              <span id="metaWeatherLabel">Current weather</span>
+              <strong id="metaWeather">Weather loading</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="activity-meta" aria-label="Cycling metadata">
+          <div>
+            <span id="rideMilesLabel">All park miles</span>
+            <strong id="rideMiles">--</strong>
+          </div>
+          <div>
+            <span id="rideSpeedLabel">Aggregate avg. speed</span>
+            <strong id="rideSpeed">--</strong>
+          </div>
+          <div>
+            <span id="equipmentLabel">Bike</span>
+            <strong id="equipmentValue">1986 Eddy Merckx Corsa</strong>
+          </div>
+        </section>
+
+      </aside>
+
+      <section class="testing-controls" aria-label="Temporary map controls">
+        <nav class="camera-toggle" aria-label="Map camera presets">
+          <span class="control-label">Tilt</span>
+          <button class="camera-button" type="button" aria-pressed="false" data-camera-preset="flat">
+            0
+          </button>
+          <button class="camera-button" type="button" aria-pressed="false" data-camera-preset="low">
+            12
+          </button>
+          <button class="camera-button" type="button" aria-pressed="false" data-camera-preset="soft">
+            24
+          </button>
+          <button class="camera-button" type="button" aria-pressed="false" data-camera-preset="half">
+            36
+          </button>
+          <button class="camera-button" type="button" aria-pressed="false" data-camera-preset="dramatic">
+            55
+          </button>
+          <button class="camera-button is-active" type="button" aria-pressed="true" data-camera-preset="steep">
+            62
+          </button>
+          <button class="camera-button" type="button" aria-pressed="false" data-camera-preset="poster">
+            68
+          </button>
+        </nav>
+
+        <nav class="speed-toggle" aria-label="Ride animation speed">
+          <span class="control-label">Speed</span>
+          <button class="speed-button" type="button" aria-pressed="false" data-playback-speed="0.75">
+            .75x
+          </button>
+          <button class="speed-button is-active" type="button" aria-pressed="true" data-playback-speed="1">
+            1x
+          </button>
+          <button class="speed-button" type="button" aria-pressed="false" data-playback-speed="1.25">
+            1.25x
+          </button>
+          <button class="speed-button" type="button" aria-pressed="false" data-playback-speed="1.5">
+            1.5x
+          </button>
+          <button class="speed-button" type="button" aria-pressed="false" data-playback-speed="2">
+            2x
+          </button>
+        </nav>
+      </section>
+    </main>
+
+    <script src="index.js?v=20260509-sailing-engine"></script>
+  </body>
 </html>

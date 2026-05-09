@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-05-09T16:02:48.865Z",
+  "location": {
+    "latitude": "40.6602",
+    "longitude": "-73.9690",
+    "tideStation": "8518750",
+    "timeZone": "America/New_York"
+  },
+  "rides": {
+    "2025-08-01": {
+      "rideId": "2025-08-01",
+      "sourceDate": "2025-08-01T15:01:00.000Z",
+      "sourceEndDate": "2025-08-01T15:24:54.000Z",
+      "localDate": "2025-08-01",
+      "weather": {
+        "wind": "NE 11 mph",
+        "condition": "Cloudy"
+      },
+      "tide": "Flood tide"
+    },
+    "2025-08-04": {
+      "rideId": "2025-08-04",
+      "sourceDate": "2025-08-04T16:43:18.000Z",
+      "sourceEndDate": "2025-08-04T17:01:55.000Z",
+      "localDate": "2025-08-04",
+      "weather": {
+        "wind": "SW 1 mph",
+        "condition": "Clear"
+      },
+      "tide": "Flood tide"
+    },
+    "2025-11-06": {
+      "rideId": "2025-11-06",
+      "sourceDate": "2025-11-06T13:11:08.000Z",
+      "sourceEndDate": "2025-11-06T13:24:49.000Z",
+      "localDate": "2025-11-06",
+      "weather": {
+        "wind": "W 10 mph",
+        "condition": "Clear"
+      },
+      "tide": "Ebb tide"
+    },
+    "2026-03-26": {
+      "rideId": "2026-03-26",
+      "sourceDate": "2026-03-26T20:29:51.000Z",
+      "sourceEndDate": "2026-03-26T21:03:00.000Z",
+      "localDate": "2026-03-26",
+      "weather": {
+        "wind": "S 7 mph",
+        "condition": "Mostly clear"
+      },
+      "tide": "Ebb tide"
+    },
+    "2026-04-01": {
+      "rideId": "2026-04-01",
+      "sourceDate": "2026-04-01T19:03:48.000Z",
+      "sourceEndDate": "2026-04-01T19:39:14.000Z",
+      "localDate": "2026-04-01",
+      "weather": {
+        "wind": "W 7 mph",
+        "condition": "Partly cloudy"
+      },
+      "tide": "Flood tide"
+    },
+    "2026-04-14": {
+      "rideId": "2026-04-14",
+      "sourceDate": "2026-04-14T19:22:07.000Z",
+      "sourceEndDate": "2026-04-14T19:45:58.000Z",
+      "localDate": "2026-04-14",
+      "weather": {
+        "wind": "S 10 mph",
+        "condition": "Clear"
+      },
+      "tide": "Flood tide"
+    }
+  }
+}

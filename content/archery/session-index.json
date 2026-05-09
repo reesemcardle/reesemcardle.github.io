@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sample-fita40-2026-05-01",
+    "name": "Sample FITA 40 Session 1",
+    "file": "sessions/sample-fita40-2026-05-01.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 12
+  },
+  {
+    "id": "sample-fita40-2026-05-03",
+    "name": "Sample FITA 40 Session 2",
+    "file": "sessions/sample-fita40-2026-05-03.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 12
+  },
+  {
+    "id": "sample-fita40-2026-05-06",
+    "name": "Sample FITA 40 Session 3",
+    "file": "sessions/sample-fita40-2026-05-06.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 12
+  },
+  {
+    "id": "sample-fita40-2026-05-09",
+    "name": "Sample FITA 40 Session 4",
+    "file": "sessions/sample-fita40-2026-05-09.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 12
+  }
+]

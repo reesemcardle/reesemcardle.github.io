@@ -1,0 +1,38 @@
+[
+  {
+    "id": "2025-08-01",
+    "name": "Morning Ride",
+    "file": "8-1-25.gpx",
+    "bike": "1986 Eddy Merckx Corsa"
+  },
+  {
+    "id": "2025-08-04",
+    "name": "Lunch Ride",
+    "file": "8-4-25.gpx",
+    "bike": "1986 Eddy Merckx Corsa"
+  },
+  {
+    "id": "2025-11-06",
+    "name": "Morning Ride",
+    "file": "11-6-25.gpx",
+    "bike": "1986 Eddy Merckx Corsa"
+  },
+  {
+    "id": "2026-03-26",
+    "name": "Season Opener",
+    "file": "3-26-26.gpx",
+    "bike": "1986 Eddy Merckx Corsa"
+  },
+  {
+    "id": "2026-04-01",
+    "name": "Afternoon Ride",
+    "file": "4-1-26.gpx",
+    "bike": "1986 Eddy Merckx Corsa"
+  },
+  {
+    "id": "2026-04-14",
+    "name": "Afternoon Ride",
+    "file": "4-14-26.gpx",
+    "bike": "1986 Eddy Merckx Corsa"
+  }
+]

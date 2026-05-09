@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Harbor Map Study</title>
+    <link rel="stylesheet" href="harbor-study.css?v=20260509-sails-integrate">
+  </head>
+  <body>
+    <main class="study-shell">
+      <section class="study-stage" aria-label="Harbor map composition study">
+        <svg id="harborStudyMap" class="harbor-study-map" viewBox="0 0 1600 1000" role="img" aria-label="Abstract New York Harbor map study">
+          <rect class="study-water-field" width="1600" height="1000"></rect>
+          <g id="studyLand" class="study-layer study-land"></g>
+          <g id="studyCoast" class="study-layer study-coast"></g>
+          <g id="studyPiers" class="study-layer study-piers"></g>
+          <g id="studySailGhosts" class="study-sail-ghosts"></g>
+          <path id="studySailReplayBase" class="study-sail-replay-base" hidden></path>
+          <path id="studySailPath" class="study-sail-path" hidden></path>
+          <circle id="studySailPoint" class="study-sail-point" r="5.5" hidden></circle>
+        </svg>
+      </section>
+
+      <aside class="study-panel" aria-label="Temporary map study controls">
+        <div>
+          <span>Sail</span>
+          <select id="sailControl"></select>
+        </div>
+        <div>
+          <span>Frame</span>
+          <select id="frameControl">
+            <option value="auto">Auto</option>
+            <option value="harbor">Harbor</option>
+            <option value="upperBay">Upper Bay</option>
+            <option value="hudson">Hudson</option>
+            <option value="eastRiver">East River</option>
+          </select>
+        </div>
+        <div>
+          <span>Rotation</span>
+          <input id="rotationControl" type="range" min="-45" max="-5" step="1" value="-29">
+          <strong id="rotationValue">-29</strong>
+        </div>
+        <div>
+          <span>Tilt</span>
+          <input id="tiltControl" type="range" min="0" max="68" step="1" value="55">
+          <strong id="tiltValue">55</strong>
+        </div>
+        <div>
+          <span>Speed</span>
+          <div class="speed-steps" id="speedControl" aria-label="Playback speed">
+            <button type="button" data-speed="0.75">.75x</button>
+            <button type="button" data-speed="1">1x</button>
+            <button type="button" data-speed="1.25">1.25x</button>
+            <button type="button" data-speed="1.5">1.5x</button>
+            <button type="button" data-speed="2" class="is-active">2x</button>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <script src="harbor-study.js?v=20260509-sails-integrate"></script>
+  </body>
+</html>
