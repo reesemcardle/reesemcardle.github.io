@@ -2,14 +2,10 @@ const rideIndexFile = "content/rides/ride-index.json";
 const rideMetadataFile = "content/rides/ride-metadata.json";
 const basemapFile = "content/maps/prospect-park-osm.json";
 const harborBasemapFile = "content/maps/ny-harbor-osm.json";
+const sailIndexFile = "content/sails/sail-index.json";
 const archerySessionIndexFile = "content/archery/session-index.json";
 const archeryTargetFile = "content/archery/targets/fita-40-single-10-ring.json";
 const archeryArrowsFile = "content/archery/equipment/arrows.json";
-const sailFiles = [
-  { id: "sail-1", label: "Sail Sample 1", file: "private/sampledata/SailSample1.gpx" },
-  { id: "sail-2", label: "Sail Sample 2", file: "private/sampledata/SailSample2.gpx" },
-  { id: "sail-3", label: "Sail Sample 3", file: "private/sampledata/SailSample3.gpx" }
-];
 
 const mapFrame = {
   x: 125,
@@ -235,13 +231,16 @@ async function loadRideMetadata() {
 }
 
 async function loadSails() {
-  return Promise.all(sailFiles.map(async (sail) => {
-    const response = await fetch(sail.file, { cache: "no-store" });
-    if (!response.ok) throw new Error(`Unable to load ${sail.file}`);
+  const sailIndex = await loadJson(sailIndexFile);
+  return Promise.all(sailIndex.map(async (sail) => {
+    const file = `content/sails/${sail.file}`;
+    const response = await fetch(file, { cache: "no-store" });
+    if (!response.ok) throw new Error(`Unable to load ${file}`);
 
     const points = withSyntheticTimes(parseGpx(await response.text()));
     return {
       ...sail,
+      file,
       points,
       bounds: boundsForPoints(points),
       stats: getRideStats(points)

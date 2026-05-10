@@ -1,0 +1,17 @@
+[
+  {
+    "id": "sail-1",
+    "label": "Sail Sample 1",
+    "file": "SailSample1.gpx"
+  },
+  {
+    "id": "sail-2",
+    "label": "Sail Sample 2",
+    "file": "SailSample2.gpx"
+  },
+  {
+    "id": "sail-3",
+    "label": "Sail Sample 3",
+    "file": "SailSample3.gpx"
+  }
+]

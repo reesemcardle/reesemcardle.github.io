@@ -1,9 +1,5 @@
 const harborMapFile = "content/maps/ny-harbor-osm.json";
-const sailFiles = [
-  { id: "sail-1", label: "Sail Sample 1", file: "private/sampledata/SailSample1.gpx" },
-  { id: "sail-2", label: "Sail Sample 2", file: "private/sampledata/SailSample2.gpx" },
-  { id: "sail-3", label: "Sail Sample 3", file: "private/sampledata/SailSample3.gpx" }
-];
+const sailIndexFile = "content/sails/sail-index.json";
 
 const frame = {
   x: 70,
@@ -98,10 +94,13 @@ async function loadText(url) {
 }
 
 async function loadSails() {
-  return Promise.all(sailFiles.map(async (sail) => {
-    const points = withSyntheticTimes(parseGpx(await loadText(sail.file)));
+  const sailIndex = await loadJson(sailIndexFile);
+  return Promise.all(sailIndex.map(async (sail) => {
+    const file = `content/sails/${sail.file}`;
+    const points = withSyntheticTimes(parseGpx(await loadText(file)));
     return {
       ...sail,
+      file,
       points,
       bounds: boundsForPoints(points),
       stats: getTrackStats(points)
