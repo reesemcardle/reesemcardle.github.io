@@ -150,7 +150,7 @@ const els = {
 };
 
 const state = {
-  mode: "cycling",
+  mode: "video",
   cameraPreset: activitySettings.cycling.cameraPreset,
   cameraByMode: {
     cycling: activitySettings.cycling.cameraPreset,
@@ -386,7 +386,7 @@ async function loadActivityContent(){
 
 function initialMode() {
   const requestedMode = new URLSearchParams(window.location.search).get("mode");
-  return ["cycling", "sailing", "archery", "video", "labs", "about"].includes(requestedMode) ? requestedMode : "cycling";
+  return ["video", "cycling", "sailing", "archery", "labs", "about"].includes(requestedMode) ? requestedMode : "video";
 }
 
 async function loadActivityMetadata() {

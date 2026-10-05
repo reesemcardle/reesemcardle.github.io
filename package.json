@@ -2,6 +2,8 @@
   "name": "reese-field-notes",
   "private": true,
   "scripts": {
+    "predeploy": "npm test",
+    "deploy": "node scripts/deploy.mjs",
     "review-targets": "node scripts/review-targets.mjs",
     "update-content": "node scripts/update-content.mjs",
     "build:maps": "node scripts/build-water-maps.mjs && node scripts/build-regional-maps.mjs",

@@ -291,3 +291,17 @@ employment dates, and degree details were not accessible and were not invented.
 The source folder is the editable master; the seed script never overwrites it.
 Email/privacy choices remain deferred. Obfuscating an address in JavaScript is
 not a privacy boundary; use a dedicated public alias if email is added later.
+# Publishing
+
+After updating content and reviewing the local site, commit the intended changes
+on `master`, then run `npm run deploy` from the website folder.
+
+This runs the tests, checks that the working tree is clean and the remote branch
+has no unmerged changes, stamps the footer with the publication date in New York
+time, commits the date if needed, and pushes to GitHub Pages. Same-day deployments
+do not create an extra date commit. Check the Pages deployment and live site after
+pushing. If the push fails, resolve the issue and run the command again.
+
+Use this command instead of a bare `git push` when publishing, so the date is
+updated. Content imports still do not commit or publish anything. The footer is
+static: it never changes just because a visitor loads the page.
