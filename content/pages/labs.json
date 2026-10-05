@@ -1,0 +1,48 @@
+[
+  {
+    "id": "a-city-in-miniature",
+    "title": "A city in miniature",
+    "date": null,
+    "kind": "writing",
+    "tags": [
+      "Sample",
+      "Cities"
+    ],
+    "summary": "A sample image entry: New York at another scale.",
+    "html": "<h1 id=\"article-a-city-in-miniature\">A city in miniature</h1><p>A change in scale makes familiar streets, parks, and waterways visible all at once.</p>\n<p><img src=\"/content/pages/assets/city-model.jpg\" alt=\"A visitor standing before a large physical model of New York City.\" /></p>\n<p><em>Sample image entry.</em></p>\n",
+    "headings": [
+      {
+        "id": "article-a-city-in-miniature",
+        "label": "A city in miniature",
+        "level": 1
+      }
+    ],
+    "minutes": 1
+  },
+  {
+    "id": "six-values",
+    "title": "Six values",
+    "date": null,
+    "kind": "experiment",
+    "tags": [
+      "Sample",
+      "Data"
+    ],
+    "summary": "A sample table and chart, from 100 to 105.",
+    "html": "<h1 id=\"article-six-values\">Six values</h1><p>Six consecutive values, shown as a table and a line chart.</p>\n<table>\n<thead>\n<tr>\n<th>Observation</th>\n<th>Value</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>1</td>\n<td>100</td>\n</tr>\n<tr>\n<td>2</td>\n<td>101</td>\n</tr>\n<tr>\n<td>3</td>\n<td>102</td>\n</tr>\n<tr>\n<td>4</td>\n<td>103</td>\n</tr>\n<tr>\n<td>5</td>\n<td>104</td>\n</tr>\n<tr>\n<td>6</td>\n<td>105</td>\n</tr>\n</tbody></table>\n<h2 id=\"article-chart\">Chart</h2><p>Each observation increases by one.</p>\n",
+    "headings": [
+      {
+        "id": "article-six-values",
+        "label": "Six values",
+        "level": 1
+      },
+      {
+        "id": "article-chart",
+        "label": "Chart",
+        "level": 2
+      }
+    ],
+    "minutes": 1,
+    "experiment": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link href=\"https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap\" rel=\"stylesheet\">\n  <style>\n    html,body{margin:0;height:100%;background:#f3eee2;color:#1e1c19;font-family:\"IBM Plex Mono\",monospace}\n    .chart{position:relative;height:100%;width:100%;box-sizing:border-box;padding:12px 8px 20px}\n    canvas{display:block}\n  </style>\n</head>\n<body>\n  <div class=\"chart\"><canvas id=\"values\" role=\"img\" aria-label=\"Line chart: observations 1 through 6 have values 100, 101, 102, 103, 104, and 105. The same values appear in the table above.\"></canvas></div>\n  <script src=\"/content/pages/vendor/chart.umd.js\"></script>\n  <script>\n    Chart.defaults.font.family='\"IBM Plex Mono\", monospace';\n    Chart.defaults.color=\"#1e1c19\";\n    const chart=new Chart(document.getElementById(\"values\"),{\n      type:\"line\",\n      data:{labels:[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\"],datasets:[{\n        label:\"Value\",data:[100,101,102,103,104,105],borderColor:\"#6e8f97\",\n        backgroundColor:\"#3f5f48\",pointRadius:4,pointHoverRadius:6,borderWidth:2,tension:0\n      }]},\n      options:{responsive:true,maintainAspectRatio:false,animation:false,\n        plugins:{legend:{display:false},tooltip:{displayColors:false,backgroundColor:\"#1e1c19\",titleColor:\"#f3eee2\",bodyColor:\"#f3eee2\"}},\n        scales:{\n          x:{title:{display:true,text:\"Observation\"},grid:{display:false},border:{color:\"#b6b1a7\"}},\n          y:{min:99,max:106,ticks:{stepSize:1},title:{display:true,text:\"Value\"},grid:{color:\"#1e1c1918\"},border:{display:false}}\n        }\n      }\n    });\n    document.fonts.ready.then(()=>chart.update());\n  </script>\n</body>\n</html>\n"
+  }
+]

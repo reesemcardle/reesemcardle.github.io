@@ -1,0 +1,628 @@
+{
+  "schema": "activity-metadata-v0.1",
+  "generatedAt": "2026-05-10T22:26:37.267Z",
+  "sources": {
+    "weather": {
+      "provider": "Open-Meteo Archive API",
+      "variables": [
+        "weather_code",
+        "wind_speed_10m",
+        "wind_direction_10m"
+      ],
+      "method": "Hourly archive samples averaged over the activity window; nearest hour when no duration is available."
+    },
+    "tide": {
+      "provider": "NOAA CO-OPS API",
+      "product": "predictions",
+      "method": "Next high/low prediction at or after the activity start."
+    }
+  },
+  "locations": {
+    "cycling": {
+      "label": "Prospect Park",
+      "latitude": "40.6602",
+      "longitude": "-73.9690",
+      "tideStation": "8518750",
+      "timeZone": "America/New_York"
+    },
+    "sailing": {
+      "label": "New York Harbor",
+      "latitude": "40.6892",
+      "longitude": "-74.0445",
+      "tideStation": "8518750",
+      "timeZone": "America/New_York"
+    },
+    "archery": {
+      "label": "Brooklyn range",
+      "latitude": "40.6602",
+      "longitude": "-73.9690",
+      "tideStation": "8518750",
+      "timeZone": "America/New_York"
+    }
+  },
+  "rides": {
+    "2025-08-01": {
+      "id": "2025-08-01",
+      "label": "Morning Ride",
+      "activity": "cycling",
+      "sourceDate": "2025-08-01T15:01:00.000Z",
+      "sourceEndDate": "2025-08-01T15:24:54.000Z",
+      "localDate": "2025-08-01",
+      "location": "Prospect Park",
+      "weather": {
+        "status": "ok",
+        "wind": "NE 11 mph",
+        "condition": "Cloudy",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "latitude": "40.6602",
+          "longitude": "-73.9690",
+          "sampledFrom": "2025-08-01T15:01:00.000Z",
+          "sampledTo": "2025-08-01T15:24:54.000Z"
+        }
+      },
+      "tide": {
+        "status": "ok",
+        "phase": "Flood tide",
+        "source": {
+          "provider": "NOAA CO-OPS API",
+          "station": "8518750",
+          "predictionTime": "2025-08-01T18:50:00.000Z"
+        }
+      }
+    },
+    "2025-08-04": {
+      "id": "2025-08-04",
+      "label": "Lunch Ride",
+      "activity": "cycling",
+      "sourceDate": "2025-08-04T16:43:18.000Z",
+      "sourceEndDate": "2025-08-04T17:01:55.000Z",
+      "localDate": "2025-08-04",
+      "location": "Prospect Park",
+      "weather": {
+        "status": "ok",
+        "wind": "SW 1 mph",
+        "condition": "Clear",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "latitude": "40.6602",
+          "longitude": "-73.9690",
+          "sampledFrom": "2025-08-04T16:43:18.000Z",
+          "sampledTo": "2025-08-04T17:01:55.000Z"
+        }
+      },
+      "tide": {
+        "status": "ok",
+        "phase": "Flood tide",
+        "source": {
+          "provider": "NOAA CO-OPS API",
+          "station": "8518750",
+          "predictionTime": "2025-08-04T21:24:00.000Z"
+        }
+      }
+    },
+    "2025-11-06": {
+      "id": "2025-11-06",
+      "label": "Morning Ride",
+      "activity": "cycling",
+      "sourceDate": "2025-11-06T13:11:08.000Z",
+      "sourceEndDate": "2025-11-06T13:24:49.000Z",
+      "localDate": "2025-11-06",
+      "location": "Prospect Park",
+      "weather": {
+        "status": "ok",
+        "wind": "W 10 mph",
+        "condition": "Clear",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "latitude": "40.6602",
+          "longitude": "-73.9690",
+          "sampledFrom": "2025-11-06T13:11:08.000Z",
+          "sampledTo": "2025-11-06T13:24:49.000Z"
+        }
+      },
+      "tide": {
+        "status": "ok",
+        "phase": "Ebb tide",
+        "source": {
+          "provider": "NOAA CO-OPS API",
+          "station": "8518750",
+          "predictionTime": "2025-11-06T19:52:00.000Z"
+        }
+      }
+    },
+    "2026-03-26": {
+      "id": "2026-03-26",
+      "label": "Season Opener",
+      "activity": "cycling",
+      "sourceDate": "2026-03-26T20:29:51.000Z",
+      "sourceEndDate": "2026-03-26T21:03:00.000Z",
+      "localDate": "2026-03-26",
+      "location": "Prospect Park",
+      "weather": {
+        "status": "ok",
+        "wind": "S 7 mph",
+        "condition": "Mostly clear",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "latitude": "40.6602",
+          "longitude": "-73.9690",
+          "sampledFrom": "2026-03-26T20:29:51.000Z",
+          "sampledTo": "2026-03-26T21:03:00.000Z"
+        }
+      },
+      "tide": {
+        "status": "ok",
+        "phase": "Ebb tide",
+        "source": {
+          "provider": "NOAA CO-OPS API",
+          "station": "8518750",
+          "predictionTime": "2026-03-27T01:58:00.000Z"
+        }
+      }
+    },
+    "2026-04-01": {
+      "id": "2026-04-01",
+      "label": "Afternoon Ride",
+      "activity": "cycling",
+      "sourceDate": "2026-04-01T19:03:48.000Z",
+      "sourceEndDate": "2026-04-01T19:39:14.000Z",
+      "localDate": "2026-04-01",
+      "location": "Prospect Park",
+      "weather": {
+        "status": "ok",
+        "wind": "W 7 mph",
+        "condition": "Partly cloudy",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "latitude": "40.6602",
+          "longitude": "-73.9690",
+          "sampledFrom": "2026-04-01T19:03:48.000Z",
+          "sampledTo": "2026-04-01T19:39:14.000Z"
+        }
+      },
+      "tide": {
+        "status": "ok",
+        "phase": "Flood tide",
+        "source": {
+          "provider": "NOAA CO-OPS API",
+          "station": "8518750",
+          "predictionTime": "2026-04-02T00:55:00.000Z"
+        }
+      }
+    },
+    "2026-04-14": {
+      "id": "2026-04-14",
+      "label": "Afternoon Ride",
+      "activity": "cycling",
+      "sourceDate": "2026-04-14T19:22:07.000Z",
+      "sourceEndDate": "2026-04-14T19:45:58.000Z",
+      "localDate": "2026-04-14",
+      "location": "Prospect Park",
+      "weather": {
+        "status": "ok",
+        "wind": "S 10 mph",
+        "condition": "Clear",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "latitude": "40.6602",
+          "longitude": "-73.9690",
+          "sampledFrom": "2026-04-14T19:22:07.000Z",
+          "sampledTo": "2026-04-14T19:45:58.000Z"
+        }
+      },
+      "tide": {
+        "status": "ok",
+        "phase": "Flood tide",
+        "source": {
+          "provider": "NOAA CO-OPS API",
+          "station": "8518750",
+          "predictionTime": "2026-04-14T22:52:00.000Z"
+        }
+      }
+    }
+  },
+  "sails": {
+    "sailing-ba08cba1fe73cb49a2b4": {
+      "id": "sailing-ba08cba1fe73cb49a2b4",
+      "label": "03-Jul-2026-1949",
+      "sourceDate": "2026-07-03T16:17:00Z",
+      "sourceEndDate": "2026-07-03T22:48:00Z",
+      "localDate": "2026-07-03",
+      "location": "Mahone Bay",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":44.41,\"longitude\":-64.21,\"startedAt\":\"2026-07-03T16:17:00.000Z\",\"endedAt\":\"2026-07-03T22:48:00.000Z\"}",
+        "condition": "Clear",
+        "temperatureF": 90,
+        "wind": "W 11 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-07-03T16:17:00.000Z",
+          "sampledTo": "2026-07-03T22:48:00.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-e82994c750560dfee46d": {
+      "id": "sailing-e82994c750560dfee46d",
+      "label": "04-Jul-2026-2103",
+      "sourceDate": "2026-07-04T20:56:28Z",
+      "sourceEndDate": "2026-07-05T00:03:06Z",
+      "localDate": "2026-07-04",
+      "location": "Mahone Bay",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":44.42,\"longitude\":-64.24,\"startedAt\":\"2026-07-04T20:56:28.000Z\",\"endedAt\":\"2026-07-05T00:03:06.000Z\"}",
+        "condition": "Partly cloudy",
+        "temperatureF": 81,
+        "wind": "W 12 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-07-04T20:56:28.000Z",
+          "sampledTo": "2026-07-05T00:03:06.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-804d43581b0d9aaf0477": {
+      "id": "sailing-804d43581b0d9aaf0477",
+      "label": "07-Aug-2026-1625",
+      "sourceDate": "2026-08-07T16:32:05Z",
+      "sourceEndDate": "2026-08-07T20:25:51Z",
+      "localDate": "2026-08-07",
+      "location": "Newport Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":41.56,\"longitude\":-71.33,\"startedAt\":\"2026-08-07T16:32:05.000Z\",\"endedAt\":\"2026-08-07T20:25:51.000Z\"}",
+        "condition": "Light drizzle",
+        "temperatureF": 79,
+        "wind": "SW 9 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-08-07T16:32:05.000Z",
+          "sampledTo": "2026-08-07T20:25:51.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-0828733faf329f6af426": {
+      "id": "sailing-0828733faf329f6af426",
+      "label": "08-Aug-2026-1622",
+      "sourceDate": "2026-08-08T16:18:56Z",
+      "sourceEndDate": "2026-08-08T20:22:12Z",
+      "localDate": "2026-08-08",
+      "location": "Newport Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":41.56,\"longitude\":-71.33,\"startedAt\":\"2026-08-08T16:18:56.000Z\",\"endedAt\":\"2026-08-08T20:22:12.000Z\"}",
+        "condition": "Light drizzle",
+        "temperatureF": 78,
+        "wind": "SW 14 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-08-08T16:18:56.000Z",
+          "sampledTo": "2026-08-08T20:22:12.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-22398aad6ed5492dcf1e": {
+      "id": "sailing-22398aad6ed5492dcf1e",
+      "label": "09-Aug-2026-1504",
+      "sourceDate": "2026-08-09T16:10:08Z",
+      "sourceEndDate": "2026-08-09T19:04:12Z",
+      "localDate": "2026-08-09",
+      "location": "Newport Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":41.56,\"longitude\":-71.32,\"startedAt\":\"2026-08-09T16:10:08.000Z\",\"endedAt\":\"2026-08-09T19:04:12.000Z\"}",
+        "condition": "Light drizzle",
+        "temperatureF": 79,
+        "wind": "SW 11 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-08-09T16:10:08.000Z",
+          "sampledTo": "2026-08-09T19:04:12.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-324daf1d967822ad4ed5": {
+      "id": "sailing-324daf1d967822ad4ed5",
+      "label": "03-Jun-2026-1953",
+      "sourceDate": "2026-06-03T22:22:25Z",
+      "sourceEndDate": "2026-06-03T23:53:48Z",
+      "localDate": "2026-06-03",
+      "location": "New York Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.74,\"longitude\":-74.03,\"startedAt\":\"2026-06-03T22:22:25.000Z\",\"endedAt\":\"2026-06-03T23:53:48.000Z\"}",
+        "condition": "Clear",
+        "temperatureF": 76,
+        "wind": "S 8 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-06-03T22:22:25.000Z",
+          "sampledTo": "2026-06-03T23:53:48.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-a360f44bba6dad3054a9": {
+      "id": "sailing-a360f44bba6dad3054a9",
+      "label": "05-Jun-2026-1210",
+      "sourceDate": "2026-06-05T14:25:03Z",
+      "sourceEndDate": "2026-06-05T16:10:31Z",
+      "localDate": "2026-06-05",
+      "location": "New York Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.75,\"longitude\":-74.01,\"startedAt\":\"2026-06-05T14:25:03.000Z\",\"endedAt\":\"2026-06-05T16:10:31.000Z\"}",
+        "condition": "Partly cloudy",
+        "temperatureF": 88,
+        "wind": "NW 4 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-06-05T14:25:03.000Z",
+          "sampledTo": "2026-06-05T16:10:31.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-0e3b5ddf2b021743aa93": {
+      "id": "sailing-0e3b5ddf2b021743aa93",
+      "label": "06-Jun-2026-1509",
+      "sourceDate": "2026-06-06T17:11:32Z",
+      "sourceEndDate": "2026-06-06T19:09:08Z",
+      "localDate": "2026-06-06",
+      "location": "New York Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.75,\"longitude\":-74.01,\"startedAt\":\"2026-06-06T17:11:32.000Z\",\"endedAt\":\"2026-06-06T19:09:08.000Z\"}",
+        "condition": "Cloudy",
+        "temperatureF": 91,
+        "wind": "W 11 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-06-06T17:11:32.000Z",
+          "sampledTo": "2026-06-06T19:09:08.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-f1e6ff9a314cc755c058": {
+      "id": "sailing-f1e6ff9a314cc755c058",
+      "label": "09-Jun-2026-2008",
+      "sourceDate": "2026-06-09T21:54:29Z",
+      "sourceEndDate": "2026-06-10T00:08:43Z",
+      "localDate": "2026-06-09",
+      "location": "New York Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.75,\"longitude\":-74.01,\"startedAt\":\"2026-06-09T21:54:29.000Z\",\"endedAt\":\"2026-06-10T00:08:43.000Z\"}",
+        "condition": "Clear",
+        "temperatureF": 74,
+        "wind": "SE 7 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-06-09T21:54:29.000Z",
+          "sampledTo": "2026-06-10T00:08:43.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-343365c782b8dcbbe299": {
+      "id": "sailing-343365c782b8dcbbe299",
+      "label": "13-Jun-2026-1138",
+      "sourceDate": "2026-06-13T13:25:48Z",
+      "sourceEndDate": "2026-06-13T15:38:09Z",
+      "localDate": "2026-06-13",
+      "location": "New York Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.75,\"longitude\":-74.01,\"startedAt\":\"2026-06-13T13:25:48.000Z\",\"endedAt\":\"2026-06-13T15:38:09.000Z\"}",
+        "condition": "Clear",
+        "temperatureF": 81,
+        "wind": "NW 4 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-06-13T13:25:48.000Z",
+          "sampledTo": "2026-06-13T15:38:09.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-ad5dd87ef2a05fea2f64": {
+      "id": "sailing-ad5dd87ef2a05fea2f64",
+      "label": "14-Jul-2026-1944",
+      "sourceDate": "2026-07-14T22:08:41Z",
+      "sourceEndDate": "2026-07-14T23:44:59Z",
+      "localDate": "2026-07-14",
+      "location": "New York Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.75,\"longitude\":-74.01,\"startedAt\":\"2026-07-14T22:08:41.000Z\",\"endedAt\":\"2026-07-14T23:44:59.000Z\"}",
+        "condition": "Clear",
+        "temperatureF": 92,
+        "wind": "W 11 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-07-14T22:08:41.000Z",
+          "sampledTo": "2026-07-14T23:44:59.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-73a940d4d6c2c685e2a2": {
+      "id": "sailing-73a940d4d6c2c685e2a2",
+      "label": "16-Jun-2026-2013",
+      "sourceDate": "2026-06-16T22:00:59Z",
+      "sourceEndDate": "2026-06-17T00:13:24Z",
+      "localDate": "2026-06-16",
+      "location": "New York Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.75,\"longitude\":-74.01,\"startedAt\":\"2026-06-16T22:00:59.000Z\",\"endedAt\":\"2026-06-17T00:13:24.000Z\"}",
+        "condition": "Clear",
+        "temperatureF": 69,
+        "wind": "S 9 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-06-16T22:00:59.000Z",
+          "sampledTo": "2026-06-17T00:13:24.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-5278f3f427ad8ea11d77": {
+      "id": "sailing-5278f3f427ad8ea11d77",
+      "label": "16-May-2026-1354",
+      "sourceDate": "2026-05-16T15:47:04Z",
+      "sourceEndDate": "2026-05-16T17:54:29Z",
+      "localDate": "2026-05-16",
+      "location": "New York Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.73,\"longitude\":-74.01,\"startedAt\":\"2026-05-16T15:47:04.000Z\",\"endedAt\":\"2026-05-16T17:54:29.000Z\"}",
+        "condition": "Clear",
+        "temperatureF": 77,
+        "wind": "SW 9 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-05-16T15:47:04.000Z",
+          "sampledTo": "2026-05-16T17:54:29.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-96bfd675c42da199e796": {
+      "id": "sailing-96bfd675c42da199e796",
+      "label": "17-May-2026-1204",
+      "sourceDate": "2026-05-17T13:19:47Z",
+      "sourceEndDate": "2026-05-17T16:04:31Z",
+      "localDate": "2026-05-17",
+      "location": "New York Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.75,\"longitude\":-74.01,\"startedAt\":\"2026-05-17T13:19:47.000Z\",\"endedAt\":\"2026-05-17T16:04:31.000Z\"}",
+        "condition": "Clear",
+        "temperatureF": 82,
+        "wind": "W 4 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-05-17T13:19:47.000Z",
+          "sampledTo": "2026-05-17T16:04:31.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-2a601be73c23c029ca35": {
+      "id": "sailing-2a601be73c23c029ca35",
+      "label": "27-Jun-2026-1708",
+      "sourceDate": "2026-06-27T17:36:05Z",
+      "sourceEndDate": "2026-06-27T21:08:35Z",
+      "localDate": "2026-06-27",
+      "location": "New York Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.74,\"longitude\":-74.01,\"startedAt\":\"2026-06-27T17:36:05.000Z\",\"endedAt\":\"2026-06-27T21:08:35.000Z\"}",
+        "condition": "Light rain",
+        "temperatureF": 72,
+        "wind": "NE 3 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-06-27T17:36:05.000Z",
+          "sampledTo": "2026-06-27T21:08:35.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "sailing-13bfac9988fd054a94bb": {
+      "id": "sailing-13bfac9988fd054a94bb",
+      "label": "30-Jun-2026-1959",
+      "sourceDate": "2026-06-30T22:16:09Z",
+      "sourceEndDate": "2026-06-30T23:59:08Z",
+      "localDate": "2026-06-30",
+      "location": "New York Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.74,\"longitude\":-74.02,\"startedAt\":\"2026-06-30T22:16:09.000Z\",\"endedAt\":\"2026-06-30T23:59:08.000Z\"}",
+        "condition": "Mostly clear",
+        "temperatureF": 90,
+        "wind": "SW 7 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-06-30T22:16:09.000Z",
+          "sampledTo": "2026-06-30T23:59:08.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    }
+  },
+  "archerySessions": {
+    "photo-bf57c370adc9e5e699dfb590": {
+      "id": "photo-bf57c370adc9e5e699dfb590",
+      "label": "Target 2026-03-24",
+      "activity": "archery",
+      "sourceDate": "2026-03-24T14:57:54-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-03-24",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    }
+  }
+}

@@ -1,17 +1,404 @@
 [
   {
-    "id": "sail-1",
-    "label": "Sail Sample 1",
-    "file": "SailSample1.gpx"
+    "id": "sailing-5278f3f427ad8ea11d77",
+    "label": "16-May-2026-1354",
+    "file": "ny-harbor/sailing-5278f3f427ad8ea11d77.gpx",
+    "sourceHash": "5278f3f427ad8ea11d77a6abd1c60ad71517bc12c3901b740d1b4f3ddb64e39d",
+    "regionId": "ny-harbor",
+    "recordedAt": "2026-05-16T15:47:04Z",
+    "eventDetails": {
+      "durationSeconds": 7645,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": null
+      },
+      "boatOptions": [
+        "J/80",
+        "J/24"
+      ],
+      "sailType": null,
+      "sailTypeOptions": [
+        "race",
+        "club"
+      ],
+      "event": null,
+      "notes": null
+    }
   },
   {
-    "id": "sail-2",
-    "label": "Sail Sample 2",
-    "file": "SailSample2.gpx"
+    "id": "sailing-96bfd675c42da199e796",
+    "label": "17-May-2026-1204",
+    "file": "ny-harbor/sailing-96bfd675c42da199e796.gpx",
+    "sourceHash": "96bfd675c42da199e79606ae50cb826d104a3cfafa72b3f23078c275c93930b3",
+    "regionId": "ny-harbor",
+    "recordedAt": "2026-05-17T13:19:47Z",
+    "eventDetails": {
+      "durationSeconds": 9884,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": null
+      },
+      "boatOptions": [
+        "J/80",
+        "J/24"
+      ],
+      "sailType": null,
+      "sailTypeOptions": [
+        "race",
+        "club"
+      ],
+      "event": null,
+      "notes": null
+    }
   },
   {
-    "id": "sail-3",
-    "label": "Sail Sample 3",
-    "file": "SailSample3.gpx"
+    "id": "sailing-324daf1d967822ad4ed5",
+    "label": "03-Jun-2026-1953",
+    "file": "ny-harbor/sailing-324daf1d967822ad4ed5.gpx",
+    "sourceHash": "324daf1d967822ad4ed5206fb6d213014bfc8315ecbe654f9824ed696471f18f",
+    "regionId": "ny-harbor",
+    "recordedAt": "2026-06-03T22:22:25Z",
+    "eventDetails": {
+      "durationSeconds": 5483,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": null
+      },
+      "boatOptions": [
+        "J/80",
+        "J/24"
+      ],
+      "sailType": null,
+      "sailTypeOptions": [
+        "race",
+        "club"
+      ],
+      "event": null,
+      "notes": null
+    }
+  },
+  {
+    "id": "sailing-a360f44bba6dad3054a9",
+    "label": "05-Jun-2026-1210",
+    "file": "ny-harbor/sailing-a360f44bba6dad3054a9.gpx",
+    "sourceHash": "a360f44bba6dad3054a98a7366882d8daf4e1166609822d6d8a513d3892e45c7",
+    "regionId": "ny-harbor",
+    "recordedAt": "2026-06-05T14:25:03Z",
+    "eventDetails": {
+      "durationSeconds": 6328,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": null
+      },
+      "boatOptions": [
+        "J/80",
+        "J/24"
+      ],
+      "sailType": null,
+      "sailTypeOptions": [
+        "race",
+        "club"
+      ],
+      "event": null,
+      "notes": null
+    }
+  },
+  {
+    "id": "sailing-0e3b5ddf2b021743aa93",
+    "label": "06-Jun-2026-1509",
+    "file": "ny-harbor/sailing-0e3b5ddf2b021743aa93.gpx",
+    "sourceHash": "0e3b5ddf2b021743aa93e40e74b06398e93021da7634a7bd3f351b8b8321bd65",
+    "regionId": "ny-harbor",
+    "recordedAt": "2026-06-06T17:11:32Z",
+    "eventDetails": {
+      "durationSeconds": 7056,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": null
+      },
+      "boatOptions": [
+        "J/80",
+        "J/24"
+      ],
+      "sailType": null,
+      "sailTypeOptions": [
+        "race",
+        "club"
+      ],
+      "event": null,
+      "notes": null
+    }
+  },
+  {
+    "id": "sailing-f1e6ff9a314cc755c058",
+    "label": "09-Jun-2026-2008",
+    "file": "ny-harbor/sailing-f1e6ff9a314cc755c058.gpx",
+    "sourceHash": "f1e6ff9a314cc755c05801f0ef3ff167ddea1f3078bef70ccc254edc0f1667ef",
+    "regionId": "ny-harbor",
+    "recordedAt": "2026-06-09T21:54:29Z",
+    "eventDetails": {
+      "durationSeconds": 8054,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": null
+      },
+      "boatOptions": [
+        "J/80",
+        "J/24"
+      ],
+      "sailType": null,
+      "sailTypeOptions": [
+        "race",
+        "club"
+      ],
+      "event": null,
+      "notes": null
+    }
+  },
+  {
+    "id": "sailing-343365c782b8dcbbe299",
+    "label": "13-Jun-2026-1138",
+    "file": "ny-harbor/sailing-343365c782b8dcbbe299.gpx",
+    "sourceHash": "343365c782b8dcbbe299ca8fa1595d137d4b71c7884e3daf15dd12c1c25a0f9a",
+    "regionId": "ny-harbor",
+    "recordedAt": "2026-06-13T13:25:48Z",
+    "eventDetails": {
+      "durationSeconds": 7941,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": null
+      },
+      "boatOptions": [
+        "J/80",
+        "J/24"
+      ],
+      "sailType": null,
+      "sailTypeOptions": [
+        "race",
+        "club"
+      ],
+      "event": null,
+      "notes": null
+    }
+  },
+  {
+    "id": "sailing-73a940d4d6c2c685e2a2",
+    "label": "16-Jun-2026-2013",
+    "file": "ny-harbor/sailing-73a940d4d6c2c685e2a2.gpx",
+    "sourceHash": "73a940d4d6c2c685e2a2211aad7b824d069181d8ff03c37da5803b6f31a29d79",
+    "regionId": "ny-harbor",
+    "recordedAt": "2026-06-16T22:00:59Z",
+    "eventDetails": {
+      "durationSeconds": 7945,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": null
+      },
+      "boatOptions": [
+        "J/80",
+        "J/24"
+      ],
+      "sailType": null,
+      "sailTypeOptions": [
+        "race",
+        "club"
+      ],
+      "event": null,
+      "notes": null
+    }
+  },
+  {
+    "id": "sailing-2a601be73c23c029ca35",
+    "label": "27-Jun-2026-1708",
+    "file": "ny-harbor/sailing-2a601be73c23c029ca35.gpx",
+    "sourceHash": "2a601be73c23c029ca35c0af887cab3339c61ad19f3f7a787226ab41dbd2e1ea",
+    "regionId": "ny-harbor",
+    "recordedAt": "2026-06-27T17:36:05Z",
+    "eventDetails": {
+      "durationSeconds": 12750,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": null
+      },
+      "boatOptions": [
+        "J/80",
+        "J/24"
+      ],
+      "sailType": null,
+      "sailTypeOptions": [
+        "race",
+        "club"
+      ],
+      "event": null,
+      "notes": null
+    }
+  },
+  {
+    "id": "sailing-13bfac9988fd054a94bb",
+    "label": "30-Jun-2026-1959",
+    "file": "ny-harbor/sailing-13bfac9988fd054a94bb.gpx",
+    "sourceHash": "13bfac9988fd054a94bbd5c30087d217f7232e6a3cd1890831991bd8825a223e",
+    "regionId": "ny-harbor",
+    "recordedAt": "2026-06-30T22:16:09Z",
+    "eventDetails": {
+      "durationSeconds": 6179,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": null
+      },
+      "boatOptions": [
+        "J/80",
+        "J/24"
+      ],
+      "sailType": null,
+      "sailTypeOptions": [
+        "race",
+        "club"
+      ],
+      "event": null,
+      "notes": null
+    }
+  },
+  {
+    "id": "sailing-ba08cba1fe73cb49a2b4",
+    "label": "03-Jul-2026-1949",
+    "file": "mahone-bay/sailing-ba08cba1fe73cb49a2b4.gpx",
+    "sourceHash": "ba08cba1fe73cb49a2b4570fbe1cc6b6e8d85d4bb04a16375a2cd2d35e14e2a9",
+    "regionId": "mahone-bay",
+    "recordedAt": "2026-07-03T16:17:00Z",
+    "eventDetails": {
+      "durationSeconds": 23460,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": "J/30"
+      },
+      "boatOptions": [],
+      "sailType": null,
+      "sailTypeOptions": [],
+      "event": null,
+      "notes": null
+    }
+  },
+  {
+    "id": "sailing-e82994c750560dfee46d",
+    "label": "04-Jul-2026-2103",
+    "file": "mahone-bay/sailing-e82994c750560dfee46d.gpx",
+    "sourceHash": "e82994c750560dfee46db0200eea679ad22573ca01d4c40e23752779c754c299",
+    "regionId": "mahone-bay",
+    "recordedAt": "2026-07-04T20:56:28Z",
+    "eventDetails": {
+      "durationSeconds": 11198,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": "J/30"
+      },
+      "boatOptions": [],
+      "sailType": null,
+      "sailTypeOptions": [],
+      "event": null,
+      "notes": null
+    }
+  },
+  {
+    "id": "sailing-ad5dd87ef2a05fea2f64",
+    "label": "14-Jul-2026-1944",
+    "file": "ny-harbor/sailing-ad5dd87ef2a05fea2f64.gpx",
+    "sourceHash": "ad5dd87ef2a05fea2f64881dd3f02c2ce81dd939173b12bbac2a396de2e56c21",
+    "regionId": "ny-harbor",
+    "recordedAt": "2026-07-14T22:08:41Z",
+    "eventDetails": {
+      "durationSeconds": 5778,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": null
+      },
+      "boatOptions": [
+        "J/80",
+        "J/24"
+      ],
+      "sailType": null,
+      "sailTypeOptions": [
+        "race",
+        "club"
+      ],
+      "event": null,
+      "notes": null
+    }
+  },
+  {
+    "id": "sailing-804d43581b0d9aaf0477",
+    "label": "07-Aug-2026-1625",
+    "file": "newport/sailing-804d43581b0d9aaf0477.gpx",
+    "sourceHash": "804d43581b0d9aaf04777b046b014948eb8ffb4e99258ab59b490803cc9d378a",
+    "regionId": "newport",
+    "recordedAt": "2026-08-07T16:32:05Z",
+    "eventDetails": {
+      "durationSeconds": 14026,
+      "boat": {
+        "name": "American Eagle",
+        "sailNumber": "US-21",
+        "class": "12 Metre"
+      },
+      "boatOptions": [],
+      "sailType": "race",
+      "sailTypeOptions": [],
+      "event": null,
+      "notes": null
+    }
+  },
+  {
+    "id": "sailing-0828733faf329f6af426",
+    "label": "08-Aug-2026-1622",
+    "file": "newport/sailing-0828733faf329f6af426.gpx",
+    "sourceHash": "0828733faf329f6af426cb775e78a6a36ece9b42250ed6c587d7870e5a4a1dd0",
+    "regionId": "newport",
+    "recordedAt": "2026-08-08T16:18:56Z",
+    "eventDetails": {
+      "durationSeconds": 14596,
+      "boat": {
+        "name": "American Eagle",
+        "sailNumber": "US-21",
+        "class": "12 Metre"
+      },
+      "boatOptions": [],
+      "sailType": "race",
+      "sailTypeOptions": [],
+      "event": null,
+      "notes": null
+    }
+  },
+  {
+    "id": "sailing-22398aad6ed5492dcf1e",
+    "label": "09-Aug-2026-1504",
+    "file": "newport/sailing-22398aad6ed5492dcf1e.gpx",
+    "sourceHash": "22398aad6ed5492dcf1efe16492e6dc93e70ccfbc6b82216c75db664986cbc18",
+    "regionId": "newport",
+    "recordedAt": "2026-08-09T16:10:08Z",
+    "eventDetails": {
+      "durationSeconds": 10444,
+      "boat": {
+        "name": "American Eagle",
+        "sailNumber": "US-21",
+        "class": "12 Metre"
+      },
+      "boatOptions": [],
+      "sailType": "race",
+      "sailTypeOptions": [],
+      "event": null,
+      "notes": null
+    }
   }
 ]

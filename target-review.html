@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Target Review</title><link rel="stylesheet" href="/target-review.css"><script type="module" src="/scripts/target-review.mjs"></script></head>
+<body>
+<header><h1>Target review</h1><span id="saveStatus" role="status">Loading</span><button id="reload">Reload</button><button id="save" class="primary" disabled>Save review</button></header>
+<main>
+  <nav class="queue" aria-label="Target photos"><h2>Photos</h2><div id="queue"></div></nav>
+  <section class="editor" aria-label="Photo annotation">
+    <div class="toolbar"><fieldset><legend class="sr-only">Photo tool</legend><label><input type="radio" name="tool" value="select" checked>Select / move</label><label><input type="radio" name="tool" value="add">Add impact</label><label><input type="radio" name="tool" value="pan">Pan</label></fieldset><button id="fit">Fit</button><label>Zoom<input id="zoom" type="range" min="0.7" max="12" value="1" step="0.1"></label><label><input id="labels" type="checkbox" checked>Numbers</label><label><input id="overlay" type="checkbox" checked>Marks</label></div>
+    <div class="stage"><svg id="photo" xmlns="http://www.w3.org/2000/svg" tabindex="0" aria-label="Target photo with editable numbered impacts"><image id="photoImage"></image><g id="markers"></g></svg><p id="empty" hidden>No imported target photos</p></div>
+    <div class="photo-footer"><span id="counts"></span><button id="previous">Previous photo</button><button id="next">Next photo</button></div>
+  </section>
+  <aside aria-label="Review details">
+    <label>Target name<input id="name" maxlength="160"></label>
+    <label>Capture date<input id="date" type="date"></label>
+    <div class="preview-row"><svg id="preview" viewBox="-1.18 -1.18 2.36 2.36" aria-label="Reconstructed target"></svg><div><strong id="selectedTitle">No mark selected</strong><p id="observation"></p></div></div>
+    <fieldset id="markDetails" disabled><legend>Selected mark</legend>
+      <label>Your feedback<textarea id="markFeedback" rows="3" maxlength="2000" placeholder="For example: this tear contains two shots"></textarea></label>
+      <label>Known shot count<input id="observedCount" type="number" min="1" max="100" placeholder="Unknown"></label>
+      <div class="actions"><button id="confirm" type="button">Confirm</button><button id="exclude" type="button">Exclude</button><button id="split" type="button" title="Keep this mark and click the photo for the second impact">Split</button></div>
+    </fieldset>
+    <div class="mark-heading"><h2>Marks</h2><label><input id="flaggedOnly" type="checkbox" checked>Flagged first</label><button id="merge" disabled>Merge selected</button></div>
+    <div id="markList" class="mark-list"></div>
+    <div class="actions"><button id="undo" disabled>Undo edit</button><button id="nextFlag">Next flagged</button></div>
+    <label>Whole-target feedback<textarea id="targetFeedback" rows="3" maxlength="10000"></textarea></label>
+    <label>Review state<select id="reviewState"><option value="draft">Draft</option><option value="ready">Ready for revision</option><option value="reviewed">Reviewed</option></select></label>
+  </aside>
+</main>
+</body></html>

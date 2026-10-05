@@ -1,0 +1,50 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {mkdtemp,mkdir,writeFile,readFile,stat,symlink} from "node:fs/promises";
+import {join} from "node:path";
+import {tmpdir} from "node:os";
+import sharp from "sharp";
+import {importEventAttachments,resolveMediaSource} from "../scripts/content-media.mjs";
+import {execFile} from "node:child_process";
+import {promisify} from "node:util";
+const exec=promisify(execFile);
+
+test("video uploads appear once, including legacy poster entries, while separate photos remain",async t=>{
+  try{await exec("ffmpeg",["-version"]);}catch{t.skip("FFmpeg not installed");return;}
+  const root=await mkdtemp(join(tmpdir(),"event-video-")),output=join(root,"content");
+  await exec("ffmpeg",["-v","error","-f","lavfi","-i","testsrc2=size=320x240:rate=12","-t","1","-c:v","libx264","-pix_fmt","yuv420p",join(root,"clip.mov")]);
+  await sharp({create:{width:100,height:200,channels:3,background:"white"}}).jpeg().toFile(join(root,"photo.jpg"));
+  const clip={file:"clip.mov",alt:"Video"},poster={...clip,posterOnly:true,alt:"Legacy still"};
+  const items=[poster,{file:"photo.jpg",alt:"Separate photo"},clip,clip];
+  await importEventAttachments("sailing:one",items,root,output);
+  const index=()=>readFile(join(output,"media/event-index.json"),"utf8").then(JSON.parse);
+  const media=(await index())["sailing:one"];
+  assert.deepEqual(media.map(item=>item.type),["image","video"]);
+  assert.equal(media[1].alt,"Video");
+  assert.ok(media[1].src.endsWith(".mp4"));
+  assert.ok(media[1].poster.endsWith(".jpg"));
+  assert.equal(await importEventAttachments("sailing:one",items,root,output),false);
+  await importEventAttachments("sailing:one",[poster],root,output);
+  assert.equal((await index())["sailing:one"][0].type,"video");
+});
+test("event photos resize, strip metadata, cache and support multiple attachments",async()=>{
+  const root=await mkdtemp(join(tmpdir(),"event-media-")),source=join(root,"inbox"),output=join(root,"content");
+  await mkdir(source);
+  await sharp({create:{width:2000,height:1000,channels:3,background:"white"}}).withMetadata().jpeg().toFile(join(source,"photo.jpg"));
+  const items=[{file:"photo.jpg",alt:"Example photo",placeholder:true}];
+  assert.equal(await importEventAttachments("sailing:one",items,source,output),true);
+  const data=JSON.parse(await readFile(join(output,"media/event-index.json")));
+  const file=join(output,"media",data["sailing:one"][0].src.split("/").at(-1));
+  const info=await sharp(file).metadata(),mtime=(await stat(file)).mtimeMs;
+  assert.equal(info.width,1280);assert.equal(info.exif,undefined);
+  assert.equal(await importEventAttachments("sailing:one",items,source,output),false);
+  assert.equal((await stat(file)).mtimeMs,mtime);
+  await importEventAttachments("sailing:one",[...items,{...items[0],alt:"Second view"}],source,output);
+  assert.equal(JSON.parse(await readFile(join(output,"media/event-index.json")))["sailing:one"].length,2);
+  await importEventAttachments("sailing:one",[],source,output);
+  assert.deepEqual(JSON.parse(await readFile(join(output,"media/event-index.json")))["sailing:one"],[]);
+  await writeFile(join(root,"outside.jpg"),"private");
+  await assert.rejects(resolveMediaSource(source,"../outside.jpg"),/inside Website Content/);
+  await symlink(join(root,"outside.jpg"),join(source,"link.jpg"));
+  await assert.rejects(resolveMediaSource(source,"link.jpg"),/inside Website Content/);
+});

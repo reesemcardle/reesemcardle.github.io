@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+cd "$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+if command -v node >/dev/null 2>&1; then
+  exec node scripts/update-content.mjs "$@"
+fi
+NODE="$HOME/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node"
+if [ -x "$NODE" ]; then
+  exec "$NODE" scripts/update-content.mjs "$@"
+fi
+printf '%s\n' 'Node.js 22 or newer is required.' >&2
+exit 1

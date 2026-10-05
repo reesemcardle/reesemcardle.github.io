@@ -1,0 +1,23 @@
+[
+  {
+    "id": "video-f3b4771d9533cf338756c654",
+    "name": "flying",
+    "file": "video-f3b4771d9533cf338756c654.mp4",
+    "poster": "video-f3b4771d9533cf338756c654.jpg",
+    "sourceHash": "f3b4771d9533cf338756c654b080699a30ecb38e574c3d17996a26945f78ea13",
+    "settingsHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "importVersion": 2,
+    "duration": 30.755,
+    "width": 1280,
+    "height": 720,
+    "bytes": 8971839,
+    "hasAudio": true,
+    "date": "2026-07-08",
+    "location": null,
+    "weather": {
+      "status": "unavailable",
+      "reason": "Weather lookup not requested"
+    },
+    "capturedAt": "2026-07-08T16:23:38-0400"
+  }
+]

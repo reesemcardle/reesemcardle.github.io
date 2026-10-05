@@ -1,7 +1,39 @@
+import { harborProjection, renderHarborMap } from "./scripts/harbor-map.mjs";
+import { createVideoPlayer, captureLabels } from "./scripts/video-player.mjs";
+import { weatherDisplay } from "./scripts/activity-weather.mjs";
+import { mapRegions, createRegionPicker } from "./scripts/map-regions.mjs";
+import { createSailingEventDetails } from "./scripts/sailing-event.mjs";
+import { createEventMedia } from "./scripts/event-media.mjs";
+import { createEditorialPages } from "./scripts/editorial-pages.mjs";
+import { prepareSail } from "./scripts/sail-data.mjs";
+import { setupResponsiveLayout } from "./scripts/responsive-layout.mjs";
+import { createMapCamera, fitCamera, launchCenter } from "./scripts/map-camera.mjs";
+import {
+  createProjection,
+  featureTouchesBounds,
+  geoPointsToPath,
+  getTrackStats as getRideStats,
+  haversineMeters,
+  loadJson,
+  parseGpx,
+  pointInBounds,
+  projectedPointsToPath,
+  projectedSegmentsToPath,
+  segmentPointsInBounds
+} from "./scripts/field-utils.mjs";
+
 const rideIndexFile = "content/rides/ride-index.json";
-const rideMetadataFile = "content/rides/ride-metadata.json";
+const activityMetadataFile = "content/activity-metadata.json";
 const basemapFile = "content/maps/prospect-park-osm.json";
-const harborBasemapFile = "content/maps/ny-harbor-osm.json";
+const requestedRegion=new URLSearchParams(location.search).get("region");
+let sailingRegion=mapRegions.sailing.find(region=>region.id===requestedRegion) || mapRegions.sailing[0];
+const regionMaps=new Map();
+const eventMedia=createEventMedia(document.getElementById("eventMedia"));
+const editorialPages=createEditorialPages(document.getElementById("editorialReader"),document.getElementById("editorialSidebar"));
+let activitiesPromise=null,modeRequest=0;
+let mediaIndex={};
+const sailEventDetails=createSailingEventDetails(document.getElementById("sailEventDetails"));
+const regionSails=new Map();
 const sailIndexFile = "content/sails/sail-index.json";
 const archerySessionIndexFile = "content/archery/session-index.json";
 const archeryTargetFile = "content/archery/targets/fita-40-single-10-ring.json";
@@ -21,34 +53,7 @@ const parkFocusBounds = {
   maxLon: -73.954
 };
 
-const harborFocusBounds = {
-  minLat: 40.555,
-  maxLat: 40.825,
-  minLon: -74.12,
-  maxLon: -73.925
-};
 
-const sailingFrames = {
-  harbor: harborFocusBounds,
-  hudson: {
-    minLat: 40.66,
-    maxLat: 40.835,
-    minLon: -74.045,
-    maxLon: -73.94
-  },
-  upperBay: {
-    minLat: 40.555,
-    maxLat: 40.735,
-    minLon: -74.12,
-    maxLon: -73.925
-  },
-  eastRiver: {
-    minLat: 40.67,
-    maxLat: 40.805,
-    minLon: -74.02,
-    maxLon: -73.925
-  }
-};
 
 const rideAnimation = {
   minDuration: 16000,
@@ -64,18 +69,26 @@ const sailAnimation = {
   msPerTrackHour: 12000
 };
 
+
 const archeryAnimation = {
   shotIntervalMs: 260,
   targetRadius: 360
 };
 
-const metadataCache = {
-  prefix: "reese-field-metadata:v1",
-  currentTtl: 10 * 60 * 1000,
-  historicalTtl: 365 * 24 * 60 * 60 * 1000
+const activitySettings = {
+  cycling: {
+    cameraPreset: "half",
+    playbackSpeed: 1.5
+  },
+  sailing: {
+    cameraPreset: "soft",
+    playbackSpeed: 2
+  },
+  archery: {
+    cameraPreset: "flat",
+    playbackSpeed: 1.25
+  }
 };
-
-const metadataRequests = new Map();
 
 const els = {
   contact: document.querySelector(".contact-link"),
@@ -85,16 +98,13 @@ const els = {
   modePlaceholder: document.getElementById("modePlaceholder"),
   placeholderTitle: document.getElementById("placeholderTitle"),
   placeholderText: document.getElementById("placeholderText"),
-  modeButtons: document.querySelectorAll(".mode-button"),
+  modeButtons: document.querySelectorAll("[data-mode]"),
   cameraButtons: document.querySelectorAll(".camera-button"),
   speedButtons: document.querySelectorAll(".speed-button"),
   mapLand: document.getElementById("mapLand"),
   mapWater: document.getElementById("mapWater"),
   mapStreets: document.getElementById("mapStreets"),
   mapPaths: document.getElementById("mapPaths"),
-  harborLand: document.getElementById("harborLand"),
-  harborCoast: document.getElementById("harborCoast"),
-  harborPaths: document.getElementById("harborPaths"),
   sailGhosts: document.getElementById("sailGhosts"),
   sailReplayBase: document.getElementById("sailReplayBase"),
   sailPath: document.getElementById("sailPath"),
@@ -107,8 +117,14 @@ const els = {
   rideLiveMetrics: document.getElementById("rideLiveMetrics"),
   liveMiles: document.getElementById("liveMiles"),
   liveSpeed: document.getElementById("liveSpeed"),
-  metaStatusLabel: document.getElementById("metaStatusLabel"),
+  archeryTicker: document.getElementById("archeryTicker"),
+  archeryTickerShot: document.getElementById("archeryTickerShot"),
+  archeryTickerScore: document.getElementById("archeryTickerScore"),
+  archeryTickerGroup: document.getElementById("archeryTickerGroup"),
+  archeryTickerXCount: document.getElementById("archeryTickerXCount"),
+  metaLocation: document.getElementById("metaLocation"),
   metaDate: document.getElementById("metaDate"),
+  metaTime: document.getElementById("metaTime"),
   metaWindLabel: document.getElementById("metaWindLabel"),
   metaTideLabel: document.getElementById("metaTideLabel"),
   metaWeatherLabel: document.getElementById("metaWeatherLabel"),
@@ -120,18 +136,28 @@ const els = {
   rideMiles: document.getElementById("rideMiles"),
   rideSpeed: document.getElementById("rideSpeed"),
   equipmentLabel: document.getElementById("equipmentLabel"),
-  equipmentValue: document.getElementById("equipmentValue")
+  equipmentValue: document.getElementById("equipmentValue"),
+  activityIndex: document.getElementById("activityIndex"),
+  activityTitle: document.getElementById("activityTitle"),
+  activityPlace: document.getElementById("activityPlace"),
+  activityDek: document.getElementById("activityDek"),
+  activityMetaTitle: document.getElementById("activityMetaTitle"),
+  figureLabel: document.getElementById("figureLabel"),
+  figureDescription: document.getElementById("figureDescription"),
+  detailEyebrow: document.getElementById("detailEyebrow"),
+  detailTitle: document.getElementById("detailTitle"),
+  detailText: document.getElementById("detailText")
 };
 
 const state = {
   mode: "cycling",
-  cameraPreset: "steep",
+  cameraPreset: activitySettings.cycling.cameraPreset,
   cameraByMode: {
-    cycling: "steep",
-    sailing: "steep",
-    archery: "flat"
+    cycling: activitySettings.cycling.cameraPreset,
+    sailing: activitySettings.sailing.cameraPreset,
+    archery: activitySettings.archery.cameraPreset
   },
-  playbackSpeed: 1,
+  playbackSpeed: activitySettings.cycling.playbackSpeed,
   rides: [],
   sails: [],
   archerySessions: [],
@@ -139,9 +165,13 @@ const state = {
   archeryArrows: [],
   harborBasemap: null,
   speedRange: { min: 0, max: 0 },
-  rideMetadata: { rides: {} },
+  activityMetadata: {
+    rides: {},
+    sails: {},
+    archerySessions: {}
+  },
   selectedRideIndex: null,
-  selectedSailIndex: 0,
+  selectedSailIndex: null,
   selectedArcherySessionIndex: null,
   projection: null,
   harborProjection: null,
@@ -162,6 +192,48 @@ const placeholderCopy = {
   }
 };
 
+const activityCopy = {
+  labs:{index:"05 / 06",title:"Labs",place:"Writing & experiments",dek:"",metaTitle:"",figure:"",detailEyebrow:"",detailTitle:"",detailText:""},
+  about:{index:"06 / 06",title:"About",place:"",dek:"",metaTitle:"",figure:"",detailEyebrow:"",detailTitle:"",detailText:""},
+  video: {
+    index: "01 / 06", title: "Scenes", place: "", dek: "", metaTitle: "Capture",
+    figure: "", detailEyebrow: "Selected video", detailTitle: "No video yet", detailText: ""
+  },
+  cycling: {
+    index: "02 / 06",
+    title: "Cycling",
+    place: "Prospect Park, Brooklyn",
+    dek: "Accumulated ride traces, 2024-2026",
+    metaTitle: "Ride Set Overview",
+    figure: "All recorded rides in and around Prospect Park. Daily loops, longer explorations, and everything in between.",
+    detailEyebrow: "Latest ride",
+    detailTitle: "Prospect Park Loop",
+    detailText: "Step through park traces, recent rides, and aggregate movement."
+  },
+  sailing: {
+    index: "03 / 06",
+    title: "Sailing",
+    place: "New York Harbor",
+    dek: "Recorded sails",
+    metaTitle: "Sail Set Overview",
+    figure: "Sailing traces over the harbor basemap. Coastline, parks, and major roads are retained for orientation.",
+    detailEyebrow: "Selected sail",
+    detailTitle: "Recorded sails",
+    detailText: "Step through sail traces or return to the aggregate harbor view."
+  },
+  archery: {
+    index: "04 / 06",
+    title: "Archery",
+    place: "Brooklyn range",
+    dek: "FITA 40cm target sessions",
+    metaTitle: "Session Overview",
+    figure: "Recorded arrow locations on a single-spot target. Session playback updates score, group size, and X count.",
+    detailEyebrow: "Selected session",
+    detailTitle: "Target session",
+    detailText: "Step through sessions to inspect score, shot count, and equipment."
+  }
+};
+
 const formatDate = new Intl.DateTimeFormat("en-US", {
   month: "long",
   day: "numeric",
@@ -169,22 +241,124 @@ const formatDate = new Intl.DateTimeFormat("en-US", {
   timeZone: "America/New_York"
 });
 
+const sailingCamera = createMapCamera(els.sailingVisual, {
+  allowRotation: true,
+  worldId: "sailingWorld", markerId: "sailPoint",
+  layers: "#harborWater, #harborLand, #harborParks, #harborRoads, #harborPaths, .sail-layer"
+});
+const cyclingCamera = createMapCamera(els.cyclingVisual, {
+  allowRotation: true,
+  worldId: "cyclingWorld", markerId: "ridePoint",
+  layers: "#mapLand, #mapWater, #mapStreets, #mapPaths, .ride-layer"
+});
+const archeryCamera = createMapCamera(els.archeryVisual, {
+  worldId: "archeryWorld", layers: ".archery-face"
+});
+const videoPlayer = createVideoPlayer({
+  player:document.getElementById("videoPlayer"),empty:document.getElementById("videoEmpty"),
+  controls:document.getElementById("videoControls"),playButton:document.getElementById("videoPlay"),
+  soundButton:document.getElementById("videoSound"),onSelect:renderVideoMetadata
+});
+
+function renderVideoMetadata(video,index,count) {
+  const labels=captureLabels(video?.date ? `${video.date}T12:00:00Z` : video?.capturedAt);
+  renderConditions({location:video?.location,localDate:video?.date || video?.capturedAt?.slice(0,10),sourceDate:video?.capturedAt || video?.weather?.source?.sampledFrom,weather:video?.weather});
+  els.activityPlace.textContent=video?.location || "";
+  els.activityDek.textContent=labels.date==="Not recorded"?"":labels.date;
+  els.detailTitle.textContent=video?.name || "No scenes yet";
+  els.detailText.textContent="";
+  els.figureDescription.textContent="";
+  document.querySelectorAll(".trace-controls button").forEach(button=>{button.disabled=count<2;});
+}
+let sailingView = "home";
+let harborRendered = false;
+let sailProjection = harborProjection(sailingRegion.bounds,sailingRegion.rotation);
+const regionPicker=createRegionPicker(els.activityPlace,{regions:mapRegions.sailing,onSelect:selectSailingRegion});
+let regionRequest=0;
+async function selectSailingRegion(region) {
+  if(region.id===sailingRegion.id)return;
+  const request=++regionRequest;
+  els.activityPlace.setAttribute("aria-busy","true");
+  try{
+    if(!regionMaps.has(region.id))regionMaps.set(region.id,loadJson(region.file));
+    const [map,sails]=await Promise.all([regionMaps.get(region.id),loadSails(region.id)]);
+    if(request!==regionRequest)return;
+    sailingRegion=region;
+    state.harborBasemap=map;
+    state.sails=sails;
+    state.selectedSailIndex=null;
+    sailingView="home";
+    sailProjection=harborProjection(region.bounds,region.rotation);
+    harborRendered=false;
+    if(state.mode==="sailing"){
+      regionPicker.render(region.id);
+      renderSailingState();
+      const url=new URL(location.href);url.searchParams.set("mode","sailing");url.searchParams.set("region",region.id);
+      history.replaceState(null,"",url);
+    }
+  }catch(error){
+    regionMaps.delete(region.id);
+    if(request===regionRequest && state.mode==="sailing")els.figureDescription.textContent="Unable to load "+region.label+". Please try again.";
+  }finally{if(request===regionRequest)els.activityPlace.removeAttribute("aria-busy");}
+}
+new ResizeObserver(() => {
+  if (state.mode === "sailing" && state.sails.length) updateSailingCamera(false);
+  if (state.mode === "cycling" && state.rides.length) updateCyclingCamera(false);
+  if (state.mode === "archery") updateArcheryCamera(false);
+}).observe(document.querySelector(".visual-frame"));
+document.getElementById("sailingHome").addEventListener("click", () => {
+  sailingView = "home";
+  state.selectedSailIndex = null;
+  renderSailingState();
+});
+document.getElementById("cyclingHome").addEventListener("click", () => {
+  state.selectedRideIndex = null;
+  renderRideState();
+});
+document.getElementById("archeryHome").addEventListener("click", () => updateArcheryCamera());
+setupResponsiveLayout();
+window.addEventListener("popstate",()=>{
+  document.dispatchEvent(new Event("close-page-details"));
+  navigateMode(initialMode());
+});
 init();
 
 async function init() {
   wireContactLink();
   wireControls();
+  renderConditions(null);
+  await navigateMode(initialMode());
+}
 
-  const [basemap, harborBasemap, rideMetadata, sails, archery] = await Promise.all([
+async function navigateMode(mode){
+  const request=++modeRequest;
+  try{
+    if(!["labs","about"].includes(mode)){
+      activitiesPromise ||= loadActivityContent().catch(error=>{activitiesPromise=null;throw error;});
+      await activitiesPromise;
+    }
+    if(request===modeRequest)setMode(mode);
+  }catch(error){
+    if(request===modeRequest){els.activityDek.hidden=false;els.activityDek.textContent="Unable to load this section. Please try again.";}
+    console.error(error);
+  }
+}
+
+async function loadActivityContent(){
+  const [basemap, harborBasemap, activityMetadata, sails, archery, parkWater, videos] = await Promise.all([
     loadJson(basemapFile),
-    loadJson(harborBasemapFile),
-    loadRideMetadata(),
+    loadJson(sailingRegion.file),
+    loadActivityMetadata(),
     loadSails(),
-    loadArchery()
+    loadArchery(),
+    loadJson("content/maps/prospect-park-water.json"),
+    loadJson("content/videos/video-index.json")
   ]);
   setCameraPreset(state.cameraPreset);
-  state.rideMetadata = rideMetadata;
+  state.activityMetadata = activityMetadata;
+  mediaIndex=await loadJson("content/media/event-index.json").catch(()=>({}));
   state.harborBasemap = harborBasemap;
+  regionMaps.set(sailingRegion.id,Promise.resolve(harborBasemap));
   state.archeryTarget = archery.target;
   state.archeryArrows = archery.arrows;
   state.projection = createProjection(parkFocusBounds, mapFrame);
@@ -192,9 +366,10 @@ async function init() {
   state.rides = rides;
   state.sails = sails;
   state.archerySessions = archery.sessions;
+  videoPlayer.setItems(videos);
   state.speedRange = getSpeedRange(rides);
 
-  renderBasemap(basemap, {
+  renderBasemap({ ...basemap, features: [...basemap.features.filter((feature) => feature.kind !== "water"), ...parkWater.features] }, {
     bounds: parkFocusBounds,
     projection: state.projection,
     layers: {
@@ -207,43 +382,39 @@ async function init() {
   });
   renderRideState();
   renderSailingState();
-  setMode(initialMode());
-  await updateMetadata();
-}
-
-async function loadJson(url) {
-  const response = await fetch(url, { cache: "no-store" });
-  if (!response.ok) throw new Error(`Unable to load ${url}`);
-  return response.json();
 }
 
 function initialMode() {
   const requestedMode = new URLSearchParams(window.location.search).get("mode");
-  return ["cycling", "sailing", "archery"].includes(requestedMode) ? requestedMode : state.mode;
+  return ["cycling", "sailing", "archery", "video", "labs", "about"].includes(requestedMode) ? requestedMode : "cycling";
 }
 
-async function loadRideMetadata() {
+async function loadActivityMetadata() {
   try {
-    return await loadJson(rideMetadataFile);
+    return await loadJson(activityMetadataFile);
   } catch (error) {
-    return { rides: {} };
+    return { rides: {}, sails: {}, archerySessions: {} };
   }
 }
 
-async function loadSails() {
+async function loadSails(regionId=sailingRegion.id) {
+  if(regionSails.has(regionId))return regionSails.get(regionId);
+  const pending=loadRegionSails(regionId).catch(error=>{regionSails.delete(regionId);throw error;});
+  regionSails.set(regionId,pending);
+  return pending;
+}
+
+async function loadRegionSails(regionId) {
   const sailIndex = await loadJson(sailIndexFile);
-  return Promise.all(sailIndex.map(async (sail) => {
+  return Promise.all(sailIndex.filter(sail=>sail.regionId===regionId).map(async (sail) => {
     const file = `content/sails/${sail.file}`;
     const response = await fetch(file, { cache: "no-store" });
     if (!response.ok) throw new Error(`Unable to load ${file}`);
 
-    const points = withSyntheticTimes(parseGpx(await response.text()));
     return {
       ...sail,
       file,
-      points,
-      bounds: boundsForPoints(points),
-      stats: getRideStats(points)
+      ...prepareSail(parseGpx(await response.text()))
     };
   }));
 }
@@ -277,7 +448,7 @@ function normalizeArcherySession(session, sessionEntry) {
   return {
     ...sessionEntry,
     ...session,
-    startedAt: new Date(session.startedAt),
+    startedAt: new Date(session.startedAt || session.capturedAt || `${session.recordedDate}T12:00:00`),
     shots
   };
 }
@@ -330,13 +501,18 @@ function wireContactLink() {
 function wireControls() {
   els.modeButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      setMode(button.dataset.mode);
+      const url=new URL(location.href);url.searchParams.set("mode",button.dataset.mode);url.searchParams.delete("entry");url.hash="";
+      history.pushState(null,"",url);
+      navigateMode(button.dataset.mode);
     });
   });
 
   document.querySelectorAll(".trace-controls button").forEach((button) => {
     button.addEventListener("click", () => {
-      if (state.mode === "sailing") {
+      if (state.mode === "video") {
+        if (button.dataset.action === "all") videoPlayer.restart();
+        else videoPlayer.next(button.dataset.action === "previous" ? -1 : 1);
+      } else if (state.mode === "sailing") {
         if (button.dataset.action === "all") {
           selectAllSails();
         } else if (button.dataset.action === "previous") {
@@ -375,6 +551,8 @@ function wireControls() {
   });
 
   document.addEventListener("keydown", (event) => {
+    if(["labs","about"].includes(state.mode))return;
+    if (event.target.closest("video, input, select, textarea, button")) return;
     if (event.key === "ArrowLeft") {
       selectAdjacentTrace(-1);
     }
@@ -388,7 +566,9 @@ function wireControls() {
 }
 
 function selectAdjacentTrace(direction) {
-  if (state.mode === "sailing") {
+  if (state.mode === "video") {
+    videoPlayer.next(direction);
+  } else if (state.mode === "sailing") {
     selectAdjacentSail(direction);
   } else if (state.mode === "archery") {
     selectAdjacentArcherySession(direction);
@@ -398,7 +578,9 @@ function selectAdjacentTrace(direction) {
 }
 
 function selectAllTraces() {
-  if (state.mode === "sailing") {
+  if (state.mode === "video") {
+    videoPlayer.restart();
+  } else if (state.mode === "sailing") {
     selectAllSails();
   } else if (state.mode === "archery") {
     selectAllArcherySessions();
@@ -419,7 +601,7 @@ function setCameraPreset(preset) {
   });
 }
 
-function setPlaybackSpeed(speed) {
+function setPlaybackSpeed(speed, { render = true } = {}) {
   if (!Number.isFinite(speed) || speed <= 0) return;
 
   state.playbackSpeed = speed;
@@ -428,6 +610,8 @@ function setPlaybackSpeed(speed) {
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-pressed", String(isActive));
   });
+
+  if (!render) return;
 
   if (state.mode === "sailing") {
     renderSailingState();
@@ -438,59 +622,17 @@ function setPlaybackSpeed(speed) {
   }
 }
 
-function createSailingProjection(bounds) {
-  return createProjection(bounds, mapFrame, -29);
-}
-
-function cinematicBoundsForTrack(bounds) {
-  const latSpan = bounds.maxLat - bounds.minLat;
-  const lonSpan = bounds.maxLon - bounds.minLon;
-  const isNorthSouth = latSpan > lonSpan * 1.28;
-  const latPad = Math.max(latSpan * (isNorthSouth ? 0.42 : 0.62), 0.035);
-  const lonPad = Math.max(lonSpan * (isNorthSouth ? 0.92 : 0.58), 0.035);
-
-  return constrainBounds({
-    minLat: bounds.minLat - latPad,
-    maxLat: bounds.maxLat + latPad,
-    minLon: bounds.minLon - lonPad,
-    maxLon: bounds.maxLon + lonPad
-  }, harborFocusBounds);
-}
-
-function constrainBounds(bounds, limit) {
-  return {
-    minLat: Math.max(bounds.minLat, limit.minLat),
-    maxLat: Math.min(bounds.maxLat, limit.maxLat),
-    minLon: Math.max(bounds.minLon, limit.minLon),
-    maxLon: Math.min(bounds.maxLon, limit.maxLon)
-  };
-}
-
-function sailingFrameForTrack(points) {
-  if (!points?.length) return sailingFrames.harbor;
-
-  const bounds = points.reduce((acc, point) => ({
-    minLat: Math.min(acc.minLat, point.lat),
-    maxLat: Math.max(acc.maxLat, point.lat),
-    minLon: Math.min(acc.minLon, point.lon),
-    maxLon: Math.max(acc.maxLon, point.lon)
-  }), {
-    minLat: Infinity,
-    maxLat: -Infinity,
-    minLon: Infinity,
-    maxLon: -Infinity
-  });
-  const latSpan = bounds.maxLat - bounds.minLat;
-  const lonSpan = bounds.maxLon - bounds.minLon;
-
-  if (latSpan > lonSpan * 1.45 && bounds.minLon < -74.04) return sailingFrames.hudson;
-  if (bounds.maxLon > -73.96 && latSpan > lonSpan) return sailingFrames.eastRiver;
-  return sailingFrames.upperBay;
-}
 
 function setMode(mode) {
   state.mode = mode;
-  setCameraPreset(state.cameraByMode[mode] || state.cameraPreset);
+  document.querySelector(".visual-wrap").dataset.mode = mode;
+  document.getElementById("sailingHome").hidden = mode !== "sailing";
+  document.getElementById("cyclingHome").hidden = mode !== "cycling";
+  document.getElementById("archeryHome").hidden = mode !== "archery";
+  const settings = activitySettings[mode];
+  updateActivityChrome(mode);
+  setCameraPreset(settings?.cameraPreset || state.cameraByMode[mode] || state.cameraPreset);
+  setPlaybackSpeed(settings?.playbackSpeed || state.playbackSpeed, { render: false });
 
   els.modeButtons.forEach((button) => {
     const isActive = button.dataset.mode === mode;
@@ -500,47 +642,122 @@ function setMode(mode) {
 
   const isCycling = mode === "cycling";
   const isSailing = mode === "sailing";
+  document.body.classList.toggle("sailing-mode",isSailing);
+  document.getElementById("sailEventDetails").hidden=!isSailing;
   const isArchery = mode === "archery";
+  const isVideo = mode === "video";
+  const isEditorial=["labs","about"].includes(mode);
+  document.body.classList.toggle("editorial-mode",isEditorial);
+  document.querySelector(".metadata").setAttribute("aria-label",isEditorial?"Page details":"Activity metadata");
+  if(isEditorial)editorialPages.show(mode);else editorialPages.hide();
+  eventMedia.setActive(!isVideo && !isEditorial);
+  document.body.classList.toggle("scene-mode", isVideo);
+  document.getElementById("videoVisual").hidden = !isVideo;
+  videoPlayer.setActive(isVideo);
+  document.querySelector(".global-meta").setAttribute("aria-label", isVideo ? "Video capture conditions" : "Current conditions");
+  document.querySelector(".activity-meta").setAttribute("aria-label", isVideo ? "Video metadata" : "Activity metadata");
+  document.querySelector(".trace-controls").setAttribute("aria-label", isVideo ? "Video navigation" : "Trace navigation");
+  document.querySelectorAll(".trace-controls button").forEach(button=>{
+    const action=button.dataset.action;
+    button.setAttribute("aria-label", isVideo ? (action==="all"?"Restart video":`${action==="previous"?"Previous":"Next"} video`) : (action==="all"?"Show all traces":`${action==="previous"?"Previous":"Next"} trace`));
+    button.title=button.getAttribute("aria-label");
+    if(action==="all")button.textContent=isVideo?"↻":"•";
+    if(!isVideo)button.disabled=false;
+  });
   setSvgHidden(els.cyclingVisual, !isCycling);
   els.cyclingVisual.style.display = isCycling ? "" : "none";
   setSvgHidden(els.sailingVisual, !isSailing);
   els.sailingVisual.style.display = isSailing ? "" : "none";
   setSvgHidden(els.archeryVisual, !isArchery);
   els.archeryVisual.style.display = isArchery ? "" : "none";
-  els.modePlaceholder.hidden = isCycling || isSailing || isArchery;
-  els.modePlaceholder.style.display = isCycling || isSailing || isArchery ? "none" : "";
+  els.modePlaceholder.hidden = isCycling || isSailing || isArchery || isVideo || isEditorial;
+  els.modePlaceholder.style.display = els.modePlaceholder.hidden ? "none" : "";
   setLiveMetricsVisible(isCycling && state.selectedRideIndex !== null);
   if (isSailing) renderSailingState();
-  if (!isSailing) resetSailAnimation();
+  if (!isSailing) {
+    resetSailAnimation();
+    sailingCamera.stop();
+  }
+  if (!isCycling) {
+    resetRideAnimation();
+    cyclingCamera.stop();
+  }
   if (isCycling) renderRideState();
 
   if (isArchery) renderArcheryState();
-  if (!isArchery) resetArcheryAnimation();
+  if (!isArchery) {
+    resetArcheryAnimation();
+    archeryCamera.stop();
+  }
 
-  if (!isCycling && !isSailing && !isArchery) {
+  if (!isCycling && !isSailing && !isArchery && !isVideo && !isEditorial) {
     els.placeholderTitle.textContent = placeholderCopy[mode].title;
     els.placeholderText.textContent = placeholderCopy[mode].text;
   }
 }
 
+function updateActivityChrome(mode) {
+  const copy = activityCopy[mode];
+  if (!copy) return;
+
+  els.activityIndex.textContent = copy.index;
+  els.activityTitle.textContent = copy.title;
+  els.activityPlace.textContent = copy.place;
+  els.activityPlace.hidden=!copy.place;
+  if(mode==="sailing")regionPicker.render(sailingRegion.id);
+  els.activityDek.textContent = copy.dek;
+  els.activityDek.hidden=!copy.dek;
+  els.activityMetaTitle.textContent = copy.metaTitle;
+  els.figureLabel.textContent = `Figure ${copy.index.slice(0, 2)}`;
+  els.figureDescription.textContent = copy.figure;
+  els.detailEyebrow.textContent = copy.detailEyebrow;
+  els.detailTitle.textContent = copy.detailTitle;
+  els.detailText.textContent = copy.detailText;
+}
+
+function updateArcheryCamera(animate = true) {
+  const frame = document.querySelector(".visual-frame").getBoundingClientRect();
+  if (!frame.width || !frame.height) return;
+  const radius = archeryAnimation.targetRadius;
+  archeryCamera.move(fitCamera([
+    { x: 800 - radius, y: 500 - radius },
+    { x: 800 + radius, y: 500 + radius }
+  ], frame.width / frame.height, 0.1), animate);
+  els.archeryVisual.dataset.camera = "home";
+}
+
 function renderArcheryState() {
+  renderSelectedConditions("archery");
+  updateArcheryCamera();
   resetArcheryAnimation();
   if (!state.archerySessions.length || !state.archeryTarget) {
+    setArcheryTickerVisible(false);
     renderArcheryStats(null);
     return;
   }
 
   if (state.selectedArcherySessionIndex === null) {
+    if (state.archerySessions.some(session => session.source?.type === "target-photo")) {
+      document.getElementById("figureDescription").textContent = "Completed target photos. Approximate impact locations; uncertain marks shown in pink.";
+    }
     const allShots = state.archerySessions.flatMap((session) => {
       return session.shots.map((shot) => ({ ...shot, sessionId: session.sessionId }));
     });
     plotArcheryShots(allShots, "all");
+    setArcheryTickerVisible(false);
     renderArcheryStats(null);
     return;
   }
 
   const session = state.archerySessions[state.selectedArcherySessionIndex];
+  if (session.source?.type === "target-photo") {
+    const date = new Date(`${session.recordedDate}T12:00:00`);
+    const flagged = session.shots.filter(shot => shot.uncertain).length;
+    document.getElementById("figureDescription").textContent = `${formatDate.format(date)}: ${session.shots.length} visible impact sites. Approximate positions; shot order unknown.${flagged ? ` ${flagged} uncertain locations shown in pink.` : ""}`;
+  }
   els.archeryShots.textContent = "";
+  setArcheryTickerVisible(true);
+  updateArcheryTicker(session, -1);
   animateArcherySession(session);
   renderArcheryStats(session);
 }
@@ -553,14 +770,21 @@ function plotArcheryShots(shots, variant = "session") {
 }
 
 function animateArcherySession(session) {
+  if (session.shotOrder === "unknown") {
+    plotArcheryShots(session.shots, "photo");
+    updateArcheryTicker(session, session.shots.length - 1);
+    return;
+  }
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     plotArcheryShots(session.shots, "session");
+    updateArcheryTicker(session, session.shots.length - 1);
     return;
   }
 
   session.shots.forEach((shot, index) => {
     const timeout = window.setTimeout(() => {
       els.archeryShots.append(createArcheryShotCircle(shot, index, "session"));
+      updateArcheryTicker(session, index);
     }, index * archeryAnimation.shotIntervalMs / state.playbackSpeed);
     state.archeryAnimationTimeouts.push(timeout);
   });
@@ -570,12 +794,49 @@ function resetArcheryAnimation() {
   state.archeryAnimationTimeouts.forEach((timeout) => window.clearTimeout(timeout));
   state.archeryAnimationTimeouts = [];
   if (els.archeryShots) els.archeryShots.textContent = "";
+  setArcheryTickerVisible(false);
+}
+
+function setArcheryTickerVisible(isVisible) {
+  if (!els.archeryTicker) return;
+
+  if (isVisible) {
+    els.archeryTicker.removeAttribute("hidden");
+  } else {
+    els.archeryTicker.setAttribute("hidden", "");
+  }
+}
+
+function updateArcheryTicker(session, shotIndex) {
+  if (!els.archeryTicker) return;
+  const isPhoto = session.shotOrder === "unknown";
+  document.getElementById("archeryTickerShotLabel").textContent = isPhoto ? "Impacts" : "Shot";
+  document.getElementById("archeryTickerScoreLabel").textContent = isPhoto ? "Est. total" : "Score";
+
+  if (shotIndex < 0) {
+    els.archeryTickerShot.textContent = "--";
+    els.archeryTickerScore.textContent = "--";
+    els.archeryTickerGroup.textContent = "--";
+    els.archeryTickerXCount.textContent = "--";
+    return;
+  }
+
+  const shots = session.shots.slice(0, shotIndex + 1);
+  const shot = session.shots[shotIndex];
+  const score = scoreArcheryShot(shot);
+  const xCount = shots.filter(isArcheryX).length;
+
+  els.archeryTickerShot.textContent = String(isPhoto ? session.shots.length : shot.shotNumber || shotIndex + 1);
+  els.archeryTickerScore.textContent = String(isPhoto ? scoreArcherySession(session) : score);
+  els.archeryTickerGroup.textContent = formatArcheryGroupSize(shots);
+  els.archeryTickerXCount.textContent = String(xCount);
 }
 
 function createArcheryShotCircle(shot, index, variant) {
   const point = archeryPointToSvg(shot);
   const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
   circle.setAttribute("class", `archery-shot is-${variant}`);
+  if (shot.uncertain) circle.classList.add("is-uncertain");
   circle.setAttribute("cx", point.x.toFixed(2));
   circle.setAttribute("cy", point.y.toFixed(2));
   circle.setAttribute("r", archeryArrowRadius().toFixed(2));
@@ -601,6 +862,7 @@ function currentArcheryArrow() {
   const selected = state.selectedArcherySessionIndex === null
     ? state.archerySessions[0]
     : state.archerySessions[state.selectedArcherySessionIndex];
+  if (selected?.source?.type === "target-photo" && !selected.equipment?.arrowId) return null;
   return state.archeryArrows.find((arrow) => arrow.id === selected?.equipment?.arrowId) || state.archeryArrows[0];
 }
 
@@ -609,21 +871,21 @@ function renderArcheryStats(session) {
 
   if (!session) {
     const shotCount = state.archerySessions.reduce((total, item) => total + item.shots.length, 0);
-    els.rideMilesLabel.textContent = "All shots";
+    els.rideMilesLabel.textContent = state.archerySessions.some(item => item.source?.type === "target-photo") ? "Visible impacts" : "All shots";
     els.rideSpeedLabel.textContent = "Sessions";
     els.rideMiles.textContent = String(shotCount || "--");
     els.rideSpeed.textContent = String(state.archerySessions.length || "--");
     els.equipmentLabel.textContent = "Arrow";
-    els.equipmentValue.textContent = arrow ? `${arrow.brand} ${arrow.model}` : "Easton 660";
+    els.equipmentValue.textContent = arrow ? `${arrow.brand} ${arrow.model}` : "Not recorded";
     return;
   }
 
-  els.rideMilesLabel.textContent = "Session score";
-  els.rideSpeedLabel.textContent = "Shots";
+  els.rideMilesLabel.textContent = session.source?.type === "target-photo" ? "Estimated score" : "Session score";
+  els.rideSpeedLabel.textContent = session.source?.type === "target-photo" ? "Visible impacts" : "Shots";
   els.rideMiles.textContent = String(scoreArcherySession(session));
   els.rideSpeed.textContent = String(session.shots.length);
   els.equipmentLabel.textContent = "Arrow";
-  els.equipmentValue.textContent = arrow ? `${arrow.brand} ${arrow.model}` : session.equipment.arrowId;
+  els.equipmentValue.textContent = arrow ? `${arrow.brand} ${arrow.model}` : session.equipment?.arrowId || "Not recorded";
 }
 
 function scoreArcherySession(session) {
@@ -636,20 +898,87 @@ function scoreArcheryShot(shot) {
   return ring?.score || state.archeryTarget.missScore || 0;
 }
 
+function isArcheryX(shot) {
+  const radius = Math.hypot(shot.x, shot.y);
+  return state.archeryTarget.tieBreakRings?.some((ring) => radius <= ring.outerRadius) || false;
+}
+
+function formatArcheryGroupSize(shots) {
+  if (shots.length < 2) return "0.0 cm";
+
+  const outerRadiusCm = state.archeryTarget?.geometry?.outerScoringRadiusCm || 20;
+  const maxDistance = shots.reduce((largest, shot, index) => {
+    const nextLargest = shots.slice(index + 1).reduce((innerLargest, otherShot) => {
+      return Math.max(innerLargest, Math.hypot(shot.x - otherShot.x, shot.y - otherShot.y));
+    }, 0);
+
+    return Math.max(largest, nextLargest);
+  }, 0);
+
+  return `${(maxDistance * outerRadiusCm).toFixed(1)} cm`;
+}
+
 function renderBasemap(basemap, config) {
+  const batches = new Map();
   for (const layer of new Set(Object.values(config.layers))) {
     layer.textContent = "";
   }
 
-  for (const feature of basemap.features.filter((feature) => featureTouchesBounds(feature, config.bounds))) {
+  for (const feature of basemap.features.filter((feature) => {
+    return featureTouchesBounds(feature, config.bounds) &&
+      (!config.featureFilter || config.featureFilter(feature));
+  })) {
     const layer = config.layers[feature.kind];
     if (!layer) continue;
 
+    const className = getBasemapClass(feature);
+    if (["street", "service", "path"].includes(feature.kind)) {
+      const key = `${layer.id}:${className}`;
+      if (!batches.has(key)) batches.set(key, { layer, className, paths: [] });
+      batches.get(key).paths.push(featurePath(feature, config));
+      continue;
+    }
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("d", geoPointsToPath(feature.points, feature.closed, config.projection));
+    path.setAttribute("d", featurePath(feature, config));
     path.setAttribute("class", getBasemapClass(feature));
+    path.setAttribute("fill-rule", "evenodd");
+    if (!feature.closed) path.style.fill = "none";
     layer.append(path);
   }
+  for (const { layer, className, paths } of batches.values()) {
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", paths.join(" "));
+    path.setAttribute("class", className);
+    layer.append(path);
+  }
+}
+
+function featurePath(feature, config) {
+  if (feature.rings) return feature.rings.map((ring) => geoPointsToPath(ring, true, config.projection)).join(" ");
+  if (!config.simplifyTolerance) {
+    return geoPointsToPath(feature.points, feature.closed, config.projection);
+  }
+
+  const projected = feature.points.map(([lon, lat]) => config.projection(lon, lat));
+  return projectedPointsToPath(simplifyProjectedPoints(projected, config.simplifyTolerance), feature.closed);
+}
+
+function simplifyProjectedPoints(points, tolerance) {
+  if (points.length <= 2) return points;
+
+  const simplified = [points[0]];
+  let previous = points[0];
+
+  for (let index = 1; index < points.length - 1; index += 1) {
+    const point = points[index];
+    if (Math.hypot(point.x - previous.x, point.y - previous.y) >= tolerance) {
+      simplified.push(point);
+      previous = point;
+    }
+  }
+
+  simplified.push(points[points.length - 1]);
+  return simplified;
 }
 
 function getBasemapClass(feature) {
@@ -661,7 +990,9 @@ function getBasemapClass(feature) {
 }
 
 function renderRideState() {
+  renderSelectedConditions("cycling");
   resetRideAnimation();
+  updateCyclingCamera();
   els.rideGhosts.textContent = "";
 
   if (state.selectedRideIndex === null) {
@@ -706,49 +1037,84 @@ function renderRideState() {
   els.equipmentValue.textContent = "1986 Eddy Merckx Corsa";
 }
 
+function updateCyclingCamera(animate = true) {
+  if (!state.projection || !state.rides.length) return;
+  const frame = document.querySelector(".visual-frame").getBoundingClientRect();
+  if (!frame.width || !frame.height) return;
+  const selected = state.rides[state.selectedRideIndex];
+  const points = selected ? selected.projectedSegments.flat() : state.rides.flatMap((ride) => ride.projectedSegments.flat());
+  if (!points.length) return;
+  cyclingCamera.move(fitCamera(points, frame.width / frame.height, 0.18), animate);
+  els.cyclingVisual.dataset.camera = selected ? "ride" : "home";
+}
+
 function renderSailingState() {
+  renderSelectedConditions("sailing");
   resetSailAnimation();
-  if (!state.harborBasemap || !state.sails.length) return;
+  if (!state.harborBasemap) return;
 
   const selectedSail = state.selectedSailIndex === null
     ? null
     : state.sails[state.selectedSailIndex];
-  const bounds = selectedSail ? cinematicBoundsForTrack(selectedSail.bounds) : harborFocusBounds;
-  const projection = createSailingProjection(bounds);
-
-  renderBasemap(state.harborBasemap, {
-    bounds,
-    projection,
-    layers: {
-      landmass: els.harborLand,
-      land: els.harborLand,
-      coastline: els.harborCoast,
-      pier: els.harborPaths
-    }
-  });
+  sailEventDetails.render(state.sails,selectedSail);
+  const projection = sailProjection;
+  if (!harborRendered) {
+    renderHarborMap(state.harborBasemap, projection, els.sailingVisual);
+    harborRendered = true;
+  }
+  els.sailingVisual.dataset.region=sailingRegion.id;
+  els.sailingVisual.querySelector("title").textContent=sailingRegion.label+": drag to pan, scroll to zoom, Shift-drag horizontally to rotate and vertically to tilt 0-68 degrees";
+  els.sailingVisual.querySelector("desc").textContent="Recorded sails in "+sailingRegion.label+".";
+  els.figureDescription.textContent=sailingRegion.label+" / "+state.sails.length+" recorded sails";
+  els.detailTitle.textContent=selectedSail?.label || sailingRegion.label;
+  updateSailingCamera();
 
   els.sailGhosts.textContent = "";
-  state.sails.forEach((sail, index) => {
-    const segments = projectedSegmentsForTrack(sail.points, bounds, projection);
-    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("d", projectedSegmentsToPath(segments, 0.72));
-    path.setAttribute("class", `sail-ghost${index === state.selectedSailIndex ? " is-selected" : ""}`);
-    els.sailGhosts.append(path);
-  });
 
   if (!selectedSail) {
+    state.sails.forEach((sail) => {
+      const segments = [sail.points.map((point) => ({ ...point, ...projection(point.lon, point.lat) }))];
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", projectedSegmentsToPath(segments, 0.72));
+      path.setAttribute("class", "sail-ghost");
+      els.sailGhosts.append(path);
+    });
     renderAllSailStats();
     return;
   }
 
-  const selectedSegments = projectedSegmentsForTrack(selectedSail.points, bounds, projection);
+  const selectedSegments = [selectedSail.points.map((point) => ({ ...point, ...projection(point.lon, point.lat) }))];
   animateSelectedSail(selectedSail, selectedSegments);
   els.rideMilesLabel.textContent = "Sail distance";
   els.rideSpeedLabel.textContent = "Sail avg. speed";
   els.rideMiles.textContent = `${(selectedSail.stats.miles * 0.868976).toFixed(2)} nm`;
-  els.rideSpeed.textContent = `${(selectedSail.stats.avgMph * 0.868976).toFixed(1)} kn`;
+  els.rideSpeed.textContent = selectedSail.hasRecordedTiming
+    ? `${(selectedSail.stats.avgMph * 0.868976).toFixed(1)} kn` : "Not recorded";
   els.equipmentLabel.textContent = "Trace";
   els.equipmentValue.textContent = selectedSail.label;
+}
+
+function updateSailingCamera(animate = true) {
+  const frame = document.querySelector(".visual-frame").getBoundingClientRect();
+  if (!frame.width || !frame.height) return;
+  const selected = state.sails[state.selectedSailIndex];
+  let points;
+  if(!state.sails.length){
+    const b=sailingRegion.bounds;
+    points=[[b.minLon,b.minLat],[b.minLon,b.maxLat],[b.maxLon,b.minLat],[b.maxLon,b.maxLat]].map(([lon,lat])=>sailProjection(lon,lat));
+  } else if (selected) {
+    points = selected.points.map((p) => sailProjection(p.lon, p.lat));
+  } else if (sailingView === "home") {
+    const center = launchCenter(state.sails);
+    const origin = sailProjection(center.lon, center.lat);
+    const nearby = sailProjection(center.lon, center.lat + 0.028);
+    const radius = Math.hypot(nearby.x - origin.x, nearby.y - origin.y);
+    points = [{ x: origin.x - radius, y: origin.y - radius }, { x: origin.x + radius, y: origin.y + radius }];
+  } else {
+    points = state.sails.flatMap((sail) => sail.points.map((p) => sailProjection(p.lon, p.lat)));
+  }
+  sailingCamera.move(fitCamera(points, frame.width / frame.height, selected ? 0.18 : 0.28), animate);
+  els.sailingVisual.dataset.camera = selected ? "sail" : sailingView;
 }
 
 function renderAllSailStats() {
@@ -761,9 +1127,10 @@ function renderAllSailStats() {
   els.rideMilesLabel.textContent = "All sail distance";
   els.rideSpeedLabel.textContent = "Aggregate avg. speed";
   els.rideMiles.textContent = `${(totals.miles * 0.868976).toFixed(2)} nm`;
-  els.rideSpeed.textContent = `${((totals.miles / Math.max(totals.hours, 0.01)) * 0.868976).toFixed(1)} kn`;
+  els.rideSpeed.textContent = state.sails.length && state.sails.every((sail) => sail.hasRecordedTiming)
+    ? `${((totals.miles / Math.max(totals.hours, 0.01)) * 0.868976).toFixed(1)} kn` : "Not recorded";
   els.equipmentLabel.textContent = "Traces";
-  els.equipmentValue.textContent = `${state.sails.length} sail samples`;
+  els.equipmentValue.textContent = `${state.sails.length} recorded sails`;
 }
 
 function animateSelectedSail(sail, projectedSegments) {
@@ -788,7 +1155,7 @@ function animateSelectedSail(sail, projectedSegments) {
 
   const duration = Math.min(
     sailAnimation.maxDuration,
-    Math.max(sailAnimation.minDuration, sail.stats.hours * sailAnimation.msPerTrackHour)
+    Math.max(sailAnimation.minDuration, sail.playbackHours * sailAnimation.msPerTrackHour)
   ) / state.playbackSpeed;
 
   renderSailAnimationFrame(timeline, 0);
@@ -914,8 +1281,10 @@ function resetRideAnimation() {
 function setSvgHidden(element, isHidden) {
   if (isHidden) {
     element.setAttribute("hidden", "");
+    element.style.display = "none";
   } else {
     element.removeAttribute("hidden");
+    element.style.display = "";
   }
 }
 
@@ -1088,9 +1457,8 @@ function getSpeedRange(rides) {
 function speedColorForRide(ride) {
   const { min, max } = state.speedRange;
   const progress = max === min ? 0.5 : (ride.stats.avgMph - min) / (max - min);
-  const hue = 132 - progress * 78;
-  const lightness = 36 + progress * 13;
-  return `hsl(${hue.toFixed(1)} 66% ${lightness.toFixed(1)}%)`;
+  const mix = Math.round(progress * 100);
+  return `color-mix(in srgb, var(--deep-park-green) ${100 - mix}%, var(--target-gold) ${mix}%)`;
 }
 
 function selectAdjacentRide(direction) {
@@ -1102,7 +1470,6 @@ function selectAdjacentRide(direction) {
 
   state.selectedRideIndex = (current + direction + state.rides.length) % state.rides.length;
   renderRideState();
-  updateMetadata();
 }
 
 function selectAdjacentSail(direction) {
@@ -1114,7 +1481,6 @@ function selectAdjacentSail(direction) {
 
   state.selectedSailIndex = (current + direction + state.sails.length) % state.sails.length;
   renderSailingState();
-  updateMetadata();
 }
 
 function selectAdjacentArcherySession(direction) {
@@ -1126,527 +1492,59 @@ function selectAdjacentArcherySession(direction) {
 
   state.selectedArcherySessionIndex = (current + direction + state.archerySessions.length) % state.archerySessions.length;
   renderArcheryState();
-  updateMetadata();
 }
 
 function selectAllRides() {
   state.selectedRideIndex = null;
   renderRideState();
-  updateMetadata();
 }
 
 function selectAllSails() {
+  sailingView = "all";
   state.selectedSailIndex = null;
   renderSailingState();
-  updateMetadata();
 }
 
 function selectAllArcherySessions() {
   state.selectedArcherySessionIndex = null;
   renderArcheryState();
-  updateMetadata();
 }
 
-async function updateMetadata() {
-  const selectedRide = state.selectedRideIndex === null
-    ? null
-    : state.rides[state.selectedRideIndex];
-  const selectedArcherySession = state.selectedArcherySessionIndex === null
-    ? null
-    : state.archerySessions[state.selectedArcherySessionIndex];
-  const date = selectedArcherySession?.startedAt || (selectedRide ? selectedRide.startDate : new Date());
-  const isNow = !selectedRide && !selectedArcherySession;
-
-  els.metaStatusLabel.textContent = selectedArcherySession ? "Session" : (isNow ? "Now" : "Ride");
-  els.metaDate.textContent = formatDate.format(date);
-  els.metaWindLabel.textContent = selectedArcherySession ? "Range wind" : (isNow ? "Current wind" : "Avg. wind");
-  els.metaTideLabel.textContent = selectedArcherySession ? "Tide" : (isNow ? "Current tide" : "Ride tide");
-  els.metaWeatherLabel.textContent = selectedArcherySession ? "Range weather" : (isNow ? "Current weather" : "Ride weather");
-  els.metaWind.textContent = "Wind loading";
-  els.metaTide.textContent = "Tide loading";
-  els.metaWeather.textContent = "Weather loading";
-
-  const precomputed = selectedRide ? getPrecomputedRideMetadata(selectedRide) : null;
-  if (precomputed) {
-    setMetadataValues(precomputed.weather, precomputed.tide);
-    return;
-  }
-
-  const [weather, tide] = await Promise.allSettled([
-    getWeatherForDate(date),
-    getTideForDate(date)
-  ]);
-
-  if (weather.status === "fulfilled") {
-    setWeatherValues(weather.value);
-  } else {
-    els.metaWind.textContent = "Wind unavailable";
-    els.metaWeather.textContent = "Weather unavailable";
-  }
-
-  els.metaTide.textContent = tide.status === "fulfilled"
-    ? tide.value
-    : "Tide unavailable";
+function renderConditions(record, latest=false) {
+  const weather=weatherDisplay(record?.weather);
+  els.metaLocation.textContent=record?.location || "Not recorded";
+  els.metaDate.textContent=record?.localDate ? captureLabels(record.localDate+"T12:00:00Z").date : "Not recorded";
+  els.metaTime.textContent=record?.timeZone && Number.isFinite(Date.parse(record?.sourceDate))
+    ? new Intl.DateTimeFormat("en-US",{hour:"numeric",minute:"2-digit",timeZone:record.timeZone,timeZoneName:"short"}).format(new Date(record.sourceDate))
+    : captureLabels(record?.sourceDate).time;
+  els.metaWeatherLabel.textContent="Weather";
+  els.metaWeather.textContent=weather.condition;
+  els.metaWeather.title=(latest?"Latest activity. ":"")+weather.title;
+  document.getElementById("metaTemperature").textContent=weather.temperature;
+  document.getElementById("metaTemperature").title=weather.title;
+  els.metaWindLabel.textContent="Avg wind";
+  els.metaWind.textContent=weather.wind;
+  els.metaTideLabel.textContent="Starting tide";
+  els.metaTide.textContent=record?.tide?.status==="ok"?(record.tide.start?.label || record.tide.phase || "Not recorded"):"Not recorded";
+  els.metaTide.title="Tide at the recorded activity start";
+  document.getElementById("metaTideEnd").textContent=record?.tide?.status==="ok"?(record.tide.end?.label || "Not recorded"):"Not recorded";
+  document.querySelector(".global-meta").setAttribute("aria-label",latest?"Latest activity conditions":"Activity conditions");
 }
 
-function getPrecomputedRideMetadata(ride) {
-  return state.rideMetadata.rides?.[ride.id] || null;
-}
-
-function setMetadataValues(weather, tide) {
-  setWeatherValues(weather);
-  els.metaTide.textContent = tide;
-}
-
-function setWeatherValues(weather) {
-  els.metaWind.textContent = weather.wind;
-  els.metaWeather.textContent = weather.condition;
-}
-
-function parseGpx(xml) {
-  const documentXml = new DOMParser().parseFromString(xml, "application/xml");
-  return [...documentXml.getElementsByTagNameNS("*", "trkpt")]
-    .map((point) => {
-      const time = point.getElementsByTagNameNS("*", "time")[0]?.textContent || null;
-      return {
-        lat: Number(point.getAttribute("lat")),
-        lon: Number(point.getAttribute("lon")),
-        time
-      };
-    })
-    .filter((point) => Number.isFinite(point.lat) && Number.isFinite(point.lon));
-}
-
-function withSyntheticTimes(points) {
-  if (!points.length || points.every((point) => point.time)) return points;
-
-  const baseTime = Date.UTC(2026, 4, 9, 12, 0, 0);
-  const totalDuration = 90 * 60 * 1000;
-  const cumulative = [0];
-
-  for (let index = 1; index < points.length; index += 1) {
-    cumulative[index] = cumulative[index - 1] + haversineMeters(points[index - 1], points[index]);
-  }
-
-  const totalMeters = Math.max(cumulative[cumulative.length - 1], 1);
-  return points.map((point, index) => ({
-    ...point,
-    time: point.time || new Date(baseTime + totalDuration * (cumulative[index] / totalMeters)).toISOString()
-  }));
-}
-
-function createProjection(bounds, frame, rotationDegrees = 0) {
-  const min = mercator(bounds.minLon, bounds.maxLat);
-  const max = mercator(bounds.maxLon, bounds.minLat);
-  const scale = Math.min(
-    frame.width / (max.x - min.x),
-    frame.height / (max.y - min.y)
-  );
-  const projectedWidth = (max.x - min.x) * scale;
-  const projectedHeight = (max.y - min.y) * scale;
-  const offsetX = frame.x + (frame.width - projectedWidth) / 2;
-  const offsetY = frame.y + (frame.height - projectedHeight) / 2;
-  const centerX = frame.x + frame.width / 2;
-  const centerY = frame.y + frame.height / 2;
-  const rotation = rotationDegrees * Math.PI / 180;
-
-  return (lon, lat) => {
-    const point = mercator(lon, lat);
-    const projected = {
-      x: offsetX + (max.x - point.x) * scale,
-      y: offsetY + (point.y - min.y) * scale
-    };
-
-    if (!rotationDegrees) return projected;
-
-    const dx = projected.x - centerX;
-    const dy = projected.y - centerY;
-    return {
-      x: centerX + dx * Math.cos(rotation) - dy * Math.sin(rotation),
-      y: centerY + dx * Math.sin(rotation) + dy * Math.cos(rotation)
-    };
+function renderSelectedConditions(mode) {
+  const [items,selected,records]=mode==="cycling"
+    ? [state.rides,state.selectedRideIndex,state.activityMetadata.rides]
+    : mode==="sailing" ? [state.sails,state.selectedSailIndex,state.activityMetadata.sails]
+    : [state.archerySessions,state.selectedArcherySessionIndex,state.activityMetadata.archerySessions];
+  const recordFor=item=>records?.[item.id || item.sessionId] || {
+    localDate:item.recordedDate || item.recordedAt?.slice(0,10),
+    sourceDate:item.capturedAt || item.recordedAt
   };
-}
-
-function mercator(lon, lat) {
-  const radians = Math.PI / 180;
-  return {
-    x: lon,
-    y: Math.log(Math.tan(Math.PI / 4 + (lat * radians) / 2)) / radians
-  };
-}
-
-function geoPointsToPath(points, closed, projection = state.projection) {
-  const projected = points.map(([lon, lat]) => projection(lon, lat));
-  return projectedPointsToPath(projected, closed);
-}
-
-function projectedSegmentsToPath(segments, tolerance) {
-  return segments
-    .map((segment) => projectedPointsToPath(simplifyPoints(segment, tolerance)))
-    .filter(Boolean)
-    .join(" ");
-}
-
-function projectedPointsToPath(points, closed = false) {
-  if (!points.length) return "";
-
-  const [first, ...rest] = points;
-  const path = rest.reduce((value, point) => {
-    return `${value} L ${point.x.toFixed(2)} ${point.y.toFixed(2)}`;
-  }, `M ${first.x.toFixed(2)} ${first.y.toFixed(2)}`);
-
-  return closed ? `${path} Z` : path;
-}
-
-function simplifyPoints(points, tolerance) {
-  if (points.length <= 2) return points;
-
-  const simplified = [points[0]];
-  let previous = points[0];
-
-  for (let index = 1; index < points.length - 1; index += 1) {
-    const point = points[index];
-    if (distanceBetween(previous, point) >= tolerance) {
-      simplified.push(point);
-      previous = point;
-    }
-  }
-
-  simplified.push(points[points.length - 1]);
-  return simplified;
-}
-
-function distanceBetween(a, b) {
-  return Math.hypot(b.x - a.x, b.y - a.y);
-}
-
-function segmentPointsInBounds(points, bounds) {
-  const segments = [];
-  let current = [];
-
-  points.forEach((point) => {
-    if (pointInBounds(point, bounds)) {
-      current.push(point);
-    } else if (current.length) {
-      if (current.length > 1) segments.push(current);
-      current = [];
-    }
-  });
-
-  if (current.length > 1) segments.push(current);
-  return segments;
-}
-
-function projectedSegmentsForTrack(points, bounds, projection) {
-  return segmentPointsInBounds(points, bounds).map((segment) => {
-    return segment.map((point) => ({
-      ...projection(point.lon, point.lat),
-      lat: point.lat,
-      lon: point.lon,
-      time: point.time
-    }));
-  });
-}
-
-function pointInBounds(point, bounds) {
-  return point.lat >= bounds.minLat &&
-    point.lat <= bounds.maxLat &&
-    point.lon >= bounds.minLon &&
-    point.lon <= bounds.maxLon;
-}
-
-function featureTouchesBounds(feature, bounds) {
-  return feature.points.some(([lon, lat]) => {
-    return lat >= bounds.minLat &&
-      lat <= bounds.maxLat &&
-      lon >= bounds.minLon &&
-      lon <= bounds.maxLon;
-  });
-}
-
-function boundsForPoints(points) {
-  return points.reduce((acc, point) => ({
-    minLat: Math.min(acc.minLat, point.lat),
-    maxLat: Math.max(acc.maxLat, point.lat),
-    minLon: Math.min(acc.minLon, point.lon),
-    maxLon: Math.max(acc.maxLon, point.lon)
-  }), {
-    minLat: Infinity,
-    maxLat: -Infinity,
-    minLon: Infinity,
-    maxLon: -Infinity
-  });
-}
-
-function getRideStats(points) {
-  const meters = points.reduce((total, point, index) => {
-    if (index === 0) return total;
-    return total + haversineMeters(points[index - 1], point);
-  }, 0);
-  const firstTime = new Date(points[0].time).getTime();
-  const lastTime = new Date(points[points.length - 1].time).getTime();
-  const hours = Math.max((lastTime - firstTime) / 3600000, 0.01);
-  const miles = meters / 1609.344;
-
-  return {
-    miles,
-    hours,
-    avgMph: miles / hours
-  };
-}
-
-function haversineMeters(a, b) {
-  const earthRadius = 6371000;
-  const latA = toRadians(a.lat);
-  const latB = toRadians(b.lat);
-  const deltaLat = toRadians(b.lat - a.lat);
-  const deltaLon = toRadians(b.lon - a.lon);
-  const sinLat = Math.sin(deltaLat / 2);
-  const sinLon = Math.sin(deltaLon / 2);
-  const h = sinLat * sinLat +
-    Math.cos(latA) * Math.cos(latB) * sinLon * sinLon;
-
-  return 2 * earthRadius * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
-}
-
-function toRadians(degrees) {
-  return degrees * Math.PI / 180;
-}
-
-async function getWeatherForDate(date) {
-  const current = isToday(date);
-  const key = metadataCacheKey("weather", current ? "current" : dateTimeKey(date));
-
-  return cachedMetadata(
-    key,
-    () => current ? getCurrentWeather() : getHistoricalWeather(date),
-    current ? metadataCache.currentTtl : metadataCache.historicalTtl
-  );
-}
-
-async function getCurrentWeather() {
-  const params = new URLSearchParams({
-    latitude: "40.6602",
-    longitude: "-73.9690",
-    current: "weather_code,wind_speed_10m,wind_direction_10m",
-    wind_speed_unit: "mph",
-    timezone: "America/New_York"
-  });
-  const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
-  if (!response.ok) throw new Error("Current weather lookup failed");
-
-  const current = (await response.json()).current;
-  return formatWeather(current.weather_code, current.wind_speed_10m, current.wind_direction_10m);
-}
-
-async function getHistoricalWeather(date) {
-  const localDate = dateKey(date);
-  const params = new URLSearchParams({
-    latitude: "40.6602",
-    longitude: "-73.9690",
-    start_date: localDate,
-    end_date: localDate,
-    hourly: "weather_code,wind_speed_10m,wind_direction_10m",
-    wind_speed_unit: "mph",
-    timezone: "America/New_York"
-  });
-  const response = await fetch(`https://archive-api.open-meteo.com/v1/archive?${params}`);
-  if (!response.ok) throw new Error("Historical weather lookup failed");
-
-  const hourly = (await response.json()).hourly;
-  const index = nearestHourlyIndex(hourly.time, date);
-  return formatWeather(
-    hourly.weather_code[index],
-    hourly.wind_speed_10m[index],
-    hourly.wind_direction_10m[index]
-  );
-}
-
-function formatWeather(code, windSpeed, windDirection) {
-  return {
-    wind: `${degreesToCardinal(windDirection)} ${Math.round(windSpeed)} mph`,
-    condition: weatherCodeLabel(code)
-  };
-}
-
-async function getTideForDate(date) {
-  const current = isToday(date);
-  const key = metadataCacheKey("tide", current ? "current" : dateTimeKey(date));
-
-  return cachedMetadata(
-    key,
-    () => fetchTideForDate(date),
-    current ? metadataCache.currentTtl : metadataCache.historicalTtl
-  );
-}
-
-async function fetchTideForDate(date) {
-  const start = new Date(date.getTime() - 7 * 60 * 60 * 1000);
-  const end = new Date(date.getTime() + 7 * 60 * 60 * 1000);
-  const params = new URLSearchParams({
-    product: "predictions",
-    application: "reesemcardle_site",
-    begin_date: noaaDate(start),
-    end_date: noaaDate(end),
-    datum: "MLLW",
-    station: "8518750",
-    time_zone: "lst_ldt",
-    units: "english",
-    interval: "hilo",
-    format: "json"
-  });
-  const response = await fetch(`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?${params}`);
-  if (!response.ok) throw new Error("Tide lookup failed");
-
-  const predictions = ((await response.json()).predictions || [])
-    .map((prediction) => ({
-      type: prediction.type,
-      date: new Date(prediction.t.replace(" ", "T"))
-    }))
-    .sort((a, b) => a.date - b.date);
-  const next = predictions.find((prediction) => prediction.date >= date);
-  if (!next) throw new Error("No tide prediction near requested time");
-
-  return next.type === "H" ? "Flood tide" : "Ebb tide";
-}
-
-async function cachedMetadata(key, loader, ttl) {
-  const cached = readMetadataCache(key, ttl);
-  if (cached !== null) return cached;
-  if (metadataRequests.has(key)) return metadataRequests.get(key);
-
-  const request = loader()
-    .then((value) => {
-      writeMetadataCache(key, value);
-      return value;
-    })
-    .finally(() => {
-      metadataRequests.delete(key);
-    });
-
-  metadataRequests.set(key, request);
-  return request;
-}
-
-function metadataCacheKey(type, variant) {
-  return `${metadataCache.prefix}:${type}:${variant}`;
-}
-
-function readMetadataCache(key, ttl) {
-  try {
-    const raw = window.localStorage.getItem(key);
-    if (!raw) return null;
-
-    const cached = JSON.parse(raw);
-    if (!cached || Date.now() - cached.savedAt > ttl) return null;
-    return cached.value;
-  } catch (error) {
-    return null;
-  }
-}
-
-function writeMetadataCache(key, value) {
-  try {
-    window.localStorage.setItem(key, JSON.stringify({
-      savedAt: Date.now(),
-      value
-    }));
-  } catch (error) {
-    // Metadata is a nice-to-have speedup; the page should still work without storage.
-  }
-}
-
-function nearestHourlyIndex(times, date) {
-  const target = date.getTime();
-  let bestIndex = 0;
-  let bestDistance = Infinity;
-
-  times.forEach((time, index) => {
-    const distance = Math.abs(new Date(time).getTime() - target);
-    if (distance < bestDistance) {
-      bestDistance = distance;
-      bestIndex = index;
-    }
-  });
-
-  return bestIndex;
-}
-
-function weatherCodeLabel(code) {
-  const labels = {
-    0: "Clear",
-    1: "Mostly clear",
-    2: "Partly cloudy",
-    3: "Cloudy",
-    45: "Fog",
-    48: "Rime fog",
-    51: "Light drizzle",
-    53: "Drizzle",
-    55: "Heavy drizzle",
-    61: "Light rain",
-    63: "Rain",
-    65: "Heavy rain",
-    71: "Light snow",
-    73: "Snow",
-    75: "Heavy snow",
-    80: "Light showers",
-    81: "Showers",
-    82: "Heavy showers",
-    95: "Thunderstorm"
-  };
-  return labels[code] || "Weather recorded";
-}
-
-function degreesToCardinal(degrees) {
-  const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-  return directions[Math.round(degrees / 45) % directions.length];
-}
-
-function isToday(date) {
-  return dateKey(date) === dateKey(new Date());
-}
-
-function dateKey(date) {
-  const formatter = new Intl.DateTimeFormat("en-CA", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    timeZone: "America/New_York"
-  });
-  return formatter.format(date);
-}
-
-function dateTimeKey(date) {
-  const parts = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-    timeZone: "America/New_York"
-  }).formatToParts(date).reduce((acc, part) => {
-    acc[part.type] = part.value;
-    return acc;
-  }, {});
-
-  return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
-}
-
-function noaaDate(date) {
-  const parts = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-    timeZone: "America/New_York"
-  }).formatToParts(date).reduce((acc, part) => {
-    acc[part.type] = part.value;
-    return acc;
-  }, {});
-
-  return `${parts.year}${parts.month}${parts.day} ${parts.hour}:${parts.minute}`;
+  const record=selected===null
+    ? items.map(recordFor).sort((a,b)=>(b.sourceDate || b.localDate || "").localeCompare(a.sourceDate || a.localDate || ""))[0]
+    : items[selected] && recordFor(items[selected]);
+  const mediaEvent=items[selected ?? 0];
+  const mediaKey=mode+":"+(mediaEvent?.id || mediaEvent?.sessionId || "");
+  eventMedia.setEvent(mediaKey,mediaEvent?.label || mediaEvent?.name,mediaIndex[mediaKey] || []);
+  renderConditions(record && {...record,timeZone:mode==="sailing"?sailingRegion.timeZone:record.timeZone},selected===null && items.length>1);
 }

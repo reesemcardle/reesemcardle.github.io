@@ -1,0 +1,58 @@
+import { createRequire } from "node:module";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+import { mkdtemp, readFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import assert from "node:assert/strict";
+const require=createRequire(import.meta.url),exec=promisify(execFile);
+const {chromium}=require(`${process.env.HOME}/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright`);
+const directory=await mkdtemp(join(tmpdir(),"video-browser-")),file=join(directory,"fixture.mp4"),poster=join(directory,"poster.jpg");
+await exec("ffmpeg",["-v","error","-f","lavfi","-i","testsrc2=size=640x360:rate=24","-f","lavfi","-i","sine=frequency=220","-t","2","-c:v","libx264","-pix_fmt","yuv420p","-c:a","aac","-movflags","+faststart",file]);
+await exec("ffmpeg",["-v","error","-i",file,"-frames:v","1",poster]);
+const videoBytes=await readFile(file),posterBytes=await readFile(poster);
+const entry={id:"fixture",name:"Playback verification",file:"fixture.mp4",poster:"fixture.jpg",duration:2,width:640,height:360,hasAudio:true,capturedAt:"2026-03-24T14:57:54-04:00",location:"New York Harbor",weather:{status:"ok",condition:"Clear",temperatureF:54,wind:"W 5 mph"},description:""};
+const browser=await chromium.launch({headless:true,executablePath:"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"});
+try{
+ const page=await browser.newPage({viewport:{width:1440,height:900}}),errors=[];
+ page.on("pageerror",error=>errors.push(error.message));
+ await page.route("**/content/videos/video-index.json",route=>route.fulfill({json:[entry,{...entry,id:"second",name:"Second video",hasAudio:false}]}));
+ await page.route("**/content/videos/fixture.mp4",route=>route.fulfill({contentType:"video/mp4",body:videoBytes}));
+ await page.route("**/content/videos/fixture.jpg",route=>route.fulfill({contentType:"image/jpeg",body:posterBytes}));
+ let weatherRequests=0;
+ await page.route(/open-meteo\.com|api\.tidesandcurrents\.noaa\.gov/,route=>{weatherRequests++;return route.abort();});
+ await page.goto("http://localhost:8015/?mode=video");
+ await page.waitForFunction(()=>document.querySelector("#videoPlayer").currentTime>0.1);
+ assert.equal(await page.locator("#metaLocation").textContent(),"New York Harbor");
+ assert.equal(await page.locator("#metaDate").textContent(),"Mar 24, 2026");
+ assert.ok(await page.locator("#metaTime").isVisible());
+ assert.equal(await page.locator("#metaWeather").textContent(),"Clear");
+ assert.equal(await page.locator("#metaTemperature").textContent(),"54 F");
+ assert.ok(!(await page.locator(".activity-meta").first().isVisible()));
+ assert.match(await page.locator('.side-nav [data-mode="video"]').textContent(),/Scenes/);
+ assert.ok(await page.locator("#videoPlayer").evaluate(v=>v.loop&&v.muted&&v.playsInline&&!v.controls));
+ await page.locator("#videoPlay").click();assert.ok(await page.locator("#videoPlayer").evaluate(v=>v.paused));
+ await page.locator("#videoPlay").click();await page.waitForFunction(()=>!document.querySelector("#videoPlayer").paused);
+ await page.locator("#videoSound").click();assert.ok(await page.locator("#videoPlayer").evaluate(v=>!v.muted));
+ await page.locator("#videoSound").click();assert.ok(await page.locator("#videoPlayer").evaluate(v=>v.muted));
+ await page.locator("#videoPlayer").evaluate(v=>v.currentTime=1.8);
+ await page.waitForFunction(()=>document.querySelector("#videoPlayer").currentTime<1);
+ await page.locator('[data-action="next"]').click();assert.ok(await page.locator("#videoSound").isDisabled());
+ await page.locator('.side-nav [data-mode="cycling"]').click();assert.ok(await page.locator("#videoPlayer").evaluate(v=>v.paused));
+ await page.locator('.side-nav [data-mode="video"]').click();
+ await page.waitForFunction(()=>document.querySelector("#videoPlayer").currentTime>0.1);
+ assert.equal(await page.locator('#videoControls button').count(),2);
+ for(const width of [1440,390,320]){
+   await page.setViewportSize({width,height:width===1440?900:844});
+   assert.ok(await page.evaluate(()=>document.documentElement.scrollHeight<=innerHeight+1&&document.documentElement.scrollWidth<=innerWidth+1));
+   if(width<=390)assert.ok(await page.evaluate(()=>{const boxes=[...document.querySelectorAll('.mobile-mode-button')].map(e=>e.getBoundingClientRect());return boxes.every((box,i)=>!i||box.left>=boxes[i-1].right);}));
+   await page.screenshot({path:`/tmp/site-video-${width}.png`});
+ }
+ await page.emulateMedia({reducedMotion:"reduce"});await page.reload();await page.waitForSelector("#videoPlayer:not([hidden])");assert.ok(await page.locator("#videoPlayer").evaluate(v=>v.paused));
+ await page.locator("#videoPlay").click();await page.waitForFunction(()=>!document.querySelector("#videoPlayer").paused);
+ await page.unroute("**/content/videos/video-index.json");await page.route("**/content/videos/video-index.json",route=>route.fulfill({json:[]}));await page.reload();await page.waitForSelector("#videoEmpty:not([hidden])");
+ assert.equal(await page.locator("#videoEmpty").textContent(),"No scenes yet");assert.ok(await page.locator('[data-action="next"]').isDisabled());
+ assert.ok(!(await page.locator("#videoControls").isVisible()));
+ assert.equal(weatherRequests,0);
+ assert.deepEqual(errors,[]);console.log("ok video: autoplay, loop, saved weather without network requests, controls, navigation, mode pause, reduced motion, empty state, responsive viewports");
+}finally{await browser.close();}

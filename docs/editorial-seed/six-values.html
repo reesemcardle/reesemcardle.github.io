@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    html,body{margin:0;height:100%;background:#f3eee2;color:#1e1c19;font-family:"IBM Plex Mono",monospace}
+    .chart{position:relative;height:100%;width:100%;box-sizing:border-box;padding:12px 8px 20px}
+    canvas{display:block}
+  </style>
+</head>
+<body>
+  <div class="chart"><canvas id="values" role="img" aria-label="Line chart: observations 1 through 6 have values 100, 101, 102, 103, 104, and 105. The same values appear in the table above."></canvas></div>
+  <script src="/content/pages/vendor/chart.umd.js"></script>
+  <script>
+    Chart.defaults.font.family='"IBM Plex Mono", monospace';
+    Chart.defaults.color="#1e1c19";
+    const chart=new Chart(document.getElementById("values"),{
+      type:"line",
+      data:{labels:["1","2","3","4","5","6"],datasets:[{
+        label:"Value",data:[100,101,102,103,104,105],borderColor:"#6e8f97",
+        backgroundColor:"#3f5f48",pointRadius:4,pointHoverRadius:6,borderWidth:2,tension:0
+      }]},
+      options:{responsive:true,maintainAspectRatio:false,animation:false,
+        plugins:{legend:{display:false},tooltip:{displayColors:false,backgroundColor:"#1e1c19",titleColor:"#f3eee2",bodyColor:"#f3eee2"}},
+        scales:{
+          x:{title:{display:true,text:"Observation"},grid:{display:false},border:{color:"#b6b1a7"}},
+          y:{min:99,max:106,ticks:{stepSize:1},title:{display:true,text:"Value"},grid:{color:"#1e1c1918"},border:{display:false}}
+        }
+      }
+    });
+    document.fonts.ready.then(()=>chart.update());
+  </script>
+</body>
+</html>

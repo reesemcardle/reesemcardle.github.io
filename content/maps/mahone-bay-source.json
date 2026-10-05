@@ -1,0 +1,23 @@
+{
+  "url": "https://nsgiwa.novascotia.ca/arcgis/rest/services/BASE/BASE_NSTDB_10k_Water_UT83/MapServer/8",
+  "where": "FEAT_DESC LIKE '%Water%'",
+  "attribution": "Province of Nova Scotia, Nova Scotia Topographic Database 1:10,000, Open Government Licence - Nova Scotia",
+  "bounds": {
+    "minLat": 43.95,
+    "maxLat": 44.85,
+    "minLon": -64.75,
+    "maxLon": -63.65
+  },
+  "query": {
+    "where": "FEAT_DESC LIKE '%Water%'",
+    "geometry": "-64.75,43.95,-63.65,44.85",
+    "geometryType": "esriGeometryEnvelope",
+    "inSR": 4326,
+    "spatialRel": "esriSpatialRelIntersects"
+  },
+  "retrieved": "2026-10-05T17:09:57.158Z",
+  "featureCount": 4831,
+  "geometryPrecision": 6,
+  "maxAllowableOffset": 0.0001,
+  "sha256": "8091e54b20e514b8d0fcde8a89f670c3aca9abec32c8a2b5cbb5a9e88e7c581d"
+}

@@ -1,5 +1,19 @@
 # Archery Shot Location Format v0.1
 
+## Completed-Target Photo Extension
+
+Photo-derived records retain normalized `x`/`y` and the target ID, but set
+`shotOrder: "unknown"`, `positionAccuracy: "approximate"`, and one observation
+group with `endNumber: null`. No `shotNumber` or shooting `startedAt` is invented.
+`recordedDate` stores the photo's calendar date; `capturedAt` is included only
+when the capture timestamp and UTC offset are known. Missing equipment is null.
+Individual impacts can carry `uncertain: true` and a short note. These are visible
+impact sites, not a verified count of arrows. Hanging-pin holes are excluded.
+The site displays photo records simultaneously and labels derived scores as
+estimates. See `content-workflow.md` for the local import command.
+
+## Original Session Format
+
 This document defines a small, portable data format for archery shot location.
 The core principle is:
 

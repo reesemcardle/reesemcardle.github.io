@@ -1,0 +1,23 @@
+{
+  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Hydro/MapServer/1",
+  "where": "1=1",
+  "attribution": "U.S. Census Bureau, TIGERweb Areal Hydrography (public domain)",
+  "bounds": {
+    "minLat": 41.2,
+    "maxLat": 41.95,
+    "minLon": -72,
+    "maxLon": -70.7
+  },
+  "query": {
+    "where": "1=1",
+    "geometry": "-72,41.2,-70.7,41.95",
+    "geometryType": "esriGeometryEnvelope",
+    "inSR": 4326,
+    "spatialRel": "esriSpatialRelIntersects"
+  },
+  "retrieved": "2026-10-05T17:09:47.896Z",
+  "featureCount": 7338,
+  "geometryPrecision": 6,
+  "maxAllowableOffset": 0.0001,
+  "sha256": "58795a07f8831d8cffbcd0de2a5308809adae345c42fe3689db47e3142a70509"
+}

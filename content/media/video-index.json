@@ -1,0 +1,44 @@
+[
+  {
+    "id": "video-a2a2edd5c0f8c8ff5de3b911",
+    "name": "sail",
+    "file": "video-a2a2edd5c0f8c8ff5de3b911.mp4",
+    "poster": "video-a2a2edd5c0f8c8ff5de3b911.jpg",
+    "sourceHash": "a2a2edd5c0f8c8ff5de3b91123467f09acdac2834c992717dd82090a6829d364",
+    "settingsHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "importVersion": 2,
+    "duration": 5.565,
+    "width": 720,
+    "height": 1280,
+    "bytes": 1917908,
+    "hasAudio": true,
+    "date": "2026-06-09",
+    "location": null,
+    "weather": {
+      "status": "unavailable",
+      "reason": "Weather lookup not requested"
+    },
+    "capturedAt": "2026-06-09T18:08:02-0400"
+  },
+  {
+    "id": "video-58f1459045f8e2a1fe756779",
+    "name": "bike",
+    "file": "video-58f1459045f8e2a1fe756779.mp4",
+    "poster": "video-58f1459045f8e2a1fe756779.jpg",
+    "sourceHash": "58f1459045f8e2a1fe7567796f6ff5617fe606d8da7d2679e6de3ae36c13abfd",
+    "settingsHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "importVersion": 2,
+    "duration": 38.636667,
+    "width": 1280,
+    "height": 720,
+    "bytes": 12331929,
+    "hasAudio": true,
+    "date": "2025-10-05",
+    "location": null,
+    "weather": {
+      "status": "unavailable",
+      "reason": "Weather lookup not requested"
+    },
+    "capturedAt": "2025-10-05T12:15:29-0400"
+  }
+]

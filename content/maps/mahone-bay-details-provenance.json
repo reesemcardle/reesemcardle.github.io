@@ -1,0 +1,13 @@
+{
+  "url": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+  "query": "[out:json][timeout:60][maxsize:268435456];(way[highway~\"^(motorway|trunk|primary|secondary|tertiary)(_link)?$\"](44.23,-64.5,44.6,-64.02);nwr[leisure~\"^(park|nature_reserve)$\"](44.23,-64.5,44.6,-64.02);nwr[landuse=recreation_ground](44.23,-64.5,44.6,-64.02););out geom;",
+  "bounds": {
+    "minLat": 44.23,
+    "maxLat": 44.6,
+    "minLon": -64.5,
+    "maxLon": -64.02
+  },
+  "retrieved": "2026-10-05T17:08:24.104Z",
+  "attribution": "OpenStreetMap contributors, ODbL 1.0",
+  "sha256": "b51ac7f56948e39b5f4c365d36e997d50ca594cda1d766f6e0573c865ebe9266"
+}

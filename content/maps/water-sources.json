@@ -1,0 +1,20 @@
+{
+  "source": "US Census Bureau, TIGERweb Areal Hydrography, January 1, 2026",
+  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Hydro/MapServer/1",
+  "query": {
+    "where": "1=1",
+    "geometry": "-74.3,40.45,-73.7,40.95",
+    "geometryType": "esriGeometryEnvelope",
+    "inSR": 4326,
+    "outSR": 4326,
+    "spatialRel": "esriSpatialRelIntersects",
+    "outFields": "NAME,MTFCC,AREAWATER",
+    "geometryPrecision": 6,
+    "maxAllowableOffset": 0.00001,
+    "f": "geojson"
+  },
+  "retrieved": "2026-10-04",
+  "sha256": "ec7aeb6d2ff23f56b4309cbda34cb18c883c2b607db88aa1e8b8884a68aa2a89",
+  "featureCount": 1053,
+  "attribution": "U.S. Census Bureau (public domain); OSM detail layers retain OpenStreetMap attribution."
+}

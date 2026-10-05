@@ -16,43 +16,85 @@
 
     <title>Reese McArdle</title>
     <meta name="description" content="Reese McArdle. Building and thinking about digital interfaces for cities.">
-    <link rel="stylesheet" href="styles.css?v=20260509-sailing-engine">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20260525-atlas-ui-1">
+    <link rel="stylesheet" href="visual-stage.css">
+    <link rel="stylesheet" href="viewport-layout.css">
+    <link rel="stylesheet" href="editorial.css">
   </head>
   <body>
     <main class="site-shell" aria-label="Personal field instrument">
-      <aside class="intro" aria-label="Identity">
-        <div>
-          <h1>Reese McArdle</h1>
-          <p class="location">Brooklyn, NY</p>
-        </div>
+      <aside class="intro" aria-label="Site navigation">
+        <h1>Reese<br>McArdle</h1>
 
-        <p class="positioning">
-          Building and thinking<br>
-          about digital interfaces<br>
-          for cities.
-        </p>
-
-        <a class="contact-link" href="#" data-email-user="reesemcardle" data-email-domain="gmail.com">
-          Get in touch
-        </a>
-      </aside>
-
-      <section class="instrument" aria-label="Activity visualization">
-        <nav class="mode-toggle" aria-label="Activity modes">
+        <nav class="side-nav" aria-label="Sections">
+          <button class="mode-button" type="button" aria-pressed="false" data-mode="video"><span>01</span>Scenes</button>
           <button class="mode-button is-active" type="button" aria-pressed="true" data-mode="cycling">
+            <span>02</span>
             Cycling
           </button>
           <button class="mode-button" type="button" aria-pressed="false" data-mode="sailing">
+            <span>03</span>
             Sailing
           </button>
           <button class="mode-button" type="button" aria-pressed="false" data-mode="archery">
+            <span>04</span>
             Archery
           </button>
+          <button class="mode-button" type="button" aria-pressed="false" data-mode="labs"><span>05</span>Labs</button>
+          <button class="mode-button" type="button" aria-pressed="false" data-mode="about"><span>06</span>About</button>
         </nav>
 
+        <p class="positioning">
+          Movement, measurement,<br>
+          and making systems<br>
+          more legible.
+        </p>
+
+        <div class="place-lockup" aria-label="Current base">
+          <span>40.6971° N</span>
+          <span>73.9783° W</span>
+          <strong>New York, NY</strong>
+        </div>
+      </aside>
+
+      <section class="instrument" aria-label="Activity visualization">
+        <nav class="mobile-nav" aria-label="Activity modes">
+          <strong>Reese<br>McArdle</strong>
+          <button class="mobile-mode-button" type="button" aria-pressed="false" data-mode="video">Scenes</button>
+          <button class="mobile-mode-button is-active" type="button" aria-pressed="true" data-mode="cycling">Cycling</button>
+          <button class="mobile-mode-button" type="button" aria-pressed="false" data-mode="sailing">Sailing</button>
+          <button class="mobile-mode-button" type="button" aria-pressed="false" data-mode="archery">Archery</button>
+          <button class="mobile-mode-button" type="button" aria-pressed="false" data-mode="labs">Labs</button>
+          <button class="mobile-mode-button" type="button" aria-pressed="false" data-mode="about">About</button>
+          <button class="menu-button" type="button" aria-label="Menu"><span></span><span></span><span></span></button>
+        </nav>
+
+        <header class="activity-hero">
+          <span id="activityIndex" class="activity-index">02</span>
+          <h2 id="activityTitle">Cycling</h2>
+          <p id="activityPlace">Prospect Park, Brooklyn</p>
+          <p id="activityDek">Accumulated ride traces, 2024-2026</p>
+        </header>
+
+        <section id="editorialReader" class="editorial-reader" aria-label="Page content" tabindex="0" hidden></section>
         <figure class="visual-wrap">
-          <svg id="cyclingVisual" class="park-map" viewBox="0 0 1600 1000" role="img" aria-labelledby="map-title map-desc">
-            <title id="map-title">Prospect Park cycling traces</title>
+          <div class="visual-frame">
+          <div id="videoVisual" class="video-stage" hidden>
+            <video id="videoPlayer" loop muted playsinline disablepictureinpicture disableremoteplayback preload="none" aria-label="Selected scene" hidden></video>
+            <div id="videoControls" class="video-controls" hidden>
+              <button id="videoPlay" type="button" aria-label="Play" title="Play"></button>
+              <button id="videoSound" type="button" aria-label="Sound on" title="Sound on"></button>
+            </div>
+            <p id="videoEmpty" role="status">No scenes yet</p>
+          </div>
+          <button id="sailingHome" class="sailing-home" type="button" title="Return to launch area" hidden>Home</button>
+          <button id="cyclingHome" class="sailing-home" type="button" title="Return to Prospect Park">Home</button>
+          <button id="archeryHome" class="sailing-home" type="button" title="Reset target view" hidden>Home</button>
+          <svg id="cyclingVisual" class="park-map" viewBox="0 0 1600 1000" role="img" tabindex="0" aria-labelledby="map-title map-desc">
+            <title id="map-title">Prospect Park: drag to pan, scroll to zoom, Shift-drag horizontally to rotate and vertically to tilt 0-68 degrees</title>
             <desc id="map-desc">A restrained illustrated map of Prospect Park with a projected ride trace from GPX data.</desc>
 
             <defs>
@@ -85,16 +127,19 @@
             </g>
           </svg>
 
-          <svg id="sailingVisual" class="park-map harbor-map" viewBox="0 0 1600 1000" role="img" aria-labelledby="harbor-map-title harbor-map-desc" hidden>
-            <title id="harbor-map-title">New York Harbor sailing map</title>
+          <svg id="sailingVisual" class="park-map harbor-map" viewBox="0 0 1600 1000" role="img" tabindex="0" aria-labelledby="harbor-map-title harbor-map-desc" hidden>
+            <title id="harbor-map-title">New York Harbor: drag to pan, scroll to zoom, Shift-drag horizontally to rotate and vertically to tilt 0-68 degrees</title>
             <desc id="harbor-map-desc">A tilted map of New York Harbor from the Verrazzano Bridge to Manhattanville and Roosevelt Island.</desc>
 
             <rect class="paper" width="1600" height="1000"></rect>
             <rect class="paper-grain" width="1600" height="1000" filter="url(#paper-noise)"></rect>
 
-            <g id="harborLand" class="map-layer map-land harbor-land" aria-hidden="true"></g>
-            <g id="harborCoast" class="map-layer harbor-coast" aria-hidden="true"></g>
-            <g id="harborPaths" class="map-layer map-paths harbor-paths" aria-hidden="true"></g>
+            <defs></defs>
+            <g id="harborWater" class="harbor-water" aria-hidden="true"></g>
+            <g id="harborLand" class="map-layer harbor-land" aria-hidden="true"></g>
+            <g id="harborParks" class="map-layer harbor-parks" aria-hidden="true"></g>
+            <g id="harborRoads" class="map-layer harbor-roads" aria-hidden="true"></g>
+            <g id="harborPaths" class="map-layer harbor-paths" aria-hidden="true"></g>
             <g class="sail-layer" aria-label="Sailing traces">
               <g id="sailGhosts"></g>
               <path id="sailReplayBase" class="sail-replay-base" hidden></path>
@@ -103,8 +148,8 @@
             </g>
           </svg>
 
-          <svg id="archeryVisual" class="park-map archery-target" viewBox="0 0 1600 1000" role="img" aria-labelledby="archery-target-title archery-target-desc" hidden>
-            <title id="archery-target-title">FITA 40 centimeter archery target</title>
+          <svg id="archeryVisual" class="park-map archery-target" viewBox="0 0 1600 1000" role="img" tabindex="0" aria-labelledby="archery-target-title archery-target-desc" hidden>
+            <title id="archery-target-title">FITA 40 centimeter target: drag to pan, scroll to zoom, Shift-drag vertically to tilt 0-68 degrees</title>
             <desc id="archery-target-desc">A single spot FITA 40 target face with ten scoring rings and an X-ring at center.</desc>
 
             <defs>
@@ -116,9 +161,9 @@
                 </feComponentTransfer>
               </filter>
               <radialGradient id="archery-face-shade" cx="46%" cy="38%" r="64%">
-                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.34"></stop>
-                <stop offset="58%" stop-color="#ffffff" stop-opacity="0"></stop>
-                <stop offset="100%" stop-color="#1c1b18" stop-opacity="0.06"></stop>
+                <stop offset="0%" stop-color="var(--paper)" stop-opacity="0.34"></stop>
+                <stop offset="58%" stop-color="var(--paper)" stop-opacity="0"></stop>
+                <stop offset="100%" stop-color="var(--ink)" stop-opacity="0.06"></stop>
               </radialGradient>
             </defs>
 
@@ -167,7 +212,9 @@
             <p id="placeholderText"></p>
           </div>
 
-          <div id="rideLiveMetrics" class="ride-live-metrics" hidden aria-live="polite">
+          </div>
+          <div class="visual-metrics">
+          <div id="rideLiveMetrics" class="ride-live-metrics" hidden>
             <div>
               <span>Miles elapsed</span>
               <strong id="liveMiles">0.00</strong>
@@ -178,44 +225,85 @@
             </div>
           </div>
 
+          <div id="archeryTicker" class="archery-ticker" hidden>
+            <div>
+              <span id="archeryTickerShotLabel">Shot</span>
+              <strong id="archeryTickerShot">--</strong>
+            </div>
+            <div>
+              <span id="archeryTickerScoreLabel">Score</span>
+              <strong id="archeryTickerScore">--</strong>
+            </div>
+            <div>
+              <span>Group</span>
+              <strong id="archeryTickerGroup">--</strong>
+            </div>
+            <div>
+              <span>X count</span>
+              <strong id="archeryTickerXCount">--</strong>
+            </div>
+          </div>
+
+          </div>
           <figcaption>
-            <span>PROSPECT PARK, BROOKLYN</span>
-            <span>recent rides fade to show</span>
-            <span>patterns over time</span>
+            <div>
+              <span id="figureLabel">Figure 01</span>
+              <p id="figureDescription">All recorded rides in and around Prospect Park. Daily loops, longer explorations, and everything in between.</p>
+            </div>
+            <div class="legend" aria-label="Figure legend">
+              <span><i></i> All traces</span>
+              <span><i></i> Selected trace</span>
+              <span><i></i> Basemap</span>
+            </div>
           </figcaption>
         </figure>
       </section>
 
-      <aside class="metadata" aria-label="Ride metadata">
-        <section class="global-meta" aria-label="Ambient metadata">
-          <div class="meta-primary">
-            <span id="metaStatusLabel">Now</span>
+      <aside class="metadata" aria-label="Activity metadata">
+        <section id="editorialSidebar" class="editorial-sidebar" aria-label="Page details" hidden></section>
+        <section class="global-meta" aria-label="Current conditions">
+          <div>
+            <span>Location</span>
+            <strong id="metaLocation">Brooklyn, NY</strong>
+          </div>
+          <div>
+            <span>Date</span>
             <strong id="metaDate">Loading</strong>
           </div>
-
-          <nav class="trace-controls" aria-label="Trace navigation">
-            <button type="button" data-action="previous" aria-label="Previous trace">←</button>
-            <button type="button" data-action="all" aria-label="Show all traces">•</button>
-            <button type="button" data-action="next" aria-label="Next trace">→</button>
-          </nav>
-
-          <div class="ambient-meta">
-            <div>
-              <span id="metaWindLabel">Current wind</span>
-              <strong id="metaWind">Wind loading</strong>
-            </div>
-            <div>
-              <span id="metaTideLabel">Current tide</span>
-              <strong id="metaTide">Tide loading</strong>
-            </div>
-            <div>
-              <span id="metaWeatherLabel">Current weather</span>
-              <strong id="metaWeather">Weather loading</strong>
-            </div>
+          <div>
+            <span>Start time</span>
+            <strong id="metaTime">--</strong>
+          </div>
+          <div>
+            <span id="metaWindLabel">Avg wind</span>
+            <strong id="metaWind">Wind loading</strong>
+          </div>
+          <div>
+            <span id="metaTideLabel">Starting tide</span>
+            <strong id="metaTide">Tide loading</strong>
+          </div>
+          <div>
+            <span>Ending tide</span>
+            <strong id="metaTideEnd">--</strong>
+          </div>
+          <div>
+            <span id="metaWeatherLabel">Weather</span>
+            <strong id="metaWeather">Weather loading</strong>
+          </div>
+          <div>
+            <span>Avg. temp</span>
+            <strong id="metaTemperature">--</strong>
           </div>
         </section>
 
+        <nav class="trace-controls" aria-label="Trace navigation">
+          <button type="button" data-action="previous" aria-label="Previous trace">←</button>
+          <button type="button" data-action="all" aria-label="Show all traces">•</button>
+          <button type="button" data-action="next" aria-label="Next trace">→</button>
+        </nav>
+
         <section class="activity-meta" aria-label="Cycling metadata">
+          <h3 id="activityMetaTitle">Ride Set Overview</h3>
           <div>
             <span id="rideMilesLabel">All park miles</span>
             <strong id="rideMiles">--</strong>
@@ -230,9 +318,60 @@
           </div>
         </section>
 
+        <section id="sailEventDetails" class="activity-meta sail-event-details" aria-label="Sail details" hidden>
+          <h3>Sail details</h3>
+          <div><span data-sail-field="durationLabel">Duration</span><strong data-sail-field="duration">--</strong></div>
+          <div><span>Boat</span><strong data-sail-field="boat">--</strong></div>
+          <div><span>Class</span><strong data-sail-field="class">--</strong></div>
+          <div><span>Sail type</span><strong data-sail-field="type">--</strong></div>
+          <div hidden><span>Event</span><strong data-sail-field="event"></strong></div>
+          <div hidden><span>Notes</span><strong data-sail-field="notes"></strong></div>
+        </section>
+
+        <section class="detail-card" aria-label="Current selection">
+          <span id="detailEyebrow">Latest ride</span>
+          <strong id="detailTitle">Prospect Park Loop</strong>
+          <p id="detailText">Use the arrows to step through recorded traces.</p>
+        </section>
+
+        <section id="eventMedia" class="event-media" aria-label="Event photos and videos">
+          <header><h3>Media</h3><span class="event-media-placeholder" hidden>Placeholder</span></header>
+          <div class="event-media-frame">
+            <img alt="" decoding="async" hidden>
+            <div class="event-media-video video-stage" hidden>
+              <video loop muted playsinline disablepictureinpicture disableremoteplayback preload="none" hidden></video>
+              <div class="video-controls" hidden>
+                <button type="button" data-media-action="play" aria-label="Play" title="Play"></button>
+                <button type="button" data-media-action="sound" aria-label="Sound on" title="Sound on"></button>
+              </div>
+              <p class="event-media-error" role="status" hidden></p>
+            </div>
+            <p class="event-media-empty">No media</p>
+          </div>
+          <div class="event-media-footer">
+            <button type="button" data-media-action="previous" aria-label="Previous media" title="Previous media" hidden>←</button>
+            <span class="event-media-count" aria-live="polite"></span>
+            <button type="button" data-media-action="next" aria-label="Next media" title="Next media" hidden>→</button>
+          </div>
+          <p class="event-media-caption"></p>
+        </section>
+
+        <section class="detail-links" aria-label="Related links">
+          <h3>Related</h3>
+          <a href="#" aria-disabled="true">Field notes <span>→</span></a>
+          <a href="#" aria-disabled="true">Source data <span>→</span></a>
+          <a href="#" aria-disabled="true">Method <span>→</span></a>
+        </section>
       </aside>
 
-      <section class="testing-controls" aria-label="Temporary map controls">
+      <footer class="site-footer" aria-label="Site footer">
+        <span>RM</span>
+        <small>© 2026</small>
+        <small>Built in New York</small>
+        <small>Last updated May 25, 2026</small>
+      </footer>
+
+      <section class="testing-controls" aria-label="Temporary map controls" hidden>
         <nav class="camera-toggle" aria-label="Map camera presets">
           <span class="control-label">Tilt</span>
           <button class="camera-button" type="button" aria-pressed="false" data-camera-preset="flat">
@@ -244,13 +383,13 @@
           <button class="camera-button" type="button" aria-pressed="false" data-camera-preset="soft">
             24
           </button>
-          <button class="camera-button" type="button" aria-pressed="false" data-camera-preset="half">
+          <button class="camera-button is-active" type="button" aria-pressed="true" data-camera-preset="half">
             36
           </button>
           <button class="camera-button" type="button" aria-pressed="false" data-camera-preset="dramatic">
             55
           </button>
-          <button class="camera-button is-active" type="button" aria-pressed="true" data-camera-preset="steep">
+          <button class="camera-button" type="button" aria-pressed="false" data-camera-preset="steep">
             62
           </button>
           <button class="camera-button" type="button" aria-pressed="false" data-camera-preset="poster">
@@ -263,13 +402,13 @@
           <button class="speed-button" type="button" aria-pressed="false" data-playback-speed="0.75">
             .75x
           </button>
-          <button class="speed-button is-active" type="button" aria-pressed="true" data-playback-speed="1">
+          <button class="speed-button" type="button" aria-pressed="false" data-playback-speed="1">
             1x
           </button>
           <button class="speed-button" type="button" aria-pressed="false" data-playback-speed="1.25">
             1.25x
           </button>
-          <button class="speed-button" type="button" aria-pressed="false" data-playback-speed="1.5">
+          <button class="speed-button is-active" type="button" aria-pressed="true" data-playback-speed="1.5">
             1.5x
           </button>
           <button class="speed-button" type="button" aria-pressed="false" data-playback-speed="2">
@@ -279,6 +418,6 @@
       </section>
     </main>
 
-    <script src="index.js?v=20260509-sailing-engine"></script>
+    <script type="module" src="index.js?v=20260525-atlas-ui-1"></script>
   </body>
 </html>

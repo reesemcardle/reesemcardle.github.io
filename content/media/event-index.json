@@ -1,0 +1,92 @@
+{
+  "cycling:2025-08-01": [
+    {
+      "id": "video-58f1459045f8e2a1fe756779",
+      "type": "video",
+      "src": "content/media/video-58f1459045f8e2a1fe756779.mp4",
+      "poster": "content/media/video-58f1459045f8e2a1fe756779.jpg",
+      "width": 1280,
+      "height": 720,
+      "hasAudio": true,
+      "alt": "Cycling preview video",
+      "placeholder": true
+    }
+  ],
+  "sailing:sailing-5278f3f427ad8ea11d77": [
+    {
+      "id": "image-0d6fd0cca02e2464b9bf96f3",
+      "type": "image",
+      "src": "content/media/image-0d6fd0cca02e2464b9bf96f3.jpg",
+      "width": 1280,
+      "height": 960,
+      "alt": "Sailing preview: rigging and the New York waterfront",
+      "placeholder": true
+    },
+    {
+      "id": "video-a2a2edd5c0f8c8ff5de3b911",
+      "type": "video",
+      "src": "content/media/video-a2a2edd5c0f8c8ff5de3b911.mp4",
+      "poster": "content/media/video-a2a2edd5c0f8c8ff5de3b911.jpg",
+      "width": 720,
+      "height": 1280,
+      "hasAudio": true,
+      "alt": "Sailing preview video",
+      "placeholder": true
+    }
+  ],
+  "sailing:sailing-ba08cba1fe73cb49a2b4": [
+    {
+      "id": "image-0d6fd0cca02e2464b9bf96f3",
+      "type": "image",
+      "src": "content/media/image-0d6fd0cca02e2464b9bf96f3.jpg",
+      "width": 1280,
+      "height": 960,
+      "alt": "Sailing preview: rigging and the New York waterfront",
+      "placeholder": true
+    },
+    {
+      "id": "video-a2a2edd5c0f8c8ff5de3b911",
+      "type": "video",
+      "src": "content/media/video-a2a2edd5c0f8c8ff5de3b911.mp4",
+      "poster": "content/media/video-a2a2edd5c0f8c8ff5de3b911.jpg",
+      "width": 720,
+      "height": 1280,
+      "hasAudio": true,
+      "alt": "Sailing preview video",
+      "placeholder": true
+    }
+  ],
+  "sailing:sailing-804d43581b0d9aaf0477": [
+    {
+      "id": "image-0d6fd0cca02e2464b9bf96f3",
+      "type": "image",
+      "src": "content/media/image-0d6fd0cca02e2464b9bf96f3.jpg",
+      "width": 1280,
+      "height": 960,
+      "alt": "Sailing preview: rigging and the New York waterfront",
+      "placeholder": true
+    },
+    {
+      "id": "video-a2a2edd5c0f8c8ff5de3b911",
+      "type": "video",
+      "src": "content/media/video-a2a2edd5c0f8c8ff5de3b911.mp4",
+      "poster": "content/media/video-a2a2edd5c0f8c8ff5de3b911.jpg",
+      "width": 720,
+      "height": 1280,
+      "hasAudio": true,
+      "alt": "Sailing preview video",
+      "placeholder": true
+    }
+  ],
+  "archery:photo-bf57c370adc9e5e699dfb590": [
+    {
+      "id": "image-bf57c370adc9e5e699dfb590",
+      "type": "image",
+      "src": "content/media/image-bf57c370adc9e5e699dfb590.jpg",
+      "width": 960,
+      "height": 1280,
+      "alt": "Target photographed on March 24, 2026",
+      "placeholder": false
+    }
+  ]
+}

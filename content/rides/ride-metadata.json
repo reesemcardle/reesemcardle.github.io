@@ -1,6 +1,7 @@
 {
-  "generatedAt": "2026-05-09T16:02:48.865Z",
+  "generatedAt": "2026-05-10T22:26:37.267Z",
   "location": {
+    "label": "Prospect Park",
     "latitude": "40.6602",
     "longitude": "-73.9690",
     "tideStation": "8518750",
@@ -8,70 +9,184 @@
   },
   "rides": {
     "2025-08-01": {
-      "rideId": "2025-08-01",
+      "id": "2025-08-01",
+      "label": "Morning Ride",
+      "activity": "cycling",
       "sourceDate": "2025-08-01T15:01:00.000Z",
       "sourceEndDate": "2025-08-01T15:24:54.000Z",
       "localDate": "2025-08-01",
+      "location": "Prospect Park",
       "weather": {
+        "status": "ok",
         "wind": "NE 11 mph",
-        "condition": "Cloudy"
+        "condition": "Cloudy",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "latitude": "40.6602",
+          "longitude": "-73.9690",
+          "sampledFrom": "2025-08-01T15:01:00.000Z",
+          "sampledTo": "2025-08-01T15:24:54.000Z"
+        }
       },
-      "tide": "Flood tide"
+      "tide": {
+        "status": "ok",
+        "phase": "Flood tide",
+        "source": {
+          "provider": "NOAA CO-OPS API",
+          "station": "8518750",
+          "predictionTime": "2025-08-01T18:50:00.000Z"
+        }
+      }
     },
     "2025-08-04": {
-      "rideId": "2025-08-04",
+      "id": "2025-08-04",
+      "label": "Lunch Ride",
+      "activity": "cycling",
       "sourceDate": "2025-08-04T16:43:18.000Z",
       "sourceEndDate": "2025-08-04T17:01:55.000Z",
       "localDate": "2025-08-04",
+      "location": "Prospect Park",
       "weather": {
+        "status": "ok",
         "wind": "SW 1 mph",
-        "condition": "Clear"
+        "condition": "Clear",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "latitude": "40.6602",
+          "longitude": "-73.9690",
+          "sampledFrom": "2025-08-04T16:43:18.000Z",
+          "sampledTo": "2025-08-04T17:01:55.000Z"
+        }
       },
-      "tide": "Flood tide"
+      "tide": {
+        "status": "ok",
+        "phase": "Flood tide",
+        "source": {
+          "provider": "NOAA CO-OPS API",
+          "station": "8518750",
+          "predictionTime": "2025-08-04T21:24:00.000Z"
+        }
+      }
     },
     "2025-11-06": {
-      "rideId": "2025-11-06",
+      "id": "2025-11-06",
+      "label": "Morning Ride",
+      "activity": "cycling",
       "sourceDate": "2025-11-06T13:11:08.000Z",
       "sourceEndDate": "2025-11-06T13:24:49.000Z",
       "localDate": "2025-11-06",
+      "location": "Prospect Park",
       "weather": {
+        "status": "ok",
         "wind": "W 10 mph",
-        "condition": "Clear"
+        "condition": "Clear",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "latitude": "40.6602",
+          "longitude": "-73.9690",
+          "sampledFrom": "2025-11-06T13:11:08.000Z",
+          "sampledTo": "2025-11-06T13:24:49.000Z"
+        }
       },
-      "tide": "Ebb tide"
+      "tide": {
+        "status": "ok",
+        "phase": "Ebb tide",
+        "source": {
+          "provider": "NOAA CO-OPS API",
+          "station": "8518750",
+          "predictionTime": "2025-11-06T19:52:00.000Z"
+        }
+      }
     },
     "2026-03-26": {
-      "rideId": "2026-03-26",
+      "id": "2026-03-26",
+      "label": "Season Opener",
+      "activity": "cycling",
       "sourceDate": "2026-03-26T20:29:51.000Z",
       "sourceEndDate": "2026-03-26T21:03:00.000Z",
       "localDate": "2026-03-26",
+      "location": "Prospect Park",
       "weather": {
+        "status": "ok",
         "wind": "S 7 mph",
-        "condition": "Mostly clear"
+        "condition": "Mostly clear",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "latitude": "40.6602",
+          "longitude": "-73.9690",
+          "sampledFrom": "2026-03-26T20:29:51.000Z",
+          "sampledTo": "2026-03-26T21:03:00.000Z"
+        }
       },
-      "tide": "Ebb tide"
+      "tide": {
+        "status": "ok",
+        "phase": "Ebb tide",
+        "source": {
+          "provider": "NOAA CO-OPS API",
+          "station": "8518750",
+          "predictionTime": "2026-03-27T01:58:00.000Z"
+        }
+      }
     },
     "2026-04-01": {
-      "rideId": "2026-04-01",
+      "id": "2026-04-01",
+      "label": "Afternoon Ride",
+      "activity": "cycling",
       "sourceDate": "2026-04-01T19:03:48.000Z",
       "sourceEndDate": "2026-04-01T19:39:14.000Z",
       "localDate": "2026-04-01",
+      "location": "Prospect Park",
       "weather": {
+        "status": "ok",
         "wind": "W 7 mph",
-        "condition": "Partly cloudy"
+        "condition": "Partly cloudy",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "latitude": "40.6602",
+          "longitude": "-73.9690",
+          "sampledFrom": "2026-04-01T19:03:48.000Z",
+          "sampledTo": "2026-04-01T19:39:14.000Z"
+        }
       },
-      "tide": "Flood tide"
+      "tide": {
+        "status": "ok",
+        "phase": "Flood tide",
+        "source": {
+          "provider": "NOAA CO-OPS API",
+          "station": "8518750",
+          "predictionTime": "2026-04-02T00:55:00.000Z"
+        }
+      }
     },
     "2026-04-14": {
-      "rideId": "2026-04-14",
+      "id": "2026-04-14",
+      "label": "Afternoon Ride",
+      "activity": "cycling",
       "sourceDate": "2026-04-14T19:22:07.000Z",
       "sourceEndDate": "2026-04-14T19:45:58.000Z",
       "localDate": "2026-04-14",
+      "location": "Prospect Park",
       "weather": {
+        "status": "ok",
         "wind": "S 10 mph",
-        "condition": "Clear"
+        "condition": "Clear",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "latitude": "40.6602",
+          "longitude": "-73.9690",
+          "sampledFrom": "2026-04-14T19:22:07.000Z",
+          "sampledTo": "2026-04-14T19:45:58.000Z"
+        }
       },
-      "tide": "Flood tide"
+      "tide": {
+        "status": "ok",
+        "phase": "Flood tide",
+        "source": {
+          "provider": "NOAA CO-OPS API",
+          "station": "8518750",
+          "predictionTime": "2026-04-14T22:52:00.000Z"
+        }
+      }
     }
   }
 }

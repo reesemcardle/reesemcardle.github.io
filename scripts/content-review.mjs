@@ -1,0 +1,20 @@
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { join } from "node:path";
+import { normalizeImpact } from "./target-records.mjs";
+import { storeRoot } from "./target-store.mjs";
+
+const escape = value => String(value).replace(/[&<>"']/g,character=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[character]));
+const markLabel = mark => mark.id.replace(/^impact-/, "");
+export async function writeTargetReview(record, directory) {
+  await mkdir(directory,{recursive:true});
+  const bytes=await readFile(join(storeRoot,`${record.id}.image`));
+  const scale=record.width/700;
+  const markers=record.marks.map(mark=>`<g class="mark ${mark.uncertain?"flagged":""}"><circle cx="${mark.x}" cy="${mark.y}" r="${6*scale}"/><text x="${mark.x+8*scale}" y="${mark.y-7*scale}">${escape(markLabel(mark))}</text><title>${escape(markLabel(mark))}: ${escape(mark.note || "Visible impact")}</title></g>`).join("");
+  const pins=record.excluded.map(mark=>`<g class="pin"><circle cx="${mark.x}" cy="${mark.y}" r="${8*scale}"/><title>${escape(mark.note)}</title></g>`).join("");
+  const colors=["#fff","#fff","#303434","#303434","#309cd0","#309cd0","#ed4939","#ed4939","#ffdc36","#ffdc36"];
+  const rings=colors.map((color,i)=>`<circle r="${1-i/10}" fill="${color}" stroke="#777" stroke-width=".003"/>`).join("");
+  const locations=record.marks.map(mark=>{const p=normalizeImpact(mark,record.calibration);return `<circle cx="${p.x}" cy="${-p.y}" r=".012" fill="${mark.uncertain?"#d23b87":"#176950"}" stroke="white" stroke-width=".004"/>`;}).join("");
+  const flagged=record.marks.map(mark=>mark.uncertain?`<li><b>${escape(markLabel(mark))}</b> ${escape(mark.note || "Uncertain impact")}</li>`:"").join("");
+  const html=`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(record.name)}</title><style>*{box-sizing:border-box;letter-spacing:0}body{margin:0;background:#f4f6f5;color:#253931;font:14px/1.5 system-ui}header{padding:16px 24px;border-bottom:1px solid #cbd4cf;background:white}h1{font-size:20px;margin:0}p{margin:6px 0}main{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr);gap:24px;padding:24px;max-width:1500px;margin:auto}svg{width:100%;display:block}.preview{max-width:500px;margin:auto}.mark circle{fill:none;stroke:#43ffd1;stroke-width:${1.4*scale}}.mark text{fill:#43ffd1;font-size:${10*scale}px;font-weight:600;paint-order:stroke;stroke:#233d34;stroke-width:${1.8*scale}}.flagged circle{stroke:#ff9ada}.flagged text{fill:#ff9ada}.pin circle{fill:none;stroke:white;stroke-width:${1.5*scale}}.hide-labels .mark text{display:none}.hide-marks .mark,.hide-marks .pin{display:none}label{display:inline-flex;align-items:center;gap:6px;margin-right:16px}input{accent-color:#176950}li{margin:12px 0}h2{font-size:16px}a{color:#176950}@media(max-width:750px){main{grid-template-columns:1fr;padding:12px}header{padding:12px}}</style><header><h1>${escape(record.name)}</h1><p>${escape(record.date)} · ${record.marks.length} visible impact sites · ${record.marks.filter(m=>m.uncertain).length} flagged · ${record.excluded.length} excluded marks</p><p>Approximate locations · Unknown shot order</p><label><input type="checkbox" checked onchange="document.body.classList.toggle('hide-marks',!this.checked)">Markers</label><label><input type="checkbox" checked onchange="document.body.classList.toggle('hide-labels',!this.checked)">Numbers</label></header><main><section><svg viewBox="0 0 ${record.width} ${record.height}" xmlns="http://www.w3.org/2000/svg"><image href="data:${record.mime};base64,${bytes.toString("base64")}" width="${record.width}" height="${record.height}"/>${markers}${pins}</svg></section><section><svg class="preview" viewBox="-1.15 -1.15 2.3 2.3">${rings}${locations}</svg><h2>Flagged locations</h2><ul>${flagged || "<li>None flagged</li>"}</ul><p>Green: impact sites. Pink: uncertain. White: excluded marks, including hanging holes.</p></section></main></html>`;
+  const path=join(directory,`${record.id}.html`);await writeFile(path,html);return path;
+}

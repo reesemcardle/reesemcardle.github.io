@@ -1,0 +1,50 @@
+{
+  "name": "Reese McArdle",
+  "location": "Brooklyn, New York",
+  "linkedin": "https://www.linkedin.com/in/reesemcardle/",
+  "email": null,
+  "html": "<h2 id=\"article-experience\">Experience</h2><h3 id=\"article-reflexions\">Reflexions</h3><p>New York, United States</p>\n<h2 id=\"article-education\">Education</h2><h3 id=\"article-carnegie-mellon-university\">Carnegie Mellon University</h3><p>2018 - 2021</p>\n<p>Coursework in programming, data analysis for social science, economics, and emerging markets.</p>\n<h2 id=\"article-honors\">Honors</h2><h3 id=\"article-entrepreneurship-competition-finalist\">Entrepreneurship competition finalist</h3><p>Carnegie Mellon University, Swartz Center / November 2020</p>\n<p>Finalist in the Vitro Innovation Grand Challenge.</p>\n<h3 id=\"article-mattress-factory-fellowship\">Mattress Factory fellowship</h3><p>Pittsburgh / December 2017</p>\n<h2 id=\"article-elsewhere\">Elsewhere</h2><p><a href=\"https://www.linkedin.com/in/reesemcardle/\" rel=\"noopener noreferrer\">LinkedIn</a></p>\n",
+  "headings": [
+    {
+      "id": "article-experience",
+      "label": "Experience",
+      "level": 2
+    },
+    {
+      "id": "article-reflexions",
+      "label": "Reflexions",
+      "level": 3
+    },
+    {
+      "id": "article-education",
+      "label": "Education",
+      "level": 2
+    },
+    {
+      "id": "article-carnegie-mellon-university",
+      "label": "Carnegie Mellon University",
+      "level": 3
+    },
+    {
+      "id": "article-honors",
+      "label": "Honors",
+      "level": 2
+    },
+    {
+      "id": "article-entrepreneurship-competition-finalist",
+      "label": "Entrepreneurship competition finalist",
+      "level": 3
+    },
+    {
+      "id": "article-mattress-factory-fellowship",
+      "label": "Mattress Factory fellowship",
+      "level": 3
+    },
+    {
+      "id": "article-elsewhere",
+      "label": "Elsewhere",
+      "level": 2
+    }
+  ],
+  "minutes": 1
+}
