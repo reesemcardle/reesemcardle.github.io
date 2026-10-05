@@ -1,5 +1,5 @@
 import {execFileSync} from "node:child_process";
-import {readFileSync, writeFileSync} from "node:fs";
+import {readFileSync, writeFileSync, readdirSync} from "node:fs";
 import {fileURLToPath, pathToFileURL} from "node:url";
 
 export function stampUpdatedDate(html, date = new Date()) {
@@ -16,6 +16,9 @@ function deploy() {
   const git = (...args) => execFileSync("git", args, {cwd, encoding: "utf8"}).trim();
   if (git("branch", "--show-current") !== "master") throw new Error("Publish from master only.");
   if (git("status", "--porcelain")) throw new Error("Commit your site changes before publishing.");
+  const tests = readdirSync(new URL("../tests/", import.meta.url))
+    .filter(name => name.endsWith(".test.mjs")).map(name => `tests/${name}`);
+  execFileSync(process.execPath, ["--test", ...tests], {cwd, stdio: "inherit"});
   git("fetch", "origin");
   git("merge-base", "--is-ancestor", "origin/master", "HEAD");
   const path = new URL("../index.html", import.meta.url);

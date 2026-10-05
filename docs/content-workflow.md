@@ -294,7 +294,8 @@ not a privacy boundary; use a dedicated public alias if email is added later.
 # Publishing
 
 After updating content and reviewing the local site, commit the intended changes
-on `master`, then run `npm run deploy` from the website folder.
+on `master`, then run `./deploy-site` from the website folder
+(`npm run deploy` also works when npm is installed).
 
 This runs the tests, checks that the working tree is clean and the remote branch
 has no unmerged changes, stamps the footer with the publication date in New York
