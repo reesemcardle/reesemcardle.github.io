@@ -19,6 +19,6 @@
     "osmtogeojson": "3.0.0-beta.5",
     "polygon-clipping": "0.15.7",
     "sanitize-html": "2.17.0",
-    "sharp": "0.34.5"
+    "sharp": "0.35.4"
   }
 }
