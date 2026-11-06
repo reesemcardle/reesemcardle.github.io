@@ -15,6 +15,7 @@ import { regionForPoints } from "./map-regions.mjs";
 import { sailingEvent } from "./sailing-event.mjs";
 import {importEventAttachments,importMediaManifest} from "./content-media.mjs";
 import {importPages} from "./content-pages.mjs";
+import {buildSailingTracks} from "./build-sailing-web.mjs";
 
 const project=resolve(fileURLToPath(new URL("../",import.meta.url)));
 try { process.loadEnvFile(join(project,"private/content.env")); } catch(error) { if(error.code!=="ENOENT")throw error; }
@@ -124,6 +125,8 @@ for(const kind of ["cycling","sailing"]) {
     } catch(error){failed++;console.error(`  skipped ${basename(path)}: ${error.message}`);}
   }
 }
+
+if(!dry && (!only || only==="sailing"))await buildSailingTracks(content);
 
 const sessionIndexPath=join(content,"archery/session-index.json");
 let sessions=await json(sessionIndexPath,[]);

@@ -1,14 +1,14 @@
 export const mapRegions = {
   sailing: [
     {id:"ny-harbor",label:"New York Harbor",folder:"NY",timeZone:"America/New_York",
-      file:"content/maps/ny-harbor-osm.json",rotation:-29,
+      file:"content/maps/ny-harbor-osm.json",webFile:"content/maps/ny-harbor.paths.json",rotation:-29,
       bounds:{minLat:40.45,maxLat:40.95,minLon:-74.3,maxLon:-73.7}},
     {id:"newport",label:"Newport Harbor",folder:"Newport",timeZone:"America/New_York",
-      file:"content/maps/newport.json",rotation:-29,
+      file:"content/maps/newport.json",webFile:"content/maps/newport.paths.json",rotation:-29,
       detailBounds:{minLat:41.40,maxLat:41.75,minLon:-71.50,maxLon:-71.15},
       bounds:{minLat:41.20,maxLat:41.95,minLon:-72.00,maxLon:-70.70}},
     {id:"mahone-bay",label:"Mahone Bay",folder:"Mahone",timeZone:"America/Halifax",
-      file:"content/maps/mahone-bay.json",rotation:-29,
+      file:"content/maps/mahone-bay.json",webFile:"content/maps/mahone-bay.paths.json",rotation:-29,
       detailBounds:{minLat:44.23,maxLat:44.60,minLon:-64.50,maxLon:-64.02},
       bounds:{minLat:43.95,maxLat:44.85,minLon:-64.75,maxLon:-63.65}}
   ],

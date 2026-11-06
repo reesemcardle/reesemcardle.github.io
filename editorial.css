@@ -17,6 +17,9 @@ body.editorial-mode .visual-wrap,body.editorial-mode .trace-controls,body.editor
 .prose h3{font-family:"IBM Plex Sans",sans-serif;font-size:18px;font-weight:500;margin:24px 0 8px}
 .prose p{margin:0 0 18px}.prose h1,.prose h2,.prose h3{scroll-margin-top:20px}
 .prose a{color:inherit;text-underline-offset:3px}
+.editorial-reader[data-mode="about"] a,.editorial-sidebar[data-mode="about"] a{color:var(--muted, #77776f);text-decoration:none}
+.editorial-reader[data-mode="about"] a:hover,.editorial-sidebar[data-mode="about"] a:hover{text-decoration:underline;text-underline-offset:4px}
+.editorial-reader[data-mode="about"] a:focus-visible,.editorial-sidebar[data-mode="about"] a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 .prose blockquote{margin:24px 0;padding-left:20px;border-left:2px solid var(--muted)}
 .prose pre{max-width:100%;overflow:auto;padding:16px;background:#e2e5df;font-size:13px;line-height:1.7}
 .prose code{font-family:"IBM Plex Mono",monospace;font-size:.75em}.prose pre code{font-size:inherit}

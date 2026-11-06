@@ -39,6 +39,7 @@ export function createEditorialPages(root,sidebar){
     link.addEventListener("click",e=>{if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;e.preventDefault();history.pushState(null,"",link.href);show("labs");});return link;
   }
   async function show(mode){
+    root.dataset.mode=sidebar.dataset.mode=mode;
     const request=++serial;active=true;root.hidden=sidebar.hidden=false;
     root.replaceChildren(node("p","Loading…","editorial-status"));sidebar.replaceChildren();root.scrollTop=0;
     try{
@@ -46,7 +47,6 @@ export function createEditorialPages(root,sidebar){
       root.replaceChildren();
       if(mode==="about"){
         root.append(node("h1",data.name,"profile-name"));
-        if(data.location)root.append(node("p",data.location,"profile-location"));
         sidebar.append(node("h3","Profile"));row("Based in",data.location);
         const contact=node("nav");contact.setAttribute("aria-label","Contact");
         if(data.linkedin){const a=node("a","LinkedIn");a.href=data.linkedin;a.rel="noopener noreferrer";contact.append(a);}

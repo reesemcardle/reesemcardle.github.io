@@ -24,6 +24,10 @@ export function harborPaths(data, projection) {
   }));
 }
 
+export function compileHarborMap(data, projection=harborProjection(data.bounds,data.rotation ?? -29)) {
+  return {format:"harbor-paths-v1",source:data.source,coverage:coveragePath(data,projection),layers:harborPaths(data,projection)};
+}
+
 export function renderHarborMap(data, projection, root) {
   let clip = root.querySelector("#harborCoverage");
   if (!clip) {
@@ -32,8 +36,9 @@ export function renderHarborMap(data, projection, root) {
     clip.append(document.createElementNS("http://www.w3.org/2000/svg", "path"));
     root.querySelector("defs").append(clip);
   }
-  clip.firstChild.setAttribute("d", coveragePath(data, projection));
-  for (const { id, paths } of harborPaths(data, projection)) {
+  const compiled=data.format==="harbor-paths-v1" ? data : compileHarborMap(data,projection);
+  clip.firstChild.setAttribute("d", compiled.coverage);
+  for (const { id, paths } of compiled.layers) {
     const layer = root.querySelector(`#${id}`);
     layer.setAttribute("clip-path", "url(#harborCoverage)");
     const fragment = document.createDocumentFragment();

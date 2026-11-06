@@ -5,11 +5,12 @@
     "deploy": "node scripts/deploy.mjs",
     "review-targets": "node scripts/review-targets.mjs",
     "update-content": "node scripts/update-content.mjs",
-    "build:maps": "node scripts/build-water-maps.mjs && node scripts/build-regional-maps.mjs",
-    "build:regions": "node scripts/build-regional-maps.mjs",
-    "build:harbor": "node scripts/build-harbor-map.mjs",
+    "build:maps": "node scripts/build-water-maps.mjs && node scripts/build-regional-maps.mjs && node scripts/build-sailing-web.mjs",
+    "build:regions": "node scripts/build-regional-maps.mjs && node scripts/build-sailing-web.mjs",
+    "build:harbor": "node scripts/build-harbor-map.mjs && node scripts/build-sailing-web.mjs",
     "test": "node --test tests/*.test.mjs",
-    "test:browser": "node scripts/smoke-playwright.mjs"
+    "test:browser": "node scripts/smoke-playwright.mjs",
+    "build:sailing-web": "node scripts/build-sailing-web.mjs"
   },
   "devDependencies": {
     "@turf/buffer": "7.3.0",
