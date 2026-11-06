@@ -4,6 +4,7 @@ import { weatherDisplay } from "./scripts/activity-weather.mjs";
 import { mapRegions, createRegionPicker } from "./scripts/map-regions.mjs";
 import { createSailingEventDetails } from "./scripts/sailing-event.mjs";
 import { createEventMedia } from "./scripts/event-media.mjs";
+import { photoPlaybackOrder, photoPlaybackDelays } from "./scripts/archery-playback.mjs";
 import { createEditorialPages } from "./scripts/editorial-pages.mjs";
 import { prepareSail } from "./scripts/sail-data.mjs";
 import { setupResponsiveLayout } from "./scripts/responsive-layout.mjs";
@@ -763,18 +764,21 @@ function plotArcheryShots(shots, variant = "session") {
 }
 
 function animateArcherySession(session) {
-  // Photo marks reveal in display order; this is not a recorded shot sequence.
+  const isPhoto = session.shotOrder === "unknown";
+  const playback = isPhoto ? { ...session, shots: photoPlaybackOrder(session.shots, session.sessionId) } : session;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     plotArcheryShots(session.shots, "session");
     updateArcheryTicker(session, session.shots.length - 1);
     return;
   }
 
-  session.shots.forEach((shot, index) => {
+  const delays = isPhoto ? photoPlaybackDelays(playback.shots.length, state.playbackSpeed)
+    : playback.shots.map((_, index) => index * archeryAnimation.shotIntervalMs / state.playbackSpeed);
+  playback.shots.forEach((shot, index) => {
     const timeout = window.setTimeout(() => {
       els.archeryShots.append(createArcheryShotCircle(shot, index, "session"));
-      updateArcheryTicker(session, index);
-    }, index * archeryAnimation.shotIntervalMs / state.playbackSpeed);
+      updateArcheryTicker(playback, index);
+    }, delays[index]);
     state.archeryAnimationTimeouts.push(timeout);
   });
 }
