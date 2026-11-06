@@ -9,8 +9,11 @@ export function createEventMedia(root){
   const player=createVideoPlayer({player:video,empty:root.querySelector(".event-media-error"),
     controls:root.querySelector(".video-controls"),playButton:root.querySelector('[data-media-action="play"]'),
     soundButton:root.querySelector('[data-media-action="sound"]'),autoplay:false});
-  let items=[],index=0,key=null,visible=true;
+  let items=[],index=0,key=null,visible=true,active=true;
+  caption.textContent="";caption.hidden=true;
+  root.hidden=true;
   function show(){
+    root.hidden=!active || !items.length;
     const item=items[index];
     player.setActive(false);stage.hidden=item?.type!=="video";image.hidden=item?.type!=="image";
     empty.hidden=Boolean(item);badge.hidden=!item?.placeholder;
@@ -18,7 +21,7 @@ export function createEventMedia(root){
     previous.hidden=next.hidden=items.length<2;
     image.removeAttribute("src");
     if(item?.type==="image"){image.src=item.src;image.alt=item.alt;}
-    if(item?.type==="video"){video.setAttribute("aria-label",item.alt);player.setItems([item]);player.setActive(visible);}
+    if(item?.type==="video"){video.setAttribute("aria-label",item.alt);player.setItems([item]);player.setActive(visible && !root.hidden);}
     else player.setItems([]);
   }
   for(const [button,direction] of [[previous,-1],[next,1]])button.addEventListener("click",()=>{
@@ -31,10 +34,9 @@ export function createEventMedia(root){
   }).observe(root);
   return {
     setEvent(eventKey,label,media=[]){
-      caption.textContent=label || "";
       if(key===eventKey)return;
       key=eventKey;items=media;index=0;show();
     },
-    setActive(active){root.hidden=!active;if(!active)player.setActive(false);}
+    setActive(value){active=value;root.hidden=!active || !items.length;player.setActive(!root.hidden && visible && items[index]?.type==="video");}
   };
 }
