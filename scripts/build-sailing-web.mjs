@@ -16,13 +16,14 @@ export async function buildSailingTracks(content=defaultContent){
   let index;
   try{index=JSON.parse(await readFile(indexPath,'utf8'));}catch(error){if(error.code==='ENOENT')return;throw error;}
   for(const entry of index){
-    const document=new DOMParser().parseFromString(await readFile(join(directory,entry.file),'utf8'),'application/xml');
+    const document=new DOMParser().parseFromString(await readFile(join(content,'../private/build/sails',entry.file),'utf8'),'application/xml');
     const points=Array.from(document.getElementsByTagNameNS('*','trkpt')).map(point=>[
       Number(point.getAttribute('lat')),Number(point.getAttribute('lon')),
       point.getElementsByTagNameNS('*','time')[0]?.textContent || null
     ]).filter(([lat,lon])=>Number.isFinite(lat)&&Number.isFinite(lon));
     const webFile=entry.file.replace(/\.gpx$/i,'.track.json');
     if(webFile===entry.file)throw new Error('Expected GPX source');
+    await mkdir(join(directory,webFile,'..'),{recursive:true});
     await save(join(directory,webFile),{format:'sail-track-v1',points});
     entry.webFile=webFile;
   }
@@ -31,7 +32,7 @@ export async function buildSailingTracks(content=defaultContent){
 export async function buildSailingMaps(content=defaultContent){
   await mkdir(join(content,'maps'),{recursive:true});
   for(const region of mapRegions.sailing){
-    const data=JSON.parse(await readFile(join(content,region.file.replace(/^content\//,'')),'utf8'));
+    const data=JSON.parse(await readFile(join(content,'..',region.file),'utf8'));
     await save(join(content,'maps',region.id+'.paths.json'),compileHarborMap(data,harborProjection(region.bounds,region.rotation)));
   }
 }

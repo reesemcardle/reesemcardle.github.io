@@ -4,7 +4,7 @@ import { buildSurface, surfaceFeatures } from "./harbor-geometry.mjs";
 import { harborBounds } from "./harbor-map.mjs";
 import "./build-harbor-map.mjs";
 
-const input = await readFile(new URL("../content/maps/water-source.geojson", import.meta.url), "utf8");
+const input = await readFile(new URL("../private/build/maps/water-source.geojson", import.meta.url), "utf8");
 const source = JSON.parse(input);
 if (source.type !== "FeatureCollection" || !source.features.length || source.exceededTransferLimit) {
   throw new Error("Expected a complete hydrography FeatureCollection");

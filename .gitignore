@@ -5,3 +5,17 @@ node_modules/
 .pnpm-store/
 playwright-report/
 test-results/
+
+# Local exports, originals, and legacy material must not be republished.
+gifs/
+content/svg/
+content/sails/**/*.gpx
+edgewood-walking-map.svg
+content/maps/*
+!content/maps/*.paths.json
+!content/maps/prospect-park-osm.json
+!content/maps/prospect-park-water.json
+!content/maps/*-provenance.json
+!content/maps/water-sources.json
+!content/maps/newport-source.json
+!content/maps/mahone-bay-source.json

@@ -1,3 +1,4 @@
+import {existsSync} from "node:fs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
@@ -19,8 +20,8 @@ test("land holes and disconnected islands survive clipping", () => {
   assert.deepEqual(polygonClipping.xor(polygonClipping.union(land, water), coveragePolygon(bounds)), []);
 });
 
-test("harbor surfaces partition only the declared geographic coverage", async () => {
-  const data = JSON.parse(await readFile(new URL("../content/maps/ny-harbor-osm.json", import.meta.url)));
+test("harbor surfaces partition only the declared geographic coverage", {skip:!existsSync(new URL("../private/build/maps/ny-harbor-osm.json",import.meta.url))}, async () => {
+  const data = JSON.parse(await readFile(new URL("../private/build/maps/ny-harbor-osm.json", import.meta.url)));
   const land = data.features.filter((f) => f.kind === "landmass").map((f) => f.rings);
   const water = data.features.filter((f) => f.kind === "water").map((f) => f.rings);
   assert.deepEqual(polygonClipping.intersection(land, water), []);

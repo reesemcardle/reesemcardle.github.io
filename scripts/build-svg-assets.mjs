@@ -8,7 +8,7 @@ import "./build-water-maps.mjs";
 const port = 8010;
 const baseUrl = `http://127.0.0.1:${port}`;
 const rootDir = resolve(".");
-const outputDir = resolve("content/svg");
+const outputDir = resolve("private/build/svg");
 
 const playwright = loadPlaywright();
 const server = await startServer();
@@ -96,7 +96,7 @@ async function snapshotSvg(page, selector, { remove = [] } = {}) {
 
 async function writeSvg(filename, svg) {
   await writeFile(join(outputDir, filename), svg);
-  console.log(`wrote content/svg/${filename}`);
+  console.log(`wrote private/build/svg/${filename}`);
 }
 
 function loadPlaywright() {

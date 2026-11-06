@@ -17,7 +17,7 @@ export function extendOffshoreWater(land,reference,bounds){
 }
 
 export async function offshoreReference(region,refresh=false){
-  const path=new URL("../content/maps/"+region.id+"-offshore-reference.json",import.meta.url);
+  const path=new URL("../private/build/maps/"+region.id+"-offshore-reference.json",import.meta.url);
   if(refresh){
     const url="https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_land.geojson";
     const response=await fetch(url,{signal:AbortSignal.timeout(120000)});

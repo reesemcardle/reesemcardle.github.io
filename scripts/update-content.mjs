@@ -1,5 +1,5 @@
+import {contentFolder} from "./content-paths.mjs";
 import { readFile, writeFile, readdir, mkdir, stat } from "node:fs/promises";
-import { homedir } from "node:os";
 import { resolve, join, extname, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
@@ -28,7 +28,7 @@ if(args.includes("--help")) {
 }
 const folderIndex=args.indexOf("--folder");
 if(folderIndex>=0 && (!args[folderIndex+1] || args[folderIndex+1].startsWith("--")))throw new Error("--folder needs a path.");
-const folder=resolve(folderIndex>=0?args[folderIndex+1]:process.env.WEBSITE_CONTENT_DIR || join(homedir(),"Website Content"));
+const folder=resolve(folderIndex>=0?args[folderIndex+1]:contentFolder());
 const dry=args.includes("--dry-run");
 const content=resolve(process.env.CONTENT_OUTPUT_DIR || join(project,"content"));
 const hash=bytes=>createHash("sha256").update(bytes).digest("hex");
@@ -84,9 +84,10 @@ for(const kind of ["cycling","sailing"]) {
   const directory=join(content,kind==="cycling"?"rides":"sails");
   const indexPath=join(directory,kind==="cycling"?"ride-index.json":"sail-index.json");
   const index=await json(indexPath,[]);
+  const sourceDirectory=kind==="sailing"?join(content,"../private/build/sails"):directory;
   const known=new Map();
   for(const entry of index) {
-    const bytes=await readFile(join(directory,entry.file));
+    const bytes=await readFile(join(sourceDirectory,entry.file));
     known.set(entry.sourceHash || hash(bytes),entry);
     try{known.set(hash(inspectGpx(bytes.toString("utf8"),kind).xml),entry);}catch{ /* Preserve older published records as-is. */ }
   }
@@ -117,7 +118,7 @@ for(const kind of ["cycling","sailing"]) {
       const id=`${kind}-${digest.slice(0,20)}`,file=kind==="sailing"?`${region.id}/${id}.gpx`:`${id}.gpx`;
       const name=sidecar.name || track.name || basename(path,extname(path));
       const entry={id,...(kind==="cycling"?{name}:{label:name}),file,sourceHash:digest,...(region?{regionId:region.id}:{}),...(track.date?{recordedAt:track.date}:{}),...(eventDetails?{eventDetails}:{})};
-      if(!dry){await mkdir(kind==="sailing"?join(directory,region.id):directory,{recursive:true});await writeFile(join(directory,file),track.xml);index.push(entry);index.sort((a,b)=>(a.recordedAt||"").localeCompare(b.recordedAt||""));await atomicJson(indexPath,index);}
+      if(!dry){await mkdir(kind==="sailing"?join(sourceDirectory,region.id):sourceDirectory,{recursive:true});await writeFile(join(sourceDirectory,file),track.xml);index.push(entry);index.sort((a,b)=>(a.recordedAt||"").localeCompare(b.recordedAt||""));await atomicJson(indexPath,index);}
       await saveActivityConditions(kind==="cycling"?"rides":"sails",entry,conditionInput);
       if(sidecar.media!==undefined)await importEventAttachments(kind+":"+entry.id,sidecar.media,folder,content,{dry});
       known.set(digest,entry);known.set(hash(track.xml),entry);added++;

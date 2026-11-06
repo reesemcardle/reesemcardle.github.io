@@ -109,3 +109,10 @@ use the saved reference and its provenance.
 
 Run `node scripts/smoke-regions.mjs` against the local site on port 8015 to verify
 region switching, isolated tracks, deep links, and mobile/desktop layout.
+
+## Public repository boundary
+
+Original sailing GPX files now live in `private/build/sails/`; only prepared
+playback tracks are published. Map source geometry and intermediate files live
+in `private/build/maps/`, with optional SVG exports in `private/build/svg/`.
+The public map folder retains runtime assets and attribution metadata.

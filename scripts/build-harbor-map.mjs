@@ -3,8 +3,8 @@ import { createHash } from "node:crypto";
 import { buildSurface, surfaceFeatures } from "./harbor-geometry.mjs";
 import { harborBounds, harborSvg } from "./harbor-map.mjs";
 
-const sourceFile = new URL("../content/maps/harbor-source.json", import.meta.url);
-// Routine builds use the committed regional extract, not private downloads.
+const sourceFile = new URL("../private/build/maps/harbor-source.json", import.meta.url);
+// Routine builds use the local cached extract; originals are not published.
 if (process.argv.includes("--refresh-source")) {
   const detailText = await readFile(new URL("../private/harbor-overpass.json", import.meta.url), "utf8");
   const osm = JSON.parse(detailText);
@@ -30,7 +30,7 @@ if (process.argv.includes("--refresh-source")) {
 }
 
 const source = JSON.parse(await readFile(sourceFile, "utf8"));
-const hydrography = JSON.parse(await readFile(new URL("../content/maps/water-source.geojson", import.meta.url), "utf8"));
+const hydrography = JSON.parse(await readFile(new URL("../private/build/maps/water-source.geojson", import.meta.url), "utf8"));
 // Partition from measured water areas, not a generalized global land outline.
 const { land: water, water: land } = buildSurface(hydrography.features, harborBounds);
 const output = {
@@ -38,7 +38,7 @@ const output = {
   bounds: harborBounds,
   features: [...surfaceFeatures(land, "landmass"), ...surfaceFeatures(water, "water"), ...source.details]
 };
-await writeFile(new URL("../content/maps/ny-harbor-osm.json", import.meta.url), JSON.stringify(output) + "\n");
-await mkdir(new URL("../content/svg/", import.meta.url), { recursive: true });
-await writeFile(new URL("../content/svg/harbor-basemap.svg", import.meta.url), harborSvg(output));
+await writeFile(new URL("../private/build/maps/ny-harbor-osm.json", import.meta.url), JSON.stringify(output) + "\n");
+await mkdir(new URL("../private/build/svg/", import.meta.url), { recursive: true });
+await writeFile(new URL("../private/build/svg/harbor-basemap.svg", import.meta.url), harborSvg(output));
 console.log(`Built harbor: ${land.length} land polygons, ${water.length} water polygons`);

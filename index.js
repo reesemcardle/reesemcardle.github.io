@@ -283,7 +283,7 @@ async function selectSailingRegion(region) {
   const request=++regionRequest;
   els.activityPlace.setAttribute("aria-busy","true");
   try{
-    if(!regionMaps.has(region.id))regionMaps.set(region.id,loadJson(region.webFile || region.file));
+    if(!regionMaps.has(region.id))regionMaps.set(region.id,loadJson(region.webFile));
     const [map,sails]=await Promise.all([regionMaps.get(region.id),loadSails(region.id)]);
     if(request!==regionRequest)return;
     sailingRegion=region;
@@ -397,7 +397,7 @@ async function loadActivitySection(mode){
   }
   if(mode==="sailing"){
     const region=sailingRegion;
-    if(!regionMaps.has(region.id))regionMaps.set(region.id,loadJson(region.webFile || region.file).catch(error=>{regionMaps.delete(region.id);throw error;}));
+    if(!regionMaps.has(region.id))regionMaps.set(region.id,loadJson(region.webFile).catch(error=>{regionMaps.delete(region.id);throw error;}));
     const [map,sails]=await Promise.all([regionMaps.get(region.id),loadSails(region.id)]);
     state.harborBasemap=map;
     state.sails=sails;
@@ -452,14 +452,7 @@ async function loadRegionSails(regionId) {
       if(track.format!=="sail-track-v1")throw new Error("Unsupported sail track");
       return {...sail,file,...prepareSail(track.points.map(([lat,lon,time])=>({lat,lon,time})))};
     }
-    const response = await fetch(file, { cache: "no-store" });
-    if (!response.ok) throw new Error(`Unable to load ${file}`);
-
-    return {
-      ...sail,
-      file,
-      ...prepareSail(parseGpx(await response.text()))
-    };
+    throw new Error("Sail needs a prepared playback file. Run update-content.");
   }));
   return newestFirst(sails, sail => sail.recordedAt || (sail.hasRecordedTiming ? sail.points[0].time : null));
 }

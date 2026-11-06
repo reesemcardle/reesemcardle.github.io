@@ -1,8 +1,8 @@
+import {contentFolder} from "./content-paths.mjs";
 import {readFile} from "node:fs/promises";
-import {homedir} from "node:os";
 import {join} from "node:path";
 import {atomicJson} from "./target-store.mjs";
-const root=process.env.WEBSITE_CONTENT_DIR || join(homedir(),"Website Content");
+const root=contentFolder();
 const manifestPath=join(root,"event-media.json");
 let manifest={};
 try{manifest=JSON.parse(await readFile(manifestPath,"utf8"));}catch(error){if(error.code!=="ENOENT")throw error;}

@@ -1,10 +1,10 @@
+import {contentFolder} from "./content-paths.mjs";
 import {readdir,readFile,mkdir,rename,stat} from "node:fs/promises";
 import {join} from "node:path";
-import {homedir} from "node:os";
 import {inspectGpx} from "./content-gpx.mjs";
 import {regionForPoints} from "./map-regions.mjs";
 
-const root=process.env.WEBSITE_CONTENT_DIR || join(homedir(),"Website Content");
+const root=contentFolder();
 const folder=join(root,"sailing"),apply=process.argv.includes("--apply");
 for(const file of await readdir(folder,{withFileTypes:true})){
   if(!file.isFile() || !/\.gpx$/i.test(file.name))continue;

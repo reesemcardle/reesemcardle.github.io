@@ -1,7 +1,7 @@
+import {contentFolder} from "./content-paths.mjs";
 // One-time owner-provided fleet details. Existing editable values take precedence.
 import {readFile,readdir} from "node:fs/promises";
 import {join} from "node:path";
-import {homedir} from "node:os";
 import {inspectGpx} from "./content-gpx.mjs";
 import {sailingEvent} from "./sailing-event.mjs";
 import {atomicJson} from "./target-store.mjs";
@@ -11,7 +11,7 @@ const defaults={
   Mahone:{boat:{name:null,sailNumber:null,class:"J/30"},sailType:null},
   NY:{boat:{name:null,sailNumber:null,class:null},boatOptions:["J/80","J/24"],sailType:null,sailTypeOptions:["race","club"]}
 };
-const root=join(process.env.WEBSITE_CONTENT_DIR || join(homedir(),"Website Content"),"sailing");
+const root=join(contentFolder(),"sailing");
 for(const [folder,details] of Object.entries(defaults)){
   for(const file of await readdir(join(root,folder))){
     if(!/\.gpx$/i.test(file))continue;

@@ -3,7 +3,7 @@
 Drop files into your local folder, outside the website repository:
 
 ```
-~/Website Content/
+private/Website Content/
   targets/   # Completed target photos: JPEG, PNG, WebP
   cycling/   # Recorded cycling GPX files
   sailing/   # Sailing GPX files (timing optional)
@@ -82,7 +82,7 @@ Cycling needs increasing point timestamps because its existing replay displays m
 
 ## Scenes
 
-Drop iPhone or Photos exports into `~/Website Content/videos`, then run
+Drop iPhone or Photos exports into `private/Website Content/videos`, then run
 `./update-content` from the website repository. MOV and MP4 are accepted, along
 with M4V and WebM, up to four minutes long. Export originals from Photos when
 possible so the embedded capture date survives. Originals remain untouched.
@@ -325,7 +325,7 @@ tears and approximate reference positions require visual review.
 From the website folder, run:
 
 ```sh
-node scripts/target-batch.mjs "../Website Content/targets"
+node scripts/target-batch.mjs "private/Website Content/targets"
 ```
 
 This uses Astra with medium reasoning: one alignment request and four overlapping
@@ -362,3 +362,21 @@ pushing. If the push fails, resolve the issue and run the command again.
 Use this command instead of a bare `git push` when publishing, so the date is
 updated. Content imports still do not commit or publish anything. The footer is
 static: it never changes just because a visitor loads the page.
+
+## Local preview and private sources
+
+The default source folder is now `private/Website Content/` inside this project.
+`--folder` and `WEBSITE_CONTENT_DIR` can override it. Original uploads and saved
+target reviews remain excluded from Git.
+
+Run `npm run preview` for http://localhost:8015/. This preview blocks `private/`,
+dotfiles, and directory listings, and avoids browser caching during editing.
+Use it instead of a generic server that exposes the entire project folder.
+The target review utility remains available through `npm run review-targets`.
+
+## Public repository boundary
+
+Original sailing GPX files now live in `private/build/sails/`; only prepared
+playback tracks are published. Map source geometry and intermediate files live
+in `private/build/maps/`, with optional SVG exports in `private/build/svg/`.
+The public map folder retains runtime assets and attribution metadata.

@@ -3,7 +3,7 @@ import { lookupActivityWeather } from "./activity-weather.mjs";
 import { mapRegions } from "./map-regions.mjs";
 
 const outputFile = new URL("../content/activity-metadata.json", import.meta.url);
-const legacyRideOutputFile = new URL("../content/rides/ride-metadata.json", import.meta.url);
+const legacyRideOutputFile = new URL("../private/build/ride-metadata.json", import.meta.url);
 const rideIndexFile = new URL("../content/rides/ride-index.json", import.meta.url);
 const sailIndexFile = new URL("../content/sails/sail-index.json", import.meta.url);
 const archerySessionIndexFile = new URL("../content/archery/session-index.json", import.meta.url);
@@ -99,7 +99,7 @@ async function buildSailMetadata() {
   const records = {};
 
   for (const sail of sailIndex) {
-    const points = parseGpx(await readFile(new URL(`../content/sails/${sail.file}`, import.meta.url), "utf8"));
+    const points = parseGpx(await readFile(new URL(`../private/build/sails/${sail.file}`, import.meta.url), "utf8"));
     const region=mapRegions.sailing.find(region=>region.id===sail.regionId);
     records[sail.id] = await buildActivityRecord({
       id: sail.id,

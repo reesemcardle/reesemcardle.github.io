@@ -1,3 +1,4 @@
+import {contentFolder} from "./content-paths.mjs";
 import {readFile,readdir} from 'node:fs/promises';
 import {join,resolve} from 'node:path';
 import sharp from 'sharp';
@@ -11,7 +12,7 @@ process.loadEnvFile('private/content.env');
 const model=process.env.OPENAI_VISION_MODEL;
 if(model!=='gpt-6-astra')throw new Error('This batch workflow requires gpt-6-astra.');
 if(!process.env.OPENAI_API_KEY)throw new Error('Missing API key.');
-const folder=resolve(process.argv[2] || '../Website Content/targets');
+const folder=resolve(process.argv[2] || join(contentFolder(),'targets'));
 const run=join(storeRoot,'batches',String(Date.now()));
 const report={model,startedAt:new Date().toISOString(),estimatedUSD:0,results:[],calls:[]};
 await atomicJson(join(run,'summary.json'),report);
