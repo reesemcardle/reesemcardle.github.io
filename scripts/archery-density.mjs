@@ -1,5 +1,5 @@
 // A fixed-width Gaussian kernel keeps individual impacts comparable across targets.
-export function densityField(shots, size = 384, bandwidth = .065) {
+export function densityField(shots, size = 640, bandwidth = .035) {
   const points = shots.filter(p => Number.isFinite(p.x) && Number.isFinite(p.y));
   const extent = points.reduce((max, p) => Math.max(max, Math.abs(p.x) + bandwidth * 3, Math.abs(p.y) + bandwidth * 3), 1.15);
   const values = new Float32Array(size * size);
@@ -32,7 +32,7 @@ export function renderArcheryDensity(root, shots, radius) {
     pixels.data[i * 4 + 1] = 83;
     pixels.data[i * 4 + 2] = 83;
     // Normalize to the peak so the overlay doesn't become solid as history grows.
-    pixels.data[i * 4 + 3] = Math.round(220 * Math.pow(values[i] / peak, .65));
+    pixels.data[i * 4 + 3] = Math.round(245 * Math.pow(values[i] / peak, 1.05));
   }
   context.putImageData(pixels, 0, 0);
   const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');

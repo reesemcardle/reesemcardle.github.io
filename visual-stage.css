@@ -197,13 +197,5 @@ body.scene-mode .activity-meta,body.scene-mode .detail-card,body.scene-mode .det
 .video-stage video[hidden]{display:none}
 .video-stage p{position:absolute;inset:40% 0 auto;text-align:center;color:#d7e1da;font-size:1rem;pointer-events:none}
 .visual-wrap[data-mode="video"] .visual-metrics{display:none}
-#archeryVisual.is-density .target-band-3,
-#archeryVisual.is-density .target-band-4 { fill: color-mix(in srgb, var(--ink) 9%, var(--paper)); }
-#archeryVisual.is-density .target-band-5,
-#archeryVisual.is-density .target-band-6 { fill: color-mix(in srgb, var(--deep-harbor-blue) 13%, var(--paper)); }
-#archeryVisual.is-density .target-band-7,
-#archeryVisual.is-density .target-band-8 { fill: color-mix(in srgb, var(--transit-red) 11%, var(--paper)); }
-#archeryVisual.is-density .target-band-9,
-#archeryVisual.is-density .target-band-10 { fill: color-mix(in srgb, var(--target-gold) 18%, var(--paper)); }
-#archeryVisual.is-density .target-ring-lines circle { stroke: var(--ink); opacity: .22; stroke-width: 1; }
+#archeryVisual.is-density .target-ring-lines circle { opacity: .55; stroke-width: 1; }
 #archeryVisual.is-density .target-face-shade { opacity: .2; }
