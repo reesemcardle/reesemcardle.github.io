@@ -606,6 +606,30 @@
       "tide": {
         "status": "unavailable"
       }
+    },
+    "sailing-3b31e6694ff0feeaea62": {
+      "id": "sailing-3b31e6694ff0feeaea62",
+      "label": "20-Oct-2026-1617",
+      "sourceDate": "2026-10-20T17:46:13Z",
+      "sourceEndDate": "2026-10-20T20:38:55Z",
+      "localDate": "2026-10-20",
+      "location": "New York Harbor",
+      "weather": {
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.75,\"longitude\":-74.02,\"startedAt\":\"2026-10-20T17:46:13.000Z\",\"endedAt\":\"2026-10-20T20:38:55.000Z\"}",
+        "condition": "Clear",
+        "temperatureF": 66,
+        "wind": "N 9 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-10-20T17:46:13.000Z",
+          "sampledTo": "2026-10-20T20:38:55.000Z"
+        }
+      },
+      "tide": {
+        "status": "unavailable"
+      }
     }
   },
   "archerySessions": {

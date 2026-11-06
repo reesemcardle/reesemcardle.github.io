@@ -400,5 +400,32 @@
       "event": null,
       "notes": null
     }
+  },
+  {
+    "id": "sailing-3b31e6694ff0feeaea62",
+    "label": "20-Oct-2026-1617",
+    "file": "ny-harbor/sailing-3b31e6694ff0feeaea62.gpx",
+    "sourceHash": "3b31e6694ff0feeaea629562735a916a8cfe4651bfdfd4b248b2ac8326392ab1",
+    "regionId": "ny-harbor",
+    "recordedAt": "2026-10-20T17:46:13Z",
+    "eventDetails": {
+      "durationSeconds": 10362,
+      "boat": {
+        "name": null,
+        "sailNumber": null,
+        "class": null
+      },
+      "boatOptions": [
+        "J/80",
+        "J/24"
+      ],
+      "sailType": null,
+      "sailTypeOptions": [
+        "race",
+        "club"
+      ],
+      "event": null,
+      "notes": null
+    }
   }
 ]
