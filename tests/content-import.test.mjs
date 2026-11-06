@@ -53,12 +53,19 @@ test("vision request preserves image frame and pin rule; failures don't masquera
   assert.equal(request.store,false);assert.equal(request.text.format.strict,true);
   assert.equal(request.input[0].content[1].detail,"original");
   assert.match(request.input[0].content[0].text,/hanging-pin/);
+  assert.equal(request.reasoning.effort,"medium");
+  assert.equal(detectionRequest(record,Buffer.from("image"),"gpt-5.4-mini","low").reasoning.effort,"low");
+  assert.throws(()=>detectionRequest(record,Buffer.from("image"),"gpt-5.4-mini","invalid"),/reasoning/);
   const result={isSupportedTarget:true,note:"",center:{x:50,y:50},rings:[],impacts:[],hangingHoles:[]};
   const decoded=await detectImpacts(record,Buffer.from("image"),{apiKey:"test-only",fetchImpl:async()=>({ok:true,json:async()=>({status:"completed",output:[{content:[{type:"output_text",text:JSON.stringify(result)}]}]})})});
   assert.deepEqual(decoded,result);
   await assert.rejects(detectImpacts(record,Buffer.from("image"),{}),/API key/);
   await assert.rejects(detectImpacts(record,Buffer.from("image"),{apiKey:"test",fetchImpl:async()=>({ok:false,status:401})}),/rejected/);
   await assert.rejects(detectImpacts(record,Buffer.from("image"),{apiKey:"test",fetchImpl:async()=>({ok:true,json:async()=>({status:"incomplete"})})}),/did not finish/);
+  let usage;
+  await assert.rejects(detectImpacts(record,Buffer.from("image"),{apiKey:"test",onUsage:info=>{usage=info;},fetchImpl:async()=>({ok:true,json:async()=>({status:"incomplete",usage:{output_tokens:16000},incomplete_details:{reason:"max_output_tokens"}})})}),/did not finish/);
+  assert.equal(usage.usage.output_tokens,16000);
+  assert.equal(usage.incompleteDetails.reason,"max_output_tokens");
 });
 
 test("content command imports, caches, applies corrections, preserves history, and is idempotent",async()=>{

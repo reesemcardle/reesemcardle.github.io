@@ -78,15 +78,5 @@
       "placeholder": true
     }
   ],
-  "archery:photo-bf57c370adc9e5e699dfb590": [
-    {
-      "id": "image-bf57c370adc9e5e699dfb590",
-      "type": "image",
-      "src": "content/media/image-bf57c370adc9e5e699dfb590.jpg",
-      "width": 960,
-      "height": 1280,
-      "alt": "Target photographed on March 24, 2026",
-      "placeholder": false
-    }
-  ]
+  "archery:photo-bf57c370adc9e5e699dfb590": []
 }

@@ -1,0 +1,141 @@
+{
+  "schema": "archery-session-v0.1",
+  "sessionId": "photo-e0dc360b2e0229a33f0851da",
+  "name": "IMG_3981.JPG",
+  "recordedDate": "2026-10-04",
+  "capturedAt": "2026-10-04T14:38:13-04:00",
+  "targetId": "fita-40-single-10-ring",
+  "shotOrder": "unknown",
+  "positionAccuracy": "approximate",
+  "equipment": {
+    "arrowId": null
+  },
+  "source": {
+    "type": "target-photo",
+    "sha256": "e0dc360b2e0229a33f0851da6d4caeac668e5cf64968c469b0ed4c18b095593d",
+    "method": "Photo-derived impact locations",
+    "scoreMethod": "estimated-center-radius",
+    "dateSource": "exif-original",
+    "flaggedCount": 1
+  },
+  "ends": [
+    {
+      "endNumber": null,
+      "shots": [
+        {
+          "shotId": "impact-1",
+          "faceId": "single",
+          "x": -0.0977,
+          "y": 0.6517,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-2",
+          "faceId": "single",
+          "x": -0.344,
+          "y": 0.4372,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-3",
+          "faceId": "single",
+          "x": -0.331,
+          "y": 0.3381,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-4",
+          "faceId": "single",
+          "x": -0.0913,
+          "y": 0.2487,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-5",
+          "faceId": "single",
+          "x": -0.0272,
+          "y": 0.1546,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-6",
+          "faceId": "single",
+          "x": -0.1657,
+          "y": 0.1243,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-7",
+          "faceId": "single",
+          "x": -0.2852,
+          "y": 0.1039,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-8",
+          "faceId": "single",
+          "x": -0.1748,
+          "y": 0.0854,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-9",
+          "faceId": "single",
+          "x": -0.2417,
+          "y": 0.0785,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-10",
+          "faceId": "single",
+          "x": 0.0113,
+          "y": 0.897,
+          "uncertain": true,
+          "note": "Possible top-center hanging-pin hole identified during visual spot-check. Please confirm whether to exclude."
+        },
+        {
+          "shotId": "impact-11",
+          "faceId": "single",
+          "x": -0.0095,
+          "y": 0.2272,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-12",
+          "faceId": "single",
+          "x": 0.2659,
+          "y": 0.14,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-13",
+          "faceId": "single",
+          "x": -0.3152,
+          "y": -0.1781,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-14",
+          "faceId": "single",
+          "x": -0.2973,
+          "y": -0.2183,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-15",
+          "faceId": "single",
+          "x": -0.473,
+          "y": -0.2914,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-16",
+          "faceId": "single",
+          "x": 0.3733,
+          "y": -0.154,
+          "uncertain": false
+        }
+      ]
+    }
+  ]
+}

@@ -623,6 +623,231 @@
       "tide": {
         "status": "unavailable"
       }
+    },
+    "photo-faa7095245de1a9a4b8a7fc8": {
+      "id": "photo-faa7095245de1a9a4b8a7fc8",
+      "label": "IMG_0019.JPG",
+      "sourceDate": "2026-05-04T16:02:12-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-05-04",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-93502abc04ad657a171912ee": {
+      "id": "photo-93502abc04ad657a171912ee",
+      "label": "IMG_0026.JPG",
+      "sourceDate": "2026-05-06T18:03:28-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-05-06",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-20c7adfbf0399f66e1693156": {
+      "id": "photo-20c7adfbf0399f66e1693156",
+      "label": "IMG_0142.JPG",
+      "sourceDate": "2026-05-19T19:53:38-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-05-19",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-abe700b6bc4ae5a73aa4b5b1": {
+      "id": "photo-abe700b6bc4ae5a73aa4b5b1",
+      "label": "IMG_0239.JPG",
+      "sourceDate": "2026-05-25T16:01:58-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-05-25",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-9b6a5f2350e752cdf93debeb": {
+      "id": "photo-9b6a5f2350e752cdf93debeb",
+      "label": "IMG_0369.JPG",
+      "sourceDate": "2026-05-31T12:56:40-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-05-31",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-decfa412910ed0be9a26ea58": {
+      "id": "photo-decfa412910ed0be9a26ea58",
+      "label": "IMG_0374.JPG",
+      "sourceDate": "2026-06-01T17:57:02-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-06-01",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-24744e4eabca40829abfd0da": {
+      "id": "photo-24744e4eabca40829abfd0da",
+      "label": "IMG_0510.JPG",
+      "sourceDate": "2026-06-09T12:58:59-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-06-09",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-37b9ff97479d0afe4d09fb66": {
+      "id": "photo-37b9ff97479d0afe4d09fb66",
+      "label": "IMG_0741.JPG",
+      "sourceDate": "2026-06-18T14:56:59-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-06-18",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-bbc7762c4291e51484b2289b": {
+      "id": "photo-bbc7762c4291e51484b2289b",
+      "label": "IMG_2187.JPG",
+      "sourceDate": "2026-07-16T14:43:05-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-07-16",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-e0dc360b2e0229a33f0851da": {
+      "id": "photo-e0dc360b2e0229a33f0851da",
+      "label": "IMG_3981.JPG",
+      "sourceDate": "2026-10-04T14:38:13-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-10-04",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-4280345324df23eceeeda200": {
+      "id": "photo-4280345324df23eceeeda200",
+      "label": "IMG_3994.JPG",
+      "sourceDate": "2026-10-08T19:46:35-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-10-08",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-3eed6ba94b2b11d6fbe74c48": {
+      "id": "photo-3eed6ba94b2b11d6fbe74c48",
+      "label": "IMG_4139.JPG",
+      "sourceDate": "2026-04-25T13:02:46-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-04-25",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-bb0cd1c6e12c6454cd193331": {
+      "id": "photo-bb0cd1c6e12c6454cd193331",
+      "label": "IMG_4145.JPG",
+      "sourceDate": "2026-10-18T15:54:44-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-10-18",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-87c33f50eaf0969107b6acca": {
+      "id": "photo-87c33f50eaf0969107b6acca",
+      "label": "IMG_4189.JPG",
+      "sourceDate": "2026-04-28T20:58:04-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-04-28",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
+    },
+    "photo-8806d5315e978d176dd64031": {
+      "id": "photo-8806d5315e978d176dd64031",
+      "label": "IMG_4214.JPG",
+      "sourceDate": "2026-05-01T19:00:18-04:00",
+      "sourceEndDate": null,
+      "localDate": "2026-05-01",
+      "location": "Not recorded",
+      "weather": {
+        "status": "unavailable",
+        "reason": "Offline import"
+      },
+      "tide": {
+        "status": "unavailable"
+      }
     }
   }
 }

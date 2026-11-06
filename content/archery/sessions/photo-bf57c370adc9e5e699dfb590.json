@@ -16,7 +16,7 @@
     "method": "Photo-derived impact locations",
     "scoreMethod": "estimated-center-radius",
     "dateSource": "exif-original",
-    "flaggedCount": 4
+    "flaggedCount": 2
   },
   "ends": [
     {
@@ -118,7 +118,7 @@
           "faceId": "single",
           "x": 0.1553,
           "y": 0.2365,
-          "uncertain": true,
+          "uncertain": false,
           "note": "Merged horizontal tear; one visible impact site recorded, multiplicity unknown."
         },
         {
@@ -162,7 +162,7 @@
           "faceId": "single",
           "x": 0.1989,
           "y": 0.0725,
-          "uncertain": true,
+          "uncertain": false,
           "note": "Right opening in a connected tear; separation from adjacent opening is provisional."
         },
         {
@@ -557,6 +557,54 @@
           "x": 0.0015,
           "y": -1.0333,
           "uncertain": false
+        },
+        {
+          "shotId": "impact-77",
+          "faceId": "single",
+          "x": 0.1938,
+          "y": 0.2396,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-78",
+          "faceId": "single",
+          "x": 0.117,
+          "y": 0.2274,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-79",
+          "faceId": "single",
+          "x": 0.1739,
+          "y": 0.0737,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-80",
+          "faceId": "single",
+          "x": 0.0561,
+          "y": -0.4979,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-81",
+          "faceId": "single",
+          "x": 0.0675,
+          "y": -0.5458,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-82",
+          "faceId": "single",
+          "x": 0.0016,
+          "y": -0.0012,
+          "uncertain": false,
+          "note": "Added during review"
         }
       ]
     }

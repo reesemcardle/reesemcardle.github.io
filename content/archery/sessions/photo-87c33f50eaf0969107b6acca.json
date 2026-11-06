@@ -1,0 +1,547 @@
+{
+  "schema": "archery-session-v0.1",
+  "sessionId": "photo-87c33f50eaf0969107b6acca",
+  "name": "IMG_4189.JPG",
+  "recordedDate": "2026-04-28",
+  "capturedAt": "2026-04-28T20:58:04-04:00",
+  "targetId": "fita-40-single-10-ring",
+  "shotOrder": "unknown",
+  "positionAccuracy": "approximate",
+  "equipment": {
+    "arrowId": null
+  },
+  "source": {
+    "type": "target-photo",
+    "sha256": "87c33f50eaf0969107b6accaea9b25737fb016aa0356d3688b0a621d98180d90",
+    "method": "Photo-derived impact locations",
+    "scoreMethod": "estimated-center-radius",
+    "dateSource": "exif-original",
+    "flaggedCount": 4
+  },
+  "ends": [
+    {
+      "endNumber": null,
+      "shots": [
+        {
+          "shotId": "impact-1",
+          "faceId": "single",
+          "x": -0.1111,
+          "y": 0.9367,
+          "uncertain": true,
+          "note": "Possible pinhole."
+        },
+        {
+          "shotId": "impact-2",
+          "faceId": "single",
+          "x": -0.1163,
+          "y": 0.7096,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-3",
+          "faceId": "single",
+          "x": -0.1853,
+          "y": 0.6502,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-4",
+          "faceId": "single",
+          "x": -0.5884,
+          "y": 0.5104,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-5",
+          "faceId": "single",
+          "x": -0.6507,
+          "y": 0.4501,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-6",
+          "faceId": "single",
+          "x": -0.111,
+          "y": 0.2519,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-7",
+          "faceId": "single",
+          "x": -0.1643,
+          "y": 0.1985,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-8",
+          "faceId": "single",
+          "x": -0.1071,
+          "y": 0.1082,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-9",
+          "faceId": "single",
+          "x": -0.0814,
+          "y": 0.0889,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-10",
+          "faceId": "single",
+          "x": -0.2871,
+          "y": 0.0734,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-11",
+          "faceId": "single",
+          "x": -0.1495,
+          "y": 0.0267,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-12",
+          "faceId": "single",
+          "x": 0.5249,
+          "y": 1.0498,
+          "uncertain": true,
+          "note": "Possible pinhole."
+        },
+        {
+          "shotId": "impact-13",
+          "faceId": "single",
+          "x": 0.1413,
+          "y": 0.5749,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-14",
+          "faceId": "single",
+          "x": 0.458,
+          "y": 0.4432,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-15",
+          "faceId": "single",
+          "x": 0.5467,
+          "y": 0.3491,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-16",
+          "faceId": "single",
+          "x": 0.1589,
+          "y": 0.1568,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-17",
+          "faceId": "single",
+          "x": 0.0419,
+          "y": 0.1247,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-18",
+          "faceId": "single",
+          "x": 0.1171,
+          "y": 0.1117,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-19",
+          "faceId": "single",
+          "x": 0.2295,
+          "y": 0.0858,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-20",
+          "faceId": "single",
+          "x": 0.3751,
+          "y": 0.0844,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-21",
+          "faceId": "single",
+          "x": 0.0813,
+          "y": 0.0749,
+          "uncertain": true,
+          "note": "Broad tear; separate openings unclear."
+        },
+        {
+          "shotId": "impact-22",
+          "faceId": "single",
+          "x": 0.2074,
+          "y": 0.0118,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-23",
+          "faceId": "single",
+          "x": -0.0628,
+          "y": -0.0021,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-24",
+          "faceId": "single",
+          "x": -0.1013,
+          "y": -0.0362,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-25",
+          "faceId": "single",
+          "x": -0.2444,
+          "y": -0.0875,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-26",
+          "faceId": "single",
+          "x": -0.138,
+          "y": -0.0888,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-27",
+          "faceId": "single",
+          "x": -0.0771,
+          "y": -0.0889,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-28",
+          "faceId": "single",
+          "x": -0.0698,
+          "y": -0.1406,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-29",
+          "faceId": "single",
+          "x": -0.4068,
+          "y": -0.2076,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-30",
+          "faceId": "single",
+          "x": -0.277,
+          "y": -0.2226,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-31",
+          "faceId": "single",
+          "x": -0.0977,
+          "y": -0.2329,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-32",
+          "faceId": "single",
+          "x": -0.1479,
+          "y": -0.2605,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-33",
+          "faceId": "single",
+          "x": -0.1148,
+          "y": -0.2875,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-34",
+          "faceId": "single",
+          "x": -0.1383,
+          "y": -0.3205,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-35",
+          "faceId": "single",
+          "x": -0.073,
+          "y": -0.3361,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-36",
+          "faceId": "single",
+          "x": -0.3543,
+          "y": -0.3997,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-37",
+          "faceId": "single",
+          "x": -0.3045,
+          "y": -0.4388,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-38",
+          "faceId": "single",
+          "x": -0.0631,
+          "y": -0.4772,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-39",
+          "faceId": "single",
+          "x": -0.3502,
+          "y": -0.4838,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-40",
+          "faceId": "single",
+          "x": -0.0224,
+          "y": -0.5493,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-41",
+          "faceId": "single",
+          "x": -0.1431,
+          "y": -0.5947,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-42",
+          "faceId": "single",
+          "x": -0.2634,
+          "y": -0.6248,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-43",
+          "faceId": "single",
+          "x": -0.163,
+          "y": -0.7704,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-44",
+          "faceId": "single",
+          "x": 0.0745,
+          "y": 0.0053,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-45",
+          "faceId": "single",
+          "x": 0.0419,
+          "y": -0.0902,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-46",
+          "faceId": "single",
+          "x": 0.5407,
+          "y": -0.1143,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-47",
+          "faceId": "single",
+          "x": 0.1764,
+          "y": -0.128,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-48",
+          "faceId": "single",
+          "x": 0.0355,
+          "y": -0.1473,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-49",
+          "faceId": "single",
+          "x": 0.0947,
+          "y": -0.1678,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-50",
+          "faceId": "single",
+          "x": 0.2021,
+          "y": -0.1924,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-51",
+          "faceId": "single",
+          "x": 0.2354,
+          "y": -0.2074,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-52",
+          "faceId": "single",
+          "x": 0.0183,
+          "y": -0.2183,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-53",
+          "faceId": "single",
+          "x": -0.0054,
+          "y": -0.243,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-54",
+          "faceId": "single",
+          "x": 0.1173,
+          "y": -0.2593,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-55",
+          "faceId": "single",
+          "x": 0.2183,
+          "y": -0.271,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-56",
+          "faceId": "single",
+          "x": 0.7855,
+          "y": -0.3587,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-57",
+          "faceId": "single",
+          "x": 0.0926,
+          "y": -0.3692,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-58",
+          "faceId": "single",
+          "x": 0.1697,
+          "y": -0.4104,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-59",
+          "faceId": "single",
+          "x": 0.3861,
+          "y": -0.4276,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-60",
+          "faceId": "single",
+          "x": 0.0376,
+          "y": -0.4529,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-61",
+          "faceId": "single",
+          "x": 0,
+          "y": -0.4737,
+          "uncertain": true,
+          "note": "Possible separate puncture in connected tear."
+        },
+        {
+          "shotId": "impact-62",
+          "faceId": "single",
+          "x": 0.4336,
+          "y": -0.5492,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-63",
+          "faceId": "single",
+          "x": 0.5916,
+          "y": -0.5515,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-64",
+          "faceId": "single",
+          "x": 0.2585,
+          "y": -0.5767,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-65",
+          "faceId": "single",
+          "x": 0.4116,
+          "y": -0.6079,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-66",
+          "faceId": "single",
+          "x": 0.2085,
+          "y": -0.6211,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-67",
+          "faceId": "single",
+          "x": 0.067,
+          "y": -0.6349,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-68",
+          "faceId": "single",
+          "x": 0.5796,
+          "y": -0.6972,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-69",
+          "faceId": "single",
+          "x": 0.0672,
+          "y": -1.014,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-70",
+          "faceId": "single",
+          "x": 0.0581,
+          "y": 0.0851,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-71",
+          "faceId": "single",
+          "x": 0.1072,
+          "y": 0.0609,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-72",
+          "faceId": "single",
+          "x": 0.0105,
+          "y": -0.4501,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-73",
+          "faceId": "single",
+          "x": 0.0607,
+          "y": -0.4452,
+          "uncertain": false,
+          "note": "Added during review"
+        }
+      ]
+    }
+  ]
+}

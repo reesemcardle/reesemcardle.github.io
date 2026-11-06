@@ -1,0 +1,502 @@
+{
+  "schema": "archery-session-v0.1",
+  "sessionId": "photo-8806d5315e978d176dd64031",
+  "name": "IMG_4214.JPG",
+  "recordedDate": "2026-05-01",
+  "capturedAt": "2026-05-01T19:00:18-04:00",
+  "targetId": "fita-40-single-10-ring",
+  "shotOrder": "unknown",
+  "positionAccuracy": "approximate",
+  "equipment": {
+    "arrowId": null
+  },
+  "source": {
+    "type": "target-photo",
+    "sha256": "8806d5315e978d176dd64031a3109a38c6b8b67636dd316553ad0120e69b3e7b",
+    "method": "Photo-derived impact locations",
+    "scoreMethod": "estimated-center-radius",
+    "dateSource": "exif-original",
+    "flaggedCount": 2
+  },
+  "ends": [
+    {
+      "endNumber": null,
+      "shots": [
+        {
+          "shotId": "impact-1",
+          "faceId": "single",
+          "x": -0.2409,
+          "y": 0.6148,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-2",
+          "faceId": "single",
+          "x": -0.2223,
+          "y": 0.4957,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-3",
+          "faceId": "single",
+          "x": -0.1515,
+          "y": 0.4391,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-4",
+          "faceId": "single",
+          "x": -0.1721,
+          "y": 0.286,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-5",
+          "faceId": "single",
+          "x": -0.1649,
+          "y": 0.2039,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-6",
+          "faceId": "single",
+          "x": -0.2426,
+          "y": 0.2011,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-7",
+          "faceId": "single",
+          "x": -0.1249,
+          "y": 0.1678,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-8",
+          "faceId": "single",
+          "x": -0.0338,
+          "y": 0.1299,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-9",
+          "faceId": "single",
+          "x": -0.423,
+          "y": 0.0841,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-10",
+          "faceId": "single",
+          "x": -0.1994,
+          "y": 0.0795,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-11",
+          "faceId": "single",
+          "x": -0.1026,
+          "y": 0.0728,
+          "uncertain": true,
+          "note": "Right opening in merged tear."
+        },
+        {
+          "shotId": "impact-12",
+          "faceId": "single",
+          "x": 0.0039,
+          "y": 0.0623,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-13",
+          "faceId": "single",
+          "x": -0.1432,
+          "y": 0.0547,
+          "uncertain": true,
+          "note": "Left opening in merged tear."
+        },
+        {
+          "shotId": "impact-14",
+          "faceId": "single",
+          "x": 0.2293,
+          "y": 0.4191,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-15",
+          "faceId": "single",
+          "x": 0.3404,
+          "y": 0.4176,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-16",
+          "faceId": "single",
+          "x": 0.0296,
+          "y": 0.353,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-17",
+          "faceId": "single",
+          "x": 0.2007,
+          "y": 0.2239,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-18",
+          "faceId": "single",
+          "x": 0.2617,
+          "y": 0.2142,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-19",
+          "faceId": "single",
+          "x": 0.0609,
+          "y": 0.2074,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-20",
+          "faceId": "single",
+          "x": 0.0247,
+          "y": 0.183,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-21",
+          "faceId": "single",
+          "x": 0.3507,
+          "y": 0.1421,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-22",
+          "faceId": "single",
+          "x": 0.1154,
+          "y": 0.1231,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-23",
+          "faceId": "single",
+          "x": 0.1037,
+          "y": 0.0998,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-24",
+          "faceId": "single",
+          "x": 0.3713,
+          "y": 0.0871,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-25",
+          "faceId": "single",
+          "x": 0.22,
+          "y": 0.0388,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-26",
+          "faceId": "single",
+          "x": -0.678,
+          "y": 0.032,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-27",
+          "faceId": "single",
+          "x": -0.3344,
+          "y": 0.026,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-28",
+          "faceId": "single",
+          "x": -0.087,
+          "y": 0.0052,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-29",
+          "faceId": "single",
+          "x": -0.1123,
+          "y": -0.0418,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-30",
+          "faceId": "single",
+          "x": -0.0655,
+          "y": -0.0747,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-31",
+          "faceId": "single",
+          "x": -0.2748,
+          "y": -0.0864,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-32",
+          "faceId": "single",
+          "x": -0.2738,
+          "y": -0.131,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-33",
+          "faceId": "single",
+          "x": -0.0895,
+          "y": -0.175,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-34",
+          "faceId": "single",
+          "x": -0.261,
+          "y": -0.1954,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-35",
+          "faceId": "single",
+          "x": -0.2678,
+          "y": -0.2796,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-36",
+          "faceId": "single",
+          "x": -0.2038,
+          "y": -0.2998,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-37",
+          "faceId": "single",
+          "x": -0.2234,
+          "y": -0.3679,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-38",
+          "faceId": "single",
+          "x": -0.1288,
+          "y": -0.4496,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-39",
+          "faceId": "single",
+          "x": -0.0131,
+          "y": -0.608,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-40",
+          "faceId": "single",
+          "x": 0.2622,
+          "y": -0.0181,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-41",
+          "faceId": "single",
+          "x": 0.138,
+          "y": -0.0404,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-42",
+          "faceId": "single",
+          "x": 0.4875,
+          "y": -0.0738,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-43",
+          "faceId": "single",
+          "x": 0.2131,
+          "y": -0.0897,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-44",
+          "faceId": "single",
+          "x": 0.0721,
+          "y": -0.1075,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-45",
+          "faceId": "single",
+          "x": 0.1632,
+          "y": -0.1685,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-46",
+          "faceId": "single",
+          "x": 0.0407,
+          "y": -0.1788,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-47",
+          "faceId": "single",
+          "x": 0.1891,
+          "y": -0.21,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-48",
+          "faceId": "single",
+          "x": 0.1543,
+          "y": -0.2366,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-49",
+          "faceId": "single",
+          "x": 0.5952,
+          "y": -0.2378,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-50",
+          "faceId": "single",
+          "x": 0.3727,
+          "y": -0.2695,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-51",
+          "faceId": "single",
+          "x": 0.0565,
+          "y": -0.3048,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-52",
+          "faceId": "single",
+          "x": 0.2266,
+          "y": -0.4324,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-53",
+          "faceId": "single",
+          "x": 0.4259,
+          "y": -0.5072,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-54",
+          "faceId": "single",
+          "x": 0.5621,
+          "y": -0.5326,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-55",
+          "faceId": "single",
+          "x": 0.0432,
+          "y": -0.5957,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-56",
+          "faceId": "single",
+          "x": 1.006,
+          "y": -0.9996,
+          "uncertain": false
+        },
+        {
+          "shotId": "impact-57",
+          "faceId": "single",
+          "x": -0.1264,
+          "y": 0.0584,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-58",
+          "faceId": "single",
+          "x": -0.2678,
+          "y": 0.1975,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-59",
+          "faceId": "single",
+          "x": -0.1449,
+          "y": 0.2049,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-60",
+          "faceId": "single",
+          "x": -0.1526,
+          "y": 0.2778,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-61",
+          "faceId": "single",
+          "x": -0.182,
+          "y": 0.3044,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-62",
+          "faceId": "single",
+          "x": 0.0441,
+          "y": 0.1954,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-63",
+          "faceId": "single",
+          "x": 0.387,
+          "y": 0.0596,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-64",
+          "faceId": "single",
+          "x": 0.2801,
+          "y": -0.0164,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-65",
+          "faceId": "single",
+          "x": 0.1786,
+          "y": -0.1643,
+          "uncertain": false,
+          "note": "Added during review"
+        },
+        {
+          "shotId": "impact-66",
+          "faceId": "single",
+          "x": -0.3895,
+          "y": 0.0584,
+          "uncertain": false,
+          "note": "Added during review"
+        }
+      ]
+    }
+  ]
+}

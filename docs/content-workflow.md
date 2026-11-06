@@ -27,7 +27,7 @@ New photos are oriented, reduced to a maximum 2560-pixel long edge, and stripped
 
 The model returns impact sites and scoring-ring geometry, with top hanging-pin holes separated from impacts. Coordinates are normalized to the site's target; X is right, Y is up, and radius 1 is the outside scoring edge. Uncertain merged tears are flagged, not turned into invented shot counts or chronology. Target scores are approximate center-based estimates, not official line-cutter scores. Only the existing 40 cm single-face ten-ring target is supported; other faces should be rejected for review.
 
-Coordinates are added to the site automatically, including flagged candidate sites shown in pink. Each imported photo gets a local HTML overlay under `review/`; open it to inspect numbered marks. Original photos and local paths are never put in the public data. A model can miss or misidentify impacts even when it returns valid JSON: this is assisted transcription, not a verified scoring system.
+Coordinates are added to the site automatically. All public impacts use the same styling; uncertainty flags remain available in the local review utility. Each imported photo gets a local HTML overlay under `review/`; open it to inspect numbered marks. Original photos and local paths are never put in the public data. A model can miss or misidentify impacts even when it returns valid JSON: this is assisted transcription, not a verified scoring system.
 
 The supplied March 24, 2026 photo is seeded with a **manual visual extraction**, not an API result: 76 candidate sites, four flagged locations, two hanging holes excluded. New photos take the API path. A live API call has not yet been verified with your account.
 
@@ -292,6 +292,62 @@ The source folder is the editable master; the seed script never overwrites it.
 Email/privacy choices remain deferred. Obfuscating an address in JavaScript is
 not a privacy boundary; use a dedicated public alias if email is added later.
 # Publishing
+
+## Single-target detection experiments
+
+From the website folder, run `node scripts/detect-target.mjs "/path/to/target.JPG"`
+to analyze just one target for local review without rebuilding or publishing
+the site. It reads `OPENAI_API_KEY`, `OPENAI_VISION_MODEL`, and
+`OPENAI_VISION_REASONING` from `private/content.env`. Reasoning accepts `low`,
+`medium` (default), or `high`; changing the model does not change this setting.
+Each successful API response, including an incomplete generation, gets a
+separate usage record in `private/target-workspace/attempts/`. Existing calibrated
+targets are skipped to preserve saved corrections; failures are not retried
+automatically. The API bills usage even if generation is incomplete.
+
+## Cropped-target comparison
+
+For a controlled crop comparison, run
+`node scripts/compare-target-tiles.mjs photo-<id>` from the website folder.
+This makes four paid requests using the configured model (GPT-5.4 mini or GPT-6 Astra) and medium reasoning, with no
+automatic retries. It snapshots the current review, uses its ring geometry to
+place overlapping crops, and never sends reference impact coordinates to the
+model. Results, per-request usage, and an interactive HTML overlay are saved
+under `private/target-workspace/comparisons/`. It does not modify the review or
+publish anything. Reported costs are estimates at the rates embedded in the
+script, not billing invoices. This is a detection experiment, not a validated
+batch pipeline or a test of automatic ring calibration. One-to-one matching is
+reported at 10, 20, and 30 pixels in the stored image frame; nearby ambiguous
+tears and approximate reference positions require visual review.
+
+## Batch target drafts
+
+From the website folder, run:
+
+```sh
+node scripts/target-batch.mjs "../Website Content/targets"
+```
+
+This uses Astra with medium reasoning: one alignment request and four overlapping
+crop requests per new photo. It extracts dates locally, sends metadata-stripped
+images, and saves drafts in the existing review utility at `http://localhost:8016/`.
+Refresh the utility after processing. Existing calibrated or edited records are
+skipped. Nothing is approved or published automatically.
+
+To process specific files, append their filenames after the folder. For an
+explicit retry, set `TARGET_BATCH_RESUME` to the previous batch folder to reuse
+its completed responses; incomplete requests are rerun. Reuse only responses
+from the same workflow and photo, since crop coordinates depend on calibration.
+
+Responses, usage, failures, and estimated costs are stored under
+`private/target-workspace/batches/`. Failed requests are not automatically retried;
+rerunning skips completed drafts but starts failed photos again unless the
+resume folder is supplied. Each run reports only its newly billed responses.
+The script stops
+issuing requests after estimated spend exceeds $12 (the last request may exceed
+that threshold). Calibration and ambiguous tears still require visual review.
+
+## Publishing the site
 
 After updating content and reviewing the local site, commit the intended changes
 on `master`, then run `./deploy-site` from the website folder

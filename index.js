@@ -227,7 +227,7 @@ const activityCopy = {
     place: "Brooklyn range",
     dek: "FITA 40cm target sessions",
     metaTitle: "Session Overview",
-    figure: "Recorded arrow locations on a single-spot target. Session playback updates score, group size, and X count.",
+    figure: "",
     detailEyebrow: "Selected session",
     detailTitle: "Target session",
     detailText: "Step through sessions to inspect score, shot count, and equipment."
@@ -727,6 +727,7 @@ function updateArcheryCamera(animate = true) {
 }
 
 function renderArcheryState() {
+  els.figureDescription.textContent = "";
   renderSelectedConditions("archery");
   updateArcheryCamera();
   resetArcheryAnimation();
@@ -737,9 +738,6 @@ function renderArcheryState() {
   }
 
   if (state.selectedArcherySessionIndex === null) {
-    if (state.archerySessions.some(session => session.source?.type === "target-photo")) {
-      document.getElementById("figureDescription").textContent = "Completed target photos. Approximate impact locations; uncertain marks shown in pink.";
-    }
     const allShots = state.archerySessions.flatMap((session) => {
       return session.shots.map((shot) => ({ ...shot, sessionId: session.sessionId }));
     });
@@ -750,11 +748,6 @@ function renderArcheryState() {
   }
 
   const session = state.archerySessions[state.selectedArcherySessionIndex];
-  if (session.source?.type === "target-photo") {
-    const date = new Date(`${session.recordedDate}T12:00:00`);
-    const flagged = session.shots.filter(shot => shot.uncertain).length;
-    document.getElementById("figureDescription").textContent = `${formatDate.format(date)}: ${session.shots.length} visible impact sites. Approximate positions; shot order unknown.${flagged ? ` ${flagged} uncertain locations shown in pink.` : ""}`;
-  }
   els.archeryShots.textContent = "";
   setArcheryTickerVisible(true);
   updateArcheryTicker(session, -1);
@@ -836,7 +829,6 @@ function createArcheryShotCircle(shot, index, variant) {
   const point = archeryPointToSvg(shot);
   const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
   circle.setAttribute("class", `archery-shot is-${variant}`);
-  if (shot.uncertain) circle.classList.add("is-uncertain");
   circle.setAttribute("cx", point.x.toFixed(2));
   circle.setAttribute("cy", point.y.toFixed(2));
   circle.setAttribute("r", archeryArrowRadius().toFixed(2));
@@ -1063,7 +1055,7 @@ function renderSailingState() {
     harborRendered = true;
   }
   els.sailingVisual.dataset.region=sailingRegion.id;
-  els.sailingVisual.querySelector("title").textContent=sailingRegion.label+": drag to pan, scroll to zoom, Shift-drag horizontally to rotate and vertically to tilt 0-68 degrees";
+  els.sailingVisual.setAttribute("aria-label",sailingRegion.label+": drag to pan, scroll to zoom, Shift-drag horizontally to rotate and vertically to tilt 0-68 degrees");
   els.sailingVisual.querySelector("desc").textContent="Recorded sails in "+sailingRegion.label+".";
   els.figureDescription.textContent=sailingRegion.label+" / "+state.sails.length+" recorded sails";
   els.detailTitle.textContent=selectedSail?.label || sailingRegion.label;

@@ -1,9 +1,114 @@
 [
   {
+    "id": "photo-20c7adfbf0399f66e1693156",
+    "name": "IMG_0142.JPG",
+    "file": "sessions/photo-20c7adfbf0399f66e1693156.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 59
+  },
+  {
+    "id": "photo-24744e4eabca40829abfd0da",
+    "name": "IMG_0510.JPG",
+    "file": "sessions/photo-24744e4eabca40829abfd0da.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 33
+  },
+  {
+    "id": "photo-37b9ff97479d0afe4d09fb66",
+    "name": "IMG_0741.JPG",
+    "file": "sessions/photo-37b9ff97479d0afe4d09fb66.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 22
+  },
+  {
+    "id": "photo-3eed6ba94b2b11d6fbe74c48",
+    "name": "IMG_4139.JPG",
+    "file": "sessions/photo-3eed6ba94b2b11d6fbe74c48.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 42
+  },
+  {
+    "id": "photo-4280345324df23eceeeda200",
+    "name": "IMG_3994.JPG",
+    "file": "sessions/photo-4280345324df23eceeeda200.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 46
+  },
+  {
+    "id": "photo-87c33f50eaf0969107b6acca",
+    "name": "IMG_4189.JPG",
+    "file": "sessions/photo-87c33f50eaf0969107b6acca.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 73
+  },
+  {
+    "id": "photo-8806d5315e978d176dd64031",
+    "name": "IMG_4214.JPG",
+    "file": "sessions/photo-8806d5315e978d176dd64031.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 66
+  },
+  {
+    "id": "photo-93502abc04ad657a171912ee",
+    "name": "IMG_0026.JPG",
+    "file": "sessions/photo-93502abc04ad657a171912ee.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 47
+  },
+  {
+    "id": "photo-9b6a5f2350e752cdf93debeb",
+    "name": "IMG_0369.JPG",
+    "file": "sessions/photo-9b6a5f2350e752cdf93debeb.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 37
+  },
+  {
+    "id": "photo-abe700b6bc4ae5a73aa4b5b1",
+    "name": "IMG_0239.JPG",
+    "file": "sessions/photo-abe700b6bc4ae5a73aa4b5b1.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 16
+  },
+  {
+    "id": "photo-bb0cd1c6e12c6454cd193331",
+    "name": "IMG_4145.JPG",
+    "file": "sessions/photo-bb0cd1c6e12c6454cd193331.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 44
+  },
+  {
+    "id": "photo-bbc7762c4291e51484b2289b",
+    "name": "IMG_2187.JPG",
+    "file": "sessions/photo-bbc7762c4291e51484b2289b.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 30
+  },
+  {
     "id": "photo-bf57c370adc9e5e699dfb590",
     "name": "Target 2026-03-24",
     "file": "sessions/photo-bf57c370adc9e5e699dfb590.json",
     "targetId": "fita-40-single-10-ring",
-    "shotCount": 76
+    "shotCount": 82
+  },
+  {
+    "id": "photo-decfa412910ed0be9a26ea58",
+    "name": "IMG_0374.JPG",
+    "file": "sessions/photo-decfa412910ed0be9a26ea58.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 52
+  },
+  {
+    "id": "photo-e0dc360b2e0229a33f0851da",
+    "name": "IMG_3981.JPG",
+    "file": "sessions/photo-e0dc360b2e0229a33f0851da.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 16
+  },
+  {
+    "id": "photo-faa7095245de1a9a4b8a7fc8",
+    "name": "IMG_0019.JPG",
+    "file": "sessions/photo-faa7095245de1a9a4b8a7fc8.json",
+    "targetId": "fita-40-single-10-ring",
+    "shotCount": 54
   }
 ]

@@ -144,7 +144,7 @@ for(const path of only && only!=="targets"?[]:await files(join(folder,"targets")
       if(!process.env.OPENAI_API_KEY)throw new Error("Detection pending: set OPENAI_API_KEY in private/content.env, then rerun.");
       console.log(`  detecting ${basename(path)} with ${process.env.OPENAI_VISION_MODEL || DEFAULT_VISION_MODEL}...`);
       const bytes=await readFile(join(storeRoot,`${record.id}.image`));
-      const result=await detectImpacts(record,bytes,{apiKey:process.env.OPENAI_API_KEY,model:process.env.OPENAI_VISION_MODEL || DEFAULT_VISION_MODEL});
+      const result=await detectImpacts(record,bytes,{apiKey:process.env.OPENAI_API_KEY,model:process.env.OPENAI_VISION_MODEL || DEFAULT_VISION_MODEL,reasoningEffort:process.env.OPENAI_VISION_REASONING || "medium"});
       record=await saveDetection(record.id,result,record.revision,process.env.OPENAI_VISION_MODEL || DEFAULT_VISION_MODEL);
     }
     record={...record,date:sidecar.date || record.date,name:sidecar.name || (record.reviewState ? record.name : `Target ${sidecar.date || record.date || "undated"}`)};
