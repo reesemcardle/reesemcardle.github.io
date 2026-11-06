@@ -4,6 +4,7 @@ import { weatherDisplay } from "./scripts/activity-weather.mjs";
 import { mapRegions, createRegionPicker } from "./scripts/map-regions.mjs";
 import { createSailingEventDetails } from "./scripts/sailing-event.mjs";
 import { createEventMedia } from "./scripts/event-media.mjs";
+import { newestFirst } from "./scripts/content-order.mjs";
 import { photoPlaybackOrder, photoPlaybackDelays } from "./scripts/archery-playback.mjs";
 import { createEditorialPages } from "./scripts/editorial-pages.mjs";
 import { prepareSail } from "./scripts/sail-data.mjs";
@@ -367,7 +368,7 @@ async function loadActivityContent(){
   state.rides = rides;
   state.sails = sails;
   state.archerySessions = archery.sessions;
-  videoPlayer.setItems(videos);
+  videoPlayer.setItems(newestFirst(videos, video => video.capturedAt || video.date));
   state.speedRange = getSpeedRange(rides);
 
   renderBasemap({ ...basemap, features: [...basemap.features.filter((feature) => feature.kind !== "water"), ...parkWater.features] }, {
@@ -407,7 +408,7 @@ async function loadSails(regionId=sailingRegion.id) {
 
 async function loadRegionSails(regionId) {
   const sailIndex = await loadJson(sailIndexFile);
-  return Promise.all(sailIndex.filter(sail=>sail.regionId===regionId).map(async (sail) => {
+  const sails = await Promise.all(sailIndex.filter(sail=>sail.regionId===regionId).map(async (sail) => {
     const file = `content/sails/${sail.file}`;
     const response = await fetch(file, { cache: "no-store" });
     if (!response.ok) throw new Error(`Unable to load ${file}`);
@@ -418,6 +419,7 @@ async function loadRegionSails(regionId) {
       ...prepareSail(parseGpx(await response.text()))
     };
   }));
+  return newestFirst(sails, sail => sail.recordedAt || (sail.hasRecordedTiming ? sail.points[0].time : null));
 }
 
 async function loadArchery() {
@@ -434,7 +436,7 @@ async function loadArchery() {
   return {
     target,
     arrows,
-    sessions: sessions.sort((a, b) => a.startedAt - b.startedAt)
+    sessions: newestFirst(sessions, session => session.startedAt)
   };
 }
 
@@ -483,7 +485,7 @@ async function loadRides() {
     };
   }));
 
-  return rides.sort((a, b) => a.startDate - b.startDate);
+  return newestFirst(rides, ride => ride.startDate);
 }
 
 function wireContactLink() {
