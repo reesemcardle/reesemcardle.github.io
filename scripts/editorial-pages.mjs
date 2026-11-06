@@ -69,5 +69,5 @@ export function createEditorialPages(root,sidebar){
       }
     }catch(e){if(request===serial)root.replaceChildren(node("p","This page could not be loaded. Please refresh to try again.","editorial-status"));}
   }
-  return {show,hide(){active=false;serial++;root.hidden=sidebar.hidden=true;root.replaceChildren();sidebar.replaceChildren();}};
+  return {prepare:load,show,hide(){active=false;serial++;root.hidden=sidebar.hidden=true;root.replaceChildren();sidebar.replaceChildren();}};
 }

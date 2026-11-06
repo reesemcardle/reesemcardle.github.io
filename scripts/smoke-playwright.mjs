@@ -1,4 +1,5 @@
 import { createRequire } from "node:module";
+import { checkSectionLoading } from "./check-section-loading.mjs";
 import { createReadStream } from "node:fs";
 import { stat, readFile } from "node:fs/promises";
 import { createServer } from "node:http";
@@ -22,7 +23,7 @@ try {
   });
   const pages = [
     {
-      path: "/",
+      path: "/?mode=cycling",
       name: "cycling",
       checks: [
         async (page) => assertTextIncludes(page, "h1", "Reese"),
@@ -60,7 +61,8 @@ try {
   ];
 
   const results = [];
-  for (const spec of pages) {
+  await checkSectionLoading(browser,baseUrl);
+  for (const spec of process.argv.includes("--loading-only") ? [] : pages) {
     const page = await browser.newPage({ viewport: { width: 1440, height: 960 } });
     // Exercise unavailable conditions deterministically, including long fallback labels.
     await page.route(/api\.open-meteo\.com|api\.tidesandcurrents\.noaa\.gov/, (route) => route.abort());

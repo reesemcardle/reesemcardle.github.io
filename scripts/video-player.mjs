@@ -16,7 +16,7 @@ export function createVideoPlayer({player, empty, controls, playButton, soundBut
       [playButton,player.paused?"Play":"Pause",player.paused?"play":"pause"],
       [soundButton,!audio?"No audio":player.muted?"Sound on":"Sound off",player.muted?"muted":"volume"]
     ]){
-      button.setAttribute("aria-label",label);button.title=label;
+      button.setAttribute("aria-label",label);
       button.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+icons[icon]+'</svg>';
     }
   };

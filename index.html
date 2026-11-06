@@ -24,7 +24,8 @@
     <link rel="stylesheet" href="viewport-layout.css">
     <link rel="stylesheet" href="editorial.css">
   </head>
-  <body>
+  <body class="scene-mode content-loading">
+    <p id="navigationStatus" class="navigation-status" role="status" hidden></p>
     <main class="site-shell" aria-label="Personal field instrument">
       <aside class="intro" aria-label="Site navigation">
         <h1>Reese<br>McArdle</h1>
@@ -85,14 +86,14 @@
           <div id="videoVisual" class="video-stage" hidden>
             <video id="videoPlayer" loop muted playsinline disablepictureinpicture disableremoteplayback preload="none" aria-label="Selected scene" hidden></video>
             <div id="videoControls" class="video-controls" hidden>
-              <button id="videoPlay" type="button" aria-label="Play" title="Play"></button>
-              <button id="videoSound" type="button" aria-label="Sound on" title="Sound on"></button>
+              <button id="videoPlay" type="button" aria-label="Play"></button>
+              <button id="videoSound" type="button" aria-label="Sound on"></button>
             </div>
             <p id="videoEmpty" role="status">No scenes yet</p>
           </div>
-          <button id="sailingHome" class="sailing-home" type="button" title="Return to launch area" hidden>Home</button>
-          <button id="cyclingHome" class="sailing-home" type="button" title="Return to Prospect Park">Home</button>
-          <button id="archeryHome" class="sailing-home" type="button" title="Reset target view" hidden>Home</button>
+          <button id="sailingHome" class="sailing-home" type="button" aria-label="Return to launch area" hidden>Home</button>
+          <button id="cyclingHome" class="sailing-home" type="button" aria-label="Return to Prospect Park">Home</button>
+          <button id="archeryHome" class="sailing-home" type="button" aria-label="Reset target view" hidden>Home</button>
           <svg id="cyclingVisual" class="park-map" viewBox="0 0 1600 1000" role="img" tabindex="0" aria-label="Prospect Park: drag to pan, scroll to zoom, Shift-drag horizontally to rotate and vertically to tilt 0-68 degrees" aria-describedby="map-desc">
             <desc id="map-desc">A restrained illustrated map of Prospect Park with a projected ride trace from GPX data.</desc>
 
@@ -338,17 +339,17 @@
             <div class="event-media-video video-stage" hidden>
               <video loop muted playsinline disablepictureinpicture disableremoteplayback preload="none" hidden></video>
               <div class="video-controls" hidden>
-                <button type="button" data-media-action="play" aria-label="Play" title="Play"></button>
-                <button type="button" data-media-action="sound" aria-label="Sound on" title="Sound on"></button>
+                <button type="button" data-media-action="play" aria-label="Play"></button>
+                <button type="button" data-media-action="sound" aria-label="Sound on"></button>
               </div>
               <p class="event-media-error" role="status" hidden></p>
             </div>
             <p class="event-media-empty">No media</p>
           </div>
           <div class="event-media-footer">
-            <button type="button" data-media-action="previous" aria-label="Previous media" title="Previous media" hidden>←</button>
+            <button type="button" data-media-action="previous" aria-label="Previous media" hidden>←</button>
             <span class="event-media-count" aria-live="polite"></span>
-            <button type="button" data-media-action="next" aria-label="Next media" title="Next media" hidden>→</button>
+            <button type="button" data-media-action="next" aria-label="Next media" hidden>→</button>
           </div>
           <p class="event-media-caption"></p>
         </section>

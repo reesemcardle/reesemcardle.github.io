@@ -32,7 +32,8 @@ let sailingRegion=mapRegions.sailing.find(region=>region.id===requestedRegion) |
 const regionMaps=new Map();
 const eventMedia=createEventMedia(document.getElementById("eventMedia"));
 const editorialPages=createEditorialPages(document.getElementById("editorialReader"),document.getElementById("editorialSidebar"));
-let activitiesPromise=null,modeRequest=0;
+const sectionLoads=new Map();
+let sharedActivityPromise=null,modeRequest=0,hasVisibleSection=false;
 let mediaIndex={};
 const sailEventDetails=createSailingEventDetails(document.getElementById("sailEventDetails"));
 const regionSails=new Map();
@@ -334,41 +335,79 @@ async function init() {
 
 async function navigateMode(mode){
   const request=++modeRequest;
+  const status=document.getElementById("navigationStatus");
+  document.body.classList.remove("content-error");
+  document.body.classList.toggle("content-loading",!hasVisibleSection);
+  document.querySelector(".instrument").setAttribute("aria-busy","true");
+  status.textContent=`Loading ${activityCopy[mode].title}…`;
+  status.hidden=false;
   try{
-    if(!["labs","about"].includes(mode)){
-      activitiesPromise ||= loadActivityContent().catch(error=>{activitiesPromise=null;throw error;});
-      await activitiesPromise;
+    await prepareSection(mode);
+    if(request===modeRequest){
+      setMode(mode);
+      hasVisibleSection=true;
+      status.hidden=true;
     }
-    if(request===modeRequest)setMode(mode);
   }catch(error){
-    if(request===modeRequest){els.activityDek.hidden=false;els.activityDek.textContent="Unable to load this section. Please try again.";}
+    if(request===modeRequest){
+      if(!hasVisibleSection){
+        document.body.classList.add("content-error");
+        updateActivityChrome(mode);
+      }
+      status.textContent=`Unable to load ${activityCopy[mode].title}. Select it again to retry.`;
+    }
     console.error(error);
+  }finally{
+    if(request===modeRequest){
+      document.body.classList.remove("content-loading");
+      document.querySelector(".instrument").setAttribute("aria-busy","false");
+    }
   }
 }
 
-async function loadActivityContent(){
-  const [basemap, harborBasemap, activityMetadata, sails, archery, parkWater, videos] = await Promise.all([
-    loadJson(basemapFile),
-    loadJson(sailingRegion.file),
-    loadActivityMetadata(),
-    loadSails(),
-    loadArchery(),
-    loadJson("content/maps/prospect-park-water.json"),
-    loadJson("content/videos/video-index.json")
-  ]);
-  setCameraPreset(state.cameraPreset);
-  state.activityMetadata = activityMetadata;
-  mediaIndex=await loadJson("content/media/event-index.json").catch(()=>({}));
-  state.harborBasemap = harborBasemap;
-  regionMaps.set(sailingRegion.id,Promise.resolve(harborBasemap));
-  state.archeryTarget = archery.target;
-  state.archeryArrows = archery.arrows;
+function prepareSection(mode){
+  if(!sectionLoads.has(mode)){
+    const pending=loadSection(mode).catch(error=>{sectionLoads.delete(mode);throw error;});
+    sectionLoads.set(mode,pending);
+  }
+  return sectionLoads.get(mode);
+}
+
+async function loadSection(mode){
+  if(mode==="labs" || mode==="about")return editorialPages.prepare(mode);
+  if(mode==="video"){
+    const videos=await loadJson("content/videos/video-index.json");
+    videoPlayer.setItems(newestFirst(videos, video => video.capturedAt || video.date));
+    return;
+  }
+  sharedActivityPromise ||= Promise.all([
+    loadActivityMetadata(),loadJson("content/media/event-index.json").catch(()=>({}))
+  ]).then(([metadata,media])=>{state.activityMetadata=metadata;mediaIndex=media;})
+    .catch(error=>{sharedActivityPromise=null;throw error;});
+  await Promise.all([sharedActivityPromise,loadActivitySection(mode)]);
+}
+
+async function loadActivitySection(mode){
+  if(mode==="archery"){
+    const archery=await loadArchery();
+    state.archeryTarget=archery.target;
+    state.archeryArrows=archery.arrows;
+    state.archerySessions=archery.sessions;
+    return;
+  }
+  if(mode==="sailing"){
+    const region=sailingRegion;
+    if(!regionMaps.has(region.id))regionMaps.set(region.id,loadJson(region.file).catch(error=>{regionMaps.delete(region.id);throw error;}));
+    const [map,sails]=await Promise.all([regionMaps.get(region.id),loadSails(region.id)]);
+    state.harborBasemap=map;
+    state.sails=sails;
+    return;
+  }
   state.projection = createProjection(parkFocusBounds, mapFrame);
-  const rides = await loadRides();
+  const [basemap,parkWater,rides]=await Promise.all([
+    loadJson(basemapFile),loadJson("content/maps/prospect-park-water.json"),loadRides()
+  ]);
   state.rides = rides;
-  state.sails = sails;
-  state.archerySessions = archery.sessions;
-  videoPlayer.setItems(newestFirst(videos, video => video.capturedAt || video.date));
   state.speedRange = getSpeedRange(rides);
 
   renderBasemap({ ...basemap, features: [...basemap.features.filter((feature) => feature.kind !== "water"), ...parkWater.features] }, {
@@ -382,8 +421,6 @@ async function loadActivityContent(){
       path: els.mapPaths
     }
   });
-  renderRideState();
-  renderSailingState();
 }
 
 function initialMode() {
@@ -663,7 +700,6 @@ function setMode(mode) {
   document.querySelectorAll(".trace-controls button").forEach(button=>{
     const action=button.dataset.action;
     button.setAttribute("aria-label", isVideo ? (action==="all"?"Restart video":`${action==="previous"?"Previous":"Next"} video`) : (action==="all"?"Show all traces":`${action==="previous"?"Previous":"Next"} trace`));
-    button.title=button.getAttribute("aria-label");
     if(action==="all")button.textContent=isVideo?"↻":"•";
     if(!isVideo)button.disabled=false;
   });
