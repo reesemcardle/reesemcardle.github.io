@@ -763,11 +763,7 @@ function plotArcheryShots(shots, variant = "session") {
 }
 
 function animateArcherySession(session) {
-  if (session.shotOrder === "unknown") {
-    plotArcheryShots(session.shots, "photo");
-    updateArcheryTicker(session, session.shots.length - 1);
-    return;
-  }
+  // Photo marks reveal in display order; this is not a recorded shot sequence.
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     plotArcheryShots(session.shots, "session");
     updateArcheryTicker(session, session.shots.length - 1);
@@ -819,8 +815,8 @@ function updateArcheryTicker(session, shotIndex) {
   const score = scoreArcheryShot(shot);
   const xCount = shots.filter(isArcheryX).length;
 
-  els.archeryTickerShot.textContent = String(isPhoto ? session.shots.length : shot.shotNumber || shotIndex + 1);
-  els.archeryTickerScore.textContent = String(isPhoto ? scoreArcherySession(session) : score);
+  els.archeryTickerShot.textContent = String(isPhoto ? shots.length : shot.shotNumber || shotIndex + 1);
+  els.archeryTickerScore.textContent = String(isPhoto ? shots.reduce((total, mark) => total + scoreArcheryShot(mark), 0) : score);
   els.archeryTickerGroup.textContent = formatArcheryGroupSize(shots);
   els.archeryTickerXCount.textContent = String(xCount);
 }

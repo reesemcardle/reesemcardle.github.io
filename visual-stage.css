@@ -164,11 +164,6 @@
   }
 }
 
-#archeryVisual .archery-shot.is-photo {
-  opacity: 0.9;
-  animation: none;
-}
-
 .video-stage{position:absolute;inset:0;background:#161c19;overflow:hidden}
 .event-media{min-width:0;border-bottom:1px solid var(--line, #aaa69b);padding-bottom:12px}
 .event-media[hidden],.event-media [hidden]{display:none}
