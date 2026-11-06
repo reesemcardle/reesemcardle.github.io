@@ -5,7 +5,6 @@ import { mapRegions, createRegionPicker } from "./scripts/map-regions.mjs";
 import { createSailingEventDetails } from "./scripts/sailing-event.mjs";
 import { createEventMedia } from "./scripts/event-media.mjs";
 import { photoPlaybackOrder, photoPlaybackDelays } from "./scripts/archery-playback.mjs";
-import { renderArcheryDensity } from "./scripts/archery-density.mjs";
 import { createEditorialPages } from "./scripts/editorial-pages.mjs";
 import { prepareSail } from "./scripts/sail-data.mjs";
 import { setupResponsiveLayout } from "./scripts/responsive-layout.mjs";
@@ -733,9 +732,6 @@ function renderArcheryState() {
   renderSelectedConditions("archery");
   updateArcheryCamera();
   resetArcheryAnimation();
-  const density = document.getElementById("archeryDensity");
-  density.replaceChildren();
-  els.archeryVisual.classList.toggle("is-density", state.selectedArcherySessionIndex === null);
   if (!state.archerySessions.length || !state.archeryTarget) {
     setArcheryTickerVisible(false);
     renderArcheryStats(null);
@@ -746,7 +742,7 @@ function renderArcheryState() {
     const allShots = state.archerySessions.flatMap((session) => {
       return session.shots.map((shot) => ({ ...shot, sessionId: session.sessionId }));
     });
-    renderArcheryDensity(density, allShots, archeryAnimation.targetRadius);
+    plotArcheryShots(allShots, "all");
     setArcheryTickerVisible(false);
     renderArcheryStats(null);
     return;
@@ -835,7 +831,8 @@ function createArcheryShotCircle(shot, index, variant) {
   circle.setAttribute("class", `archery-shot is-${variant}`);
   circle.setAttribute("cx", point.x.toFixed(2));
   circle.setAttribute("cy", point.y.toFixed(2));
-  circle.setAttribute("r", archeryArrowRadius().toFixed(2));
+  circle.setAttribute("r", variant === "all" ? "1.6" : archeryArrowRadius().toFixed(2));
+  if (variant === "all" && Math.hypot(shot.x, shot.y) > .6 && Math.hypot(shot.x, shot.y) <= .8) circle.classList.add("on-black");
   circle.style.setProperty("--shot-index", index);
   return circle;
 }

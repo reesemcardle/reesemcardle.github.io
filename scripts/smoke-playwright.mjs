@@ -53,8 +53,7 @@ try {
       checks: [
         async (page) => assertAttribute(page, ".side-nav [data-mode='archery']", "aria-pressed", "true"),
         async (page) => assertText(page, "#rideMiles", String(archeryCount)),
-        async (page) => assertCount(page, "#archeryDensity image", 1),
-        async (page) => assertCount(page, "#archeryShots .archery-shot", 0),
+        async (page) => assertCount(page, "#archeryShots .archery-shot", archeryCount),
         async (page) => clickAndCheckActivity(page, photoArchery ? "Estimated score" : "Session score")
       ]
     }

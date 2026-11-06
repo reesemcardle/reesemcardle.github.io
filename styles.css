@@ -572,9 +572,13 @@ h1 {
 }
 
 .archery-shot.is-all {
-  opacity: 0.56;
+  fill: var(--ink);
+  stroke: none;
+  opacity: 0.65;
   animation: none;
 }
+
+.archery-shot.is-all.on-black { fill: var(--paper); }
 
 .archery-shot.is-session {
   opacity: 0;
