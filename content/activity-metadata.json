@@ -51,8 +51,10 @@
       "location": "Prospect Park",
       "weather": {
         "status": "ok",
-        "wind": "NE 11 mph",
+        "requestKey": "{\"latitude\":40.66,\"longitude\":-73.97,\"startedAt\":\"2025-08-01T15:01:00.000Z\",\"endedAt\":\"2025-08-01T15:24:54.000Z\"}",
         "condition": "Cloudy",
+        "temperatureF": 68,
+        "wind": "NE 11 mph",
         "source": {
           "provider": "Open-Meteo Archive API",
           "latitude": "40.6602",
@@ -65,9 +67,25 @@
         "status": "ok",
         "phase": "Flood tide",
         "source": {
-          "provider": "NOAA CO-OPS API",
+          "provider": "NOAA",
           "station": "8518750",
-          "predictionTime": "2025-08-01T18:50:00.000Z"
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:43.557Z"
+        },
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2025-08-01T15:01:00.000Z\",\"endedAt\":\"2025-08-01T15:24:54.000Z\"}",
+        "start": {
+          "at": "2025-08-01T15:01:00.000Z",
+          "heightMeters": 0.772,
+          "phase": "Rising",
+          "label": "0.77 m · rising"
+        },
+        "end": {
+          "at": "2025-08-01T15:24:54.000Z",
+          "heightMeters": 0.882,
+          "phase": "Rising",
+          "label": "0.88 m · rising"
         }
       }
     },
@@ -81,8 +99,10 @@
       "location": "Prospect Park",
       "weather": {
         "status": "ok",
-        "wind": "SW 1 mph",
+        "requestKey": "{\"latitude\":40.66,\"longitude\":-73.97,\"startedAt\":\"2025-08-04T16:43:18.000Z\",\"endedAt\":\"2025-08-04T17:01:55.000Z\"}",
         "condition": "Clear",
+        "temperatureF": 88,
+        "wind": "SW 1 mph",
         "source": {
           "provider": "Open-Meteo Archive API",
           "latitude": "40.6602",
@@ -95,9 +115,25 @@
         "status": "ok",
         "phase": "Flood tide",
         "source": {
-          "provider": "NOAA CO-OPS API",
+          "provider": "NOAA",
           "station": "8518750",
-          "predictionTime": "2025-08-04T21:24:00.000Z"
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:43.618Z"
+        },
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2025-08-04T16:43:18.000Z\",\"endedAt\":\"2025-08-04T17:01:55.000Z\"}",
+        "start": {
+          "at": "2025-08-04T16:43:18.000Z",
+          "heightMeters": 0.601,
+          "phase": "Rising",
+          "label": "0.60 m · rising"
+        },
+        "end": {
+          "at": "2025-08-04T17:01:55.000Z",
+          "heightMeters": 0.683,
+          "phase": "Rising",
+          "label": "0.68 m · rising"
         }
       }
     },
@@ -111,8 +147,10 @@
       "location": "Prospect Park",
       "weather": {
         "status": "ok",
-        "wind": "W 10 mph",
+        "requestKey": "{\"latitude\":40.66,\"longitude\":-73.97,\"startedAt\":\"2025-11-06T13:11:08.000Z\",\"endedAt\":\"2025-11-06T13:24:49.000Z\"}",
         "condition": "Clear",
+        "temperatureF": 48,
+        "wind": "W 10 mph",
         "source": {
           "provider": "Open-Meteo Archive API",
           "latitude": "40.6602",
@@ -125,9 +163,25 @@
         "status": "ok",
         "phase": "Ebb tide",
         "source": {
-          "provider": "NOAA CO-OPS API",
+          "provider": "NOAA",
           "station": "8518750",
-          "predictionTime": "2025-11-06T19:52:00.000Z"
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:43.684Z"
+        },
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2025-11-06T13:11:08.000Z\",\"endedAt\":\"2025-11-06T13:24:49.000Z\"}",
+        "start": {
+          "at": "2025-11-06T13:11:08.000Z",
+          "heightMeters": 1.928,
+          "phase": "Falling",
+          "label": "1.93 m · falling"
+        },
+        "end": {
+          "at": "2025-11-06T13:24:49.000Z",
+          "heightMeters": 1.913,
+          "phase": "Falling",
+          "label": "1.91 m · falling"
         }
       }
     },
@@ -141,8 +195,10 @@
       "location": "Prospect Park",
       "weather": {
         "status": "ok",
-        "wind": "S 7 mph",
+        "requestKey": "{\"latitude\":40.66,\"longitude\":-73.97,\"startedAt\":\"2026-03-26T20:29:51.000Z\",\"endedAt\":\"2026-03-26T21:03:00.000Z\"}",
         "condition": "Mostly clear",
+        "temperatureF": 63,
+        "wind": "S 7 mph",
         "source": {
           "provider": "Open-Meteo Archive API",
           "latitude": "40.6602",
@@ -155,9 +211,25 @@
         "status": "ok",
         "phase": "Ebb tide",
         "source": {
-          "provider": "NOAA CO-OPS API",
+          "provider": "NOAA",
           "station": "8518750",
-          "predictionTime": "2026-03-27T01:58:00.000Z"
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:43.743Z"
+        },
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-03-26T20:29:51.000Z\",\"endedAt\":\"2026-03-26T21:03:00.000Z\"}",
+        "start": {
+          "at": "2026-03-26T20:29:51.000Z",
+          "heightMeters": 1.154,
+          "phase": "Falling",
+          "label": "1.15 m · falling"
+        },
+        "end": {
+          "at": "2026-03-26T21:03:00.000Z",
+          "heightMeters": 1.058,
+          "phase": "Falling",
+          "label": "1.06 m · falling"
         }
       }
     },
@@ -171,8 +243,10 @@
       "location": "Prospect Park",
       "weather": {
         "status": "ok",
-        "wind": "W 7 mph",
+        "requestKey": "{\"latitude\":40.66,\"longitude\":-73.97,\"startedAt\":\"2026-04-01T19:03:48.000Z\",\"endedAt\":\"2026-04-01T19:39:14.000Z\"}",
         "condition": "Partly cloudy",
+        "temperatureF": 79,
+        "wind": "W 7 mph",
         "source": {
           "provider": "Open-Meteo Archive API",
           "latitude": "40.6602",
@@ -185,9 +259,25 @@
         "status": "ok",
         "phase": "Flood tide",
         "source": {
-          "provider": "NOAA CO-OPS API",
+          "provider": "NOAA",
           "station": "8518750",
-          "predictionTime": "2026-04-02T00:55:00.000Z"
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:43.803Z"
+        },
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-04-01T19:03:48.000Z\",\"endedAt\":\"2026-04-01T19:39:14.000Z\"}",
+        "start": {
+          "at": "2026-04-01T19:03:48.000Z",
+          "heightMeters": -0.109,
+          "phase": "Rising",
+          "label": "-0.11 m · rising"
+        },
+        "end": {
+          "at": "2026-04-01T19:39:14.000Z",
+          "heightMeters": -0.032,
+          "phase": "Rising",
+          "label": "-0.03 m · rising"
         }
       }
     },
@@ -201,8 +291,10 @@
       "location": "Prospect Park",
       "weather": {
         "status": "ok",
-        "wind": "S 10 mph",
+        "requestKey": "{\"latitude\":40.66,\"longitude\":-73.97,\"startedAt\":\"2026-04-14T19:22:07.000Z\",\"endedAt\":\"2026-04-14T19:45:58.000Z\"}",
         "condition": "Clear",
+        "temperatureF": 78,
+        "wind": "S 10 mph",
         "source": {
           "provider": "Open-Meteo Archive API",
           "latitude": "40.6602",
@@ -215,9 +307,25 @@
         "status": "ok",
         "phase": "Flood tide",
         "source": {
-          "provider": "NOAA CO-OPS API",
+          "provider": "NOAA",
           "station": "8518750",
-          "predictionTime": "2026-04-14T22:52:00.000Z"
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:43.868Z"
+        },
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-04-14T19:22:07.000Z\",\"endedAt\":\"2026-04-14T19:45:58.000Z\"}",
+        "start": {
+          "at": "2026-04-14T19:22:07.000Z",
+          "heightMeters": 0.692,
+          "phase": "Rising",
+          "label": "0.69 m · rising"
+        },
+        "end": {
+          "at": "2026-04-14T19:45:58.000Z",
+          "heightMeters": 0.848,
+          "phase": "Rising",
+          "label": "0.85 m · rising"
         }
       }
     }
@@ -244,7 +352,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"5dd3064de0fdc4b9b4be6674\",\"startedAt\":\"2026-07-03T16:17:00.000Z\",\"endedAt\":\"2026-07-03T22:48:00.000Z\"}",
+        "start": {
+          "at": "2026-07-03T16:17:00.000Z",
+          "heightMeters": 1.499,
+          "phase": "Falling",
+          "label": "1.50 m · falling"
+        },
+        "end": {
+          "at": "2026-07-03T22:48:00.000Z",
+          "heightMeters": 1.07,
+          "phase": "Rising",
+          "label": "1.07 m · rising"
+        },
+        "source": {
+          "provider": "CHS",
+          "station": "00460",
+          "stationName": "Mahone Harbour",
+          "datum": "Chart datum",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:05.275Z"
+        }
       }
     },
     "sailing-e82994c750560dfee46d": {
@@ -268,7 +397,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"5dd3064de0fdc4b9b4be6674\",\"startedAt\":\"2026-07-04T20:56:28.000Z\",\"endedAt\":\"2026-07-05T00:03:06.000Z\"}",
+        "start": {
+          "at": "2026-07-04T20:56:28.000Z",
+          "heightMeters": 0.653,
+          "phase": "Falling",
+          "label": "0.65 m · falling"
+        },
+        "end": {
+          "at": "2026-07-05T00:03:06.000Z",
+          "heightMeters": 1.176,
+          "phase": "Rising",
+          "label": "1.18 m · rising"
+        },
+        "source": {
+          "provider": "CHS",
+          "station": "00460",
+          "stationName": "Mahone Harbour",
+          "datum": "Chart datum",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:05.337Z"
+        }
       }
     },
     "sailing-804d43581b0d9aaf0477": {
@@ -292,7 +442,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8452660\",\"startedAt\":\"2026-08-07T16:32:05.000Z\",\"endedAt\":\"2026-08-07T20:25:51.000Z\"}",
+        "start": {
+          "at": "2026-08-07T16:32:05.000Z",
+          "heightMeters": 0.706,
+          "phase": "Rising",
+          "label": "0.71 m · rising"
+        },
+        "end": {
+          "at": "2026-08-07T20:25:51.000Z",
+          "heightMeters": 1.114,
+          "phase": "Falling",
+          "label": "1.11 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8452660",
+          "stationName": "Newport",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:50.994Z"
+        }
       }
     },
     "sailing-0828733faf329f6af426": {
@@ -316,7 +487,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8452660\",\"startedAt\":\"2026-08-08T16:18:56.000Z\",\"endedAt\":\"2026-08-08T20:22:12.000Z\"}",
+        "start": {
+          "at": "2026-08-08T16:18:56.000Z",
+          "heightMeters": 0.405,
+          "phase": "Rising",
+          "label": "0.41 m · rising"
+        },
+        "end": {
+          "at": "2026-08-08T20:22:12.000Z",
+          "heightMeters": 1.229,
+          "phase": "Rising",
+          "label": "1.23 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8452660",
+          "stationName": "Newport",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:05.616Z"
+        }
       }
     },
     "sailing-22398aad6ed5492dcf1e": {
@@ -340,7 +532,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8452660\",\"startedAt\":\"2026-08-09T16:10:08.000Z\",\"endedAt\":\"2026-08-09T19:04:12.000Z\"}",
+        "start": {
+          "at": "2026-08-09T16:10:08.000Z",
+          "heightMeters": 0.171,
+          "phase": "Rising",
+          "label": "0.17 m · rising"
+        },
+        "end": {
+          "at": "2026-08-09T19:04:12.000Z",
+          "heightMeters": 0.808,
+          "phase": "Rising",
+          "label": "0.81 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8452660",
+          "stationName": "Newport",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:05.662Z"
+        }
       }
     },
     "sailing-324daf1d967822ad4ed5": {
@@ -364,7 +577,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-06-03T22:22:25.000Z\",\"endedAt\":\"2026-06-03T23:53:48.000Z\"}",
+        "start": {
+          "at": "2026-06-03T22:22:25.000Z",
+          "heightMeters": 0.469,
+          "phase": "Rising",
+          "label": "0.47 m · rising"
+        },
+        "end": {
+          "at": "2026-06-03T23:53:48.000Z",
+          "heightMeters": 0.962,
+          "phase": "Rising",
+          "label": "0.96 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:04.242Z"
+        }
       }
     },
     "sailing-a360f44bba6dad3054a9": {
@@ -388,7 +622,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-06-05T14:25:03.000Z\",\"endedAt\":\"2026-06-05T16:10:31.000Z\"}",
+        "start": {
+          "at": "2026-06-05T14:25:03.000Z",
+          "heightMeters": 1.005,
+          "phase": "Rising",
+          "label": "1.01 m · rising"
+        },
+        "end": {
+          "at": "2026-06-05T16:10:31.000Z",
+          "heightMeters": 1.186,
+          "phase": "Rising",
+          "label": "1.19 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:04.296Z"
+        }
       }
     },
     "sailing-0e3b5ddf2b021743aa93": {
@@ -412,7 +667,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-06-06T17:11:32.000Z\",\"endedAt\":\"2026-06-06T19:09:08.000Z\"}",
+        "start": {
+          "at": "2026-06-06T17:11:32.000Z",
+          "heightMeters": 1.227,
+          "phase": "Turning",
+          "label": "1.23 m · turning"
+        },
+        "end": {
+          "at": "2026-06-06T19:09:08.000Z",
+          "heightMeters": 1.062,
+          "phase": "Falling",
+          "label": "1.06 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:04.351Z"
+        }
       }
     },
     "sailing-f1e6ff9a314cc755c058": {
@@ -436,7 +712,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-06-09T21:54:29.000Z\",\"endedAt\":\"2026-06-10T00:08:43.000Z\"}",
+        "start": {
+          "at": "2026-06-09T21:54:29.000Z",
+          "heightMeters": 1.146,
+          "phase": "Falling",
+          "label": "1.15 m · falling"
+        },
+        "end": {
+          "at": "2026-06-10T00:08:43.000Z",
+          "heightMeters": 0.556,
+          "phase": "Falling",
+          "label": "0.56 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:04.547Z"
+        }
       }
     },
     "sailing-343365c782b8dcbbe299": {
@@ -460,7 +757,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-06-13T13:25:48.000Z\",\"endedAt\":\"2026-06-13T15:38:09.000Z\"}",
+        "start": {
+          "at": "2026-06-13T13:25:48.000Z",
+          "heightMeters": 0.933,
+          "phase": "Falling",
+          "label": "0.93 m · falling"
+        },
+        "end": {
+          "at": "2026-06-13T15:38:09.000Z",
+          "heightMeters": 0.193,
+          "phase": "Falling",
+          "label": "0.19 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:04.599Z"
+        }
       }
     },
     "sailing-ad5dd87ef2a05fea2f64": {
@@ -484,7 +802,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-07-14T22:08:41.000Z\",\"endedAt\":\"2026-07-14T23:44:59.000Z\"}",
+        "start": {
+          "at": "2026-07-14T22:08:41.000Z",
+          "heightMeters": 1.123,
+          "phase": "Rising",
+          "label": "1.12 m · rising"
+        },
+        "end": {
+          "at": "2026-07-14T23:44:59.000Z",
+          "heightMeters": 1.715,
+          "phase": "Rising",
+          "label": "1.72 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:05.380Z"
+        }
       }
     },
     "sailing-73a940d4d6c2c685e2a2": {
@@ -508,7 +847,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-06-16T22:00:59.000Z\",\"endedAt\":\"2026-06-17T00:13:24.000Z\"}",
+        "start": {
+          "at": "2026-06-16T22:00:59.000Z",
+          "heightMeters": 0.477,
+          "phase": "Rising",
+          "label": "0.48 m · rising"
+        },
+        "end": {
+          "at": "2026-06-17T00:13:24.000Z",
+          "heightMeters": 1.523,
+          "phase": "Rising",
+          "label": "1.52 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:50.931Z"
+        }
       }
     },
     "sailing-5278f3f427ad8ea11d77": {
@@ -532,7 +892,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-05-16T15:47:04.000Z\",\"endedAt\":\"2026-05-16T17:54:29.000Z\"}",
+        "start": {
+          "at": "2026-05-16T15:47:04.000Z",
+          "heightMeters": 0.522,
+          "phase": "Falling",
+          "label": "0.52 m · falling"
+        },
+        "end": {
+          "at": "2026-05-16T17:54:29.000Z",
+          "heightMeters": -0.05,
+          "phase": "Falling",
+          "label": "-0.05 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:04.140Z"
+        }
       }
     },
     "sailing-96bfd675c42da199e796": {
@@ -556,7 +937,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-05-17T13:19:47.000Z\",\"endedAt\":\"2026-05-17T16:04:31.000Z\"}",
+        "start": {
+          "at": "2026-05-17T13:19:47.000Z",
+          "heightMeters": 1.488,
+          "phase": "Falling",
+          "label": "1.49 m · falling"
+        },
+        "end": {
+          "at": "2026-05-17T16:04:31.000Z",
+          "heightMeters": 0.763,
+          "phase": "Falling",
+          "label": "0.76 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:04.189Z"
+        }
       }
     },
     "sailing-2a601be73c23c029ca35": {
@@ -580,7 +982,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-06-27T17:36:05.000Z\",\"endedAt\":\"2026-06-27T21:08:35.000Z\"}",
+        "start": {
+          "at": "2026-06-27T17:36:05.000Z",
+          "heightMeters": 0.261,
+          "phase": "Rising",
+          "label": "0.26 m · rising"
+        },
+        "end": {
+          "at": "2026-06-27T21:08:35.000Z",
+          "heightMeters": 1.223,
+          "phase": "Rising",
+          "label": "1.22 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:04.751Z"
+        }
       }
     },
     "sailing-13bfac9988fd054a94bb": {
@@ -604,7 +1027,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-06-30T22:16:09.000Z\",\"endedAt\":\"2026-06-30T23:59:08.000Z\"}",
+        "start": {
+          "at": "2026-06-30T22:16:09.000Z",
+          "heightMeters": 0.982,
+          "phase": "Rising",
+          "label": "0.98 m · rising"
+        },
+        "end": {
+          "at": "2026-06-30T23:59:08.000Z",
+          "heightMeters": 1.459,
+          "phase": "Rising",
+          "label": "1.46 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:04.796Z"
+        }
       }
     },
     "sailing-3b31e6694ff0feeaea62": {
@@ -628,7 +1072,28 @@
         }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-10-20T17:46:13.000Z\",\"endedAt\":\"2026-10-20T20:38:55.000Z\"}",
+        "start": {
+          "at": "2026-10-20T17:46:13.000Z",
+          "heightMeters": 1.081,
+          "phase": "Rising",
+          "label": "1.08 m · rising"
+        },
+        "end": {
+          "at": "2026-10-20T20:38:55.000Z",
+          "heightMeters": 1.351,
+          "phase": "Falling",
+          "label": "1.35 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T00:06:05.703Z"
+        }
       }
     }
   },
@@ -642,10 +1107,42 @@
       "localDate": "2026-03-24",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-03-24T18:57:54.000Z\",\"endedAt\":\"2026-03-24T18:57:54.000Z\"}",
+        "condition": "Clear",
+        "temperatureF": 46,
+        "wind": "S 4 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-03-24T18:57:54.000Z",
+          "sampledTo": "2026-03-24T18:57:54.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-03-24T18:57:54.000Z\",\"endedAt\":\"2026-03-24T18:57:54.000Z\"}",
+        "start": {
+          "at": "2026-03-24T18:57:54.000Z",
+          "heightMeters": 1.065,
+          "phase": "Falling",
+          "label": "1.06 m · falling"
+        },
+        "end": {
+          "at": "2026-03-24T18:57:54.000Z",
+          "heightMeters": 1.065,
+          "phase": "Falling",
+          "label": "1.06 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:45.801Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-faa7095245de1a9a4b8a7fc8": {
@@ -656,11 +1153,42 @@
       "localDate": "2026-05-04",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-05-04T20:02:12.000Z\",\"endedAt\":\"2026-05-04T20:02:12.000Z\"}",
+        "condition": "Mostly clear",
+        "temperatureF": 70,
+        "wind": "SW 6 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-05-04T20:02:12.000Z",
+          "sampledTo": "2026-05-04T20:02:12.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-05-04T20:02:12.000Z\",\"endedAt\":\"2026-05-04T20:02:12.000Z\"}",
+        "start": {
+          "at": "2026-05-04T20:02:12.000Z",
+          "heightMeters": 0.265,
+          "phase": "Falling",
+          "label": "0.27 m · falling"
+        },
+        "end": {
+          "at": "2026-05-04T20:02:12.000Z",
+          "heightMeters": 0.265,
+          "phase": "Falling",
+          "label": "0.27 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:45.949Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-93502abc04ad657a171912ee": {
@@ -671,11 +1199,42 @@
       "localDate": "2026-05-06",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-05-06T22:03:28.000Z\",\"endedAt\":\"2026-05-06T22:03:28.000Z\"}",
+        "condition": "Light drizzle",
+        "temperatureF": 68,
+        "wind": "SW 9 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-05-06T22:03:28.000Z",
+          "sampledTo": "2026-05-06T22:03:28.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-05-06T22:03:28.000Z\",\"endedAt\":\"2026-05-06T22:03:28.000Z\"}",
+        "start": {
+          "at": "2026-05-06T22:03:28.000Z",
+          "heightMeters": 0.358,
+          "phase": "Rising",
+          "label": "0.36 m · rising"
+        },
+        "end": {
+          "at": "2026-05-06T22:03:28.000Z",
+          "heightMeters": 0.358,
+          "phase": "Rising",
+          "label": "0.36 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:45.589Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-20c7adfbf0399f66e1693156": {
@@ -686,11 +1245,42 @@
       "localDate": "2026-05-19",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-05-19T23:53:38.000Z\",\"endedAt\":\"2026-05-19T23:53:38.000Z\"}",
+        "condition": "Light drizzle",
+        "temperatureF": 89,
+        "wind": "SW 7 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-05-19T23:53:38.000Z",
+          "sampledTo": "2026-05-19T23:53:38.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-05-19T23:53:38.000Z\",\"endedAt\":\"2026-05-19T23:53:38.000Z\"}",
+        "start": {
+          "at": "2026-05-19T23:53:38.000Z",
+          "heightMeters": 0.861,
+          "phase": "Rising",
+          "label": "0.86 m · rising"
+        },
+        "end": {
+          "at": "2026-05-19T23:53:38.000Z",
+          "heightMeters": 0.861,
+          "phase": "Rising",
+          "label": "0.86 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:43.958Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-abe700b6bc4ae5a73aa4b5b1": {
@@ -701,11 +1291,42 @@
       "localDate": "2026-05-25",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-05-25T20:01:58.000Z\",\"endedAt\":\"2026-05-25T20:01:58.000Z\"}",
+        "condition": "Cloudy",
+        "temperatureF": 71,
+        "wind": "NW 3 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-05-25T20:01:58.000Z",
+          "sampledTo": "2026-05-25T20:01:58.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-05-25T20:01:58.000Z\",\"endedAt\":\"2026-05-25T20:01:58.000Z\"}",
+        "start": {
+          "at": "2026-05-25T20:01:58.000Z",
+          "heightMeters": 1.427,
+          "phase": "Rising",
+          "label": "1.43 m · rising"
+        },
+        "end": {
+          "at": "2026-05-25T20:01:58.000Z",
+          "heightMeters": 1.427,
+          "phase": "Rising",
+          "label": "1.43 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:45.676Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-9b6a5f2350e752cdf93debeb": {
@@ -716,11 +1337,42 @@
       "localDate": "2026-05-31",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-05-31T16:56:40.000Z\",\"endedAt\":\"2026-05-31T16:56:40.000Z\"}",
+        "condition": "Cloudy",
+        "temperatureF": 75,
+        "wind": "W 5 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-05-31T16:56:40.000Z",
+          "sampledTo": "2026-05-31T16:56:40.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-05-31T16:56:40.000Z\",\"endedAt\":\"2026-05-31T16:56:40.000Z\"}",
+        "start": {
+          "at": "2026-05-31T16:56:40.000Z",
+          "heightMeters": 0.49,
+          "phase": "Falling",
+          "label": "0.49 m · falling"
+        },
+        "end": {
+          "at": "2026-05-31T16:56:40.000Z",
+          "heightMeters": 0.49,
+          "phase": "Falling",
+          "label": "0.49 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:45.631Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-decfa412910ed0be9a26ea58": {
@@ -731,11 +1383,42 @@
       "localDate": "2026-06-01",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-06-01T21:57:02.000Z\",\"endedAt\":\"2026-06-01T21:57:02.000Z\"}",
+        "condition": "Light drizzle",
+        "temperatureF": 62,
+        "wind": "SE 10 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-06-01T21:57:02.000Z",
+          "sampledTo": "2026-06-01T21:57:02.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-06-01T21:57:02.000Z\",\"endedAt\":\"2026-06-01T21:57:02.000Z\"}",
+        "start": {
+          "at": "2026-06-01T21:57:02.000Z",
+          "heightMeters": 0.706,
+          "phase": "Rising",
+          "label": "0.71 m · rising"
+        },
+        "end": {
+          "at": "2026-06-01T21:57:02.000Z",
+          "heightMeters": 0.706,
+          "phase": "Rising",
+          "label": "0.71 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:45.843Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-24744e4eabca40829abfd0da": {
@@ -746,11 +1429,42 @@
       "localDate": "2026-06-09",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-06-09T16:58:59.000Z\",\"endedAt\":\"2026-06-09T16:58:59.000Z\"}",
+        "condition": "Mostly clear",
+        "temperatureF": 78,
+        "wind": "S 7 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-06-09T16:58:59.000Z",
+          "sampledTo": "2026-06-09T16:58:59.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-06-09T16:58:59.000Z\",\"endedAt\":\"2026-06-09T16:58:59.000Z\"}",
+        "start": {
+          "at": "2026-06-09T16:58:59.000Z",
+          "heightMeters": 0.988,
+          "phase": "Rising",
+          "label": "0.99 m · rising"
+        },
+        "end": {
+          "at": "2026-06-09T16:58:59.000Z",
+          "heightMeters": 0.988,
+          "phase": "Rising",
+          "label": "0.99 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:44.011Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-37b9ff97479d0afe4d09fb66": {
@@ -761,11 +1475,42 @@
       "localDate": "2026-06-18",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-06-18T18:56:59.000Z\",\"endedAt\":\"2026-06-18T18:56:59.000Z\"}",
+        "condition": "Partly cloudy",
+        "temperatureF": 90,
+        "wind": "SW 19 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-06-18T18:56:59.000Z",
+          "sampledTo": "2026-06-18T18:56:59.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-06-18T18:56:59.000Z\",\"endedAt\":\"2026-06-18T18:56:59.000Z\"}",
+        "start": {
+          "at": "2026-06-18T18:56:59.000Z",
+          "heightMeters": 0.749,
+          "phase": "Falling",
+          "label": "0.75 m · falling"
+        },
+        "end": {
+          "at": "2026-06-18T18:56:59.000Z",
+          "heightMeters": 0.749,
+          "phase": "Falling",
+          "label": "0.75 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:44.049Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-bbc7762c4291e51484b2289b": {
@@ -776,11 +1521,42 @@
       "localDate": "2026-07-16",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-07-16T18:43:05.000Z\",\"endedAt\":\"2026-07-16T18:43:05.000Z\"}",
+        "condition": "Light drizzle",
+        "temperatureF": 88,
+        "wind": "SW 7 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-07-16T18:43:05.000Z",
+          "sampledTo": "2026-07-16T18:43:05.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-07-16T18:43:05.000Z\",\"endedAt\":\"2026-07-16T18:43:05.000Z\"}",
+        "start": {
+          "at": "2026-07-16T18:43:05.000Z",
+          "heightMeters": 0.394,
+          "phase": "Falling",
+          "label": "0.39 m · falling"
+        },
+        "end": {
+          "at": "2026-07-16T18:43:05.000Z",
+          "heightMeters": 0.394,
+          "phase": "Falling",
+          "label": "0.39 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:45.753Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-e0dc360b2e0229a33f0851da": {
@@ -791,11 +1567,42 @@
       "localDate": "2026-10-04",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-10-04T18:38:13.000Z\",\"endedAt\":\"2026-10-04T18:38:13.000Z\"}",
+        "condition": "Drizzle",
+        "temperatureF": 61,
+        "wind": "NE 5 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-10-04T18:38:13.000Z",
+          "sampledTo": "2026-10-04T18:38:13.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-10-04T18:38:13.000Z\",\"endedAt\":\"2026-10-04T18:38:13.000Z\"}",
+        "start": {
+          "at": "2026-10-04T18:38:13.000Z",
+          "heightMeters": 1.532,
+          "phase": "Rising",
+          "label": "1.53 m · rising"
+        },
+        "end": {
+          "at": "2026-10-04T18:38:13.000Z",
+          "heightMeters": 1.532,
+          "phase": "Rising",
+          "label": "1.53 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:45.914Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-4280345324df23eceeeda200": {
@@ -806,11 +1613,42 @@
       "localDate": "2026-10-08",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-10-08T23:46:35.000Z\",\"endedAt\":\"2026-10-08T23:46:35.000Z\"}",
+        "condition": "Clear",
+        "temperatureF": 68,
+        "wind": "W 6 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-10-08T23:46:35.000Z",
+          "sampledTo": "2026-10-08T23:46:35.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-10-08T23:46:35.000Z\",\"endedAt\":\"2026-10-08T23:46:35.000Z\"}",
+        "start": {
+          "at": "2026-10-08T23:46:35.000Z",
+          "heightMeters": 1.636,
+          "phase": "Falling",
+          "label": "1.64 m · falling"
+        },
+        "end": {
+          "at": "2026-10-08T23:46:35.000Z",
+          "heightMeters": 1.636,
+          "phase": "Falling",
+          "label": "1.64 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:45.412Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-3eed6ba94b2b11d6fbe74c48": {
@@ -821,11 +1659,42 @@
       "localDate": "2026-04-25",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-04-25T17:02:46.000Z\",\"endedAt\":\"2026-04-25T17:02:46.000Z\"}",
+        "condition": "Light rain",
+        "temperatureF": 46,
+        "wind": "E 9 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-04-25T17:02:46.000Z",
+          "sampledTo": "2026-04-25T17:02:46.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-04-25T17:02:46.000Z\",\"endedAt\":\"2026-04-25T17:02:46.000Z\"}",
+        "start": {
+          "at": "2026-04-25T17:02:46.000Z",
+          "heightMeters": 0.628,
+          "phase": "Rising",
+          "label": "0.63 m · rising"
+        },
+        "end": {
+          "at": "2026-04-25T17:02:46.000Z",
+          "heightMeters": 0.628,
+          "phase": "Rising",
+          "label": "0.63 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:44.088Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-bb0cd1c6e12c6454cd193331": {
@@ -836,11 +1705,42 @@
       "localDate": "2026-10-18",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-10-18T19:54:44.000Z\",\"endedAt\":\"2026-10-18T19:54:44.000Z\"}",
+        "condition": "Clear",
+        "temperatureF": 57,
+        "wind": "N 2 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-10-18T19:54:44.000Z",
+          "sampledTo": "2026-10-18T19:54:44.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-10-18T19:54:44.000Z\",\"endedAt\":\"2026-10-18T19:54:44.000Z\"}",
+        "start": {
+          "at": "2026-10-18T19:54:44.000Z",
+          "heightMeters": 1.243,
+          "phase": "Falling",
+          "label": "1.24 m · falling"
+        },
+        "end": {
+          "at": "2026-10-18T19:54:44.000Z",
+          "heightMeters": 1.243,
+          "phase": "Falling",
+          "label": "1.24 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:45.714Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-87c33f50eaf0969107b6acca": {
@@ -851,11 +1751,42 @@
       "localDate": "2026-04-28",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-04-29T00:58:04.000Z\",\"endedAt\":\"2026-04-29T00:58:04.000Z\"}",
+        "condition": "Cloudy",
+        "temperatureF": 54,
+        "wind": "S 5 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-04-29T00:58:04.000Z",
+          "sampledTo": "2026-04-29T00:58:04.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-04-29T00:58:04.000Z\",\"endedAt\":\"2026-04-29T00:58:04.000Z\"}",
+        "start": {
+          "at": "2026-04-29T00:58:04.000Z",
+          "heightMeters": 1.264,
+          "phase": "Falling",
+          "label": "1.26 m · falling"
+        },
+        "end": {
+          "at": "2026-04-29T00:58:04.000Z",
+          "heightMeters": 1.264,
+          "phase": "Falling",
+          "label": "1.26 m · falling"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:45.447Z"
+        },
+        "captureOnly": true
       }
     },
     "photo-8806d5315e978d176dd64031": {
@@ -866,11 +1797,42 @@
       "localDate": "2026-05-01",
       "location": "Not recorded",
       "weather": {
-        "status": "unavailable",
-        "reason": "Offline import"
+        "status": "ok",
+        "requestKey": "{\"latitude\":40.68,\"longitude\":-73.99,\"startedAt\":\"2026-05-01T23:00:18.000Z\",\"endedAt\":\"2026-05-01T23:00:18.000Z\"}",
+        "condition": "Clear",
+        "temperatureF": 52,
+        "wind": "S 9 mph",
+        "source": {
+          "provider": "Open-Meteo Archive API",
+          "method": "Hourly historical estimate",
+          "sampledFrom": "2026-05-01T23:00:18.000Z",
+          "sampledTo": "2026-05-01T23:00:18.000Z"
+        }
       },
       "tide": {
-        "status": "unavailable"
+        "status": "ok",
+        "requestKey": "{\"station\":\"8518750\",\"startedAt\":\"2026-05-01T23:00:18.000Z\",\"endedAt\":\"2026-05-01T23:00:18.000Z\"}",
+        "start": {
+          "at": "2026-05-01T23:00:18.000Z",
+          "heightMeters": 1.316,
+          "phase": "Rising",
+          "label": "1.32 m · rising"
+        },
+        "end": {
+          "at": "2026-05-01T23:00:18.000Z",
+          "heightMeters": 1.316,
+          "phase": "Rising",
+          "label": "1.32 m · rising"
+        },
+        "source": {
+          "provider": "NOAA",
+          "station": "8518750",
+          "stationName": "The Battery",
+          "datum": "MLLW",
+          "method": "Predicted station water level; interpolated at activity start/end",
+          "retrievedAt": "2026-11-07T03:31:45.486Z"
+        },
+        "captureOnly": true
       }
     }
   }

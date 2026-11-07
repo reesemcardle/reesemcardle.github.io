@@ -26,7 +26,8 @@ its prepared tracks therefore contain the coordinates needed for those views.
 ## Content and review
 
 For local authoring, place source material in `private/Website Content/` and run
-`./update-content`. See [the content workflow](docs/content-workflow.md).
+`./update-content`. Use `./update-metadata --report` to check weather/tide gaps,
+and `./update-metadata` to fill them without processing media. See [the content workflow](docs/content-workflow.md).
 
 The target-review utility is included: run `npm run review-targets` and open
 http://localhost:8016/. It uses local target records in `private/target-workspace/`;

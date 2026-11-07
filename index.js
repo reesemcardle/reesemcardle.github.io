@@ -1553,9 +1553,13 @@ function renderConditions(record, latest=false) {
   document.getElementById("metaTemperature").title=weather.title;
   els.metaWindLabel.textContent="Avg wind";
   els.metaWind.textContent=weather.wind;
-  els.metaTideLabel.textContent="Starting tide";
+  const captureTide=Boolean(record?.tide?.captureOnly);
+  els.metaTideLabel.textContent=captureTide?"Tide at capture":"Starting tide";
   els.metaTide.textContent=record?.tide?.status==="ok"?(record.tide.start?.label || record.tide.phase || "Not recorded"):"Not recorded";
-  els.metaTide.title="Tide at the recorded activity start";
+  els.metaTide.title=record?.tide?.source?.stationName
+    ? `Predicted water level at ${record.tide.source.stationName}; ${record.tide.source.datum}`
+    : "Tide at the recorded activity start";
+  document.getElementById("metaTideEnd").parentElement.hidden=captureTide;
   document.getElementById("metaTideEnd").textContent=record?.tide?.status==="ok"?(record.tide.end?.label || "Not recorded"):"Not recorded";
   document.querySelector(".global-meta").setAttribute("aria-label",latest?"Latest activity conditions":"Activity conditions");
 }

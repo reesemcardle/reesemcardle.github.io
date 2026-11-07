@@ -380,3 +380,64 @@ Original sailing GPX files now live in `private/build/sails/`; only prepared
 playback tracks are published. Map source geometry and intermediate files live
 in `private/build/maps/`, with optional SVG exports in `private/build/svg/`.
 The public map folder retains runtime assets and attribution metadata.
+
+## Fill missing historical metadata
+
+Run from the project folder:
+
+```sh
+./update-metadata --report       # List gaps; no network calls or writes
+./update-metadata                # Fill gaps and save results locally
+./update-metadata --only sailing # Limit to cycling, sailing, archery, or video
+```
+
+The command uses the published activity indexes and prepared tracks. It does not
+run image detection, convert media, import new content, or deploy. Existing complete
+weather and start/end tide records are retained without new requests. Older weather
+records lacking temperature get that field filled while existing wind and condition
+text remain unchanged. Failed lookups leave existing records intact and appear in
+the report. Event-media attachments use their parent activity's conditions.
+
+Optional missing lookup inputs belong in `private/Website Content/metadata.json`:
+
+```json
+{
+  "events": {
+    "archery:photo-YOUR_ID": {
+      "latitude": 40.68,
+      "longitude": -73.99,
+      "startedAt": "2026-03-24T14:57:54-04:00",
+      "endedAt": "2026-03-24T14:57:54-04:00"
+    }
+  }
+}
+```
+
+Use the exact event ID from its index. Keys begin with `cycling:`, `sailing:`,
+`archery:`, or `video:`. Inputs provide coordinates and explicit timezone-aware
+instants, not guessed times for date-only photos. Overrides supply lookup inputs;
+they do not replace saved weather or rename an activity. Missing coordinates for
+photos/videos are reported rather than guessed from a city name. Coordinates used
+for weather requests are rounded to two decimal places by the shared weather helper.
+
+Sailing tide stations are The Battery (NOAA 8518750), Newport (NOAA 8452660), and
+Mahone Harbour (CHS 00460). Start/end labels show **predicted water height in metres**
+and whether the water is rising, falling, or near a turn. These are not measured
+currents. Heights retain their station datum (NOAA MLLW or Canadian chart datum).
+UTC requests avoid dependence on the computer's timezone. Mahone Harbour is listed
+as discontinued in station metadata, but its historical prediction series is
+available; unavailable dates are reported without substituting another station.
+
+Results are stored in `content/activity-metadata.json` and, for Scenes, the video
+index. Review locally, then deploy separately. The legacy `build-activity-metadata`
+and `build-ride-metadata` scripts now delegate to this updater.
+
+Provider references: [NOAA CO-OPS API](https://api.tidesandcurrents.noaa.gov/api/prod/),
+[Canadian water-level API](https://api-iwls.dfo-mpo.gc.ca/swagger-ui/index.html),
+[Mahone Harbour station](https://tides.gc.ca/en/stations/00460).
+
+Cycling and archery also use The Battery (NOAA 8518750), as a nearby harbor
+reference. Cycling stores start and end water levels. Target photos store a single
+capture-time lookup, displayed as “Tide at capture”; the ending-tide row is hidden
+because the photograph does not establish session duration. These are harbor
+predictions, not measurements at the cycling route or archery range.

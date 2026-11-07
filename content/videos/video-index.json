@@ -15,8 +15,17 @@
     "date": "2026-07-08",
     "location": null,
     "weather": {
-      "status": "unavailable",
-      "reason": "Weather lookup not requested"
+      "status": "ok",
+      "requestKey": "{\"latitude\":40.76,\"longitude\":-74.12,\"startedAt\":\"2026-07-08T20:23:38.000Z\",\"endedAt\":\"2026-07-08T20:23:38.000Z\"}",
+      "condition": "Clear",
+      "temperatureF": 85,
+      "wind": "SW 5 mph",
+      "source": {
+        "provider": "Open-Meteo Archive API",
+        "method": "Hourly historical estimate",
+        "sampledFrom": "2026-07-08T20:23:38.000Z",
+        "sampledTo": "2026-07-08T20:23:38.000Z"
+      }
     },
     "capturedAt": "2026-07-08T16:23:38-0400"
   }
